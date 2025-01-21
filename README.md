@@ -1,4 +1,4 @@
-# mubin
+# Smart Sugar
 
 A new Flutter project.
 
