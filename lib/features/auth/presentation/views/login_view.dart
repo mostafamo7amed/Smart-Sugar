@@ -10,6 +10,7 @@ import 'package:smart_sugar/features/auth/presentation/views/widgets/custom_pass
 
 import '../../../../core/utils/app_manager/app_assets.dart';
 import '../../../../core/utils/app_manager/app_colors.dart';
+import 'forget_password_view.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -60,12 +61,15 @@ class _LoginViewState extends State<LoginView> {
                   CustomTextFormField(
                       hintText: 'Email',
                       keyboardType: TextInputType.emailAddress,
-                      prefixIcon: SvgPicture.asset(
-                        AssetsData.personIcon,
-                        colorFilter: ColorFilter.mode(
-                            AppColor.pinkColor, BlendMode.srcIn),
-                        width: 20,
-                        fit: BoxFit.scaleDown,
+                      prefixIcon: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: SvgPicture.asset(
+                          AssetsData.personIcon,
+                          colorFilter: ColorFilter.mode(
+                              AppColor.pinkColor, BlendMode.srcIn),
+                          width: 20,
+                          fit: BoxFit.scaleDown,
+                        ),
                       ),
                       onSaved: (value) {
                         email = value;
@@ -96,7 +100,11 @@ class _LoginViewState extends State<LoginView> {
                   Align(
                     alignment: Alignment.centerRight,
                     child: GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(
+                            context, ForgetPasswordView.routeName
+                        );
+                      },
                       child: Text(
                         'Forgot Password?',
                         style: Styles.regular13

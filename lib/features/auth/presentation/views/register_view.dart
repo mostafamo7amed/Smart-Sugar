@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smart_sugar/core/utils/app_manager/app_styles.dart';
 import 'package:smart_sugar/core/utils/widgets/custom_button.dart';
 import 'package:smart_sugar/core/utils/widgets/custom_text_form_field.dart';
+import 'package:smart_sugar/features/auth/presentation/views/on_boarding_view.dart';
 import 'package:smart_sugar/features/auth/presentation/views/widgets/custom_image_button.dart';
 import 'package:smart_sugar/features/auth/presentation/views/widgets/custom_password_field.dart';
 
@@ -59,12 +60,15 @@ class _LoginViewState extends State<RegisterView> {
                   CustomTextFormField(
                       hintText: 'Email',
                       keyboardType: TextInputType.emailAddress,
-                      prefixIcon: SvgPicture.asset(
-                        AssetsData.personIcon,
-                        colorFilter: ColorFilter.mode(
-                            AppColor.pinkColor, BlendMode.srcIn),
-                        width: 20,
-                        fit: BoxFit.scaleDown,
+                      prefixIcon: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: SvgPicture.asset(
+                          AssetsData.personIcon,
+                          colorFilter: ColorFilter.mode(
+                              AppColor.pinkColor, BlendMode.srcIn),
+                          width: 20,
+                          fit: BoxFit.scaleDown,
+                        ),
                       ),
                       onSaved: (value) {
                         email = value;
@@ -110,9 +114,7 @@ class _LoginViewState extends State<RegisterView> {
                   CustomButton(
                     text: 'Register',
                     onPressed: () {
-                      if (formKey.currentState!.validate()) {
-                        formKey.currentState!.save();
-                      }
+                     Navigator.pushNamed(context, OnBoardingView.routeName);
                     },
                   ),
                   const SizedBox(

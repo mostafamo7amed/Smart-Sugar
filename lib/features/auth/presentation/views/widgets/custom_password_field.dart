@@ -35,10 +35,13 @@ class _CustomPasswordFormFieldState extends State<CustomPasswordFormField> {
       },
       hintText: widget.hintText?? 'Password',
       keyboardType: TextInputType.visiblePassword,
-      prefixIcon: SvgPicture.asset(
-        AssetsData.lockIcon,
-        width: 20,
-        fit: BoxFit.scaleDown,
+      prefixIcon: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: SvgPicture.asset(
+          AssetsData.lockIcon,
+          width: 20,
+          fit: BoxFit.scaleDown,
+        ),
       ),
       suffixIcon: IconButton(
         icon: Icon(

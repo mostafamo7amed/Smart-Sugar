@@ -4,7 +4,7 @@ import '../../../../constants.dart';
 import '../../../../core/services/app_references.dart';
 import '../../../../core/utils/app_manager/app_assets.dart';
 import '../../../auth/presentation/views/login_view.dart';
-import '../../../home/peresentation/view/home_view.dart';
+import '../../../home/presentation/view/home_view.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
