@@ -5,11 +5,12 @@ import '../app_manager/app_styles.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField(
-      {super.key, this.suffixIcon,this.prefixIcon, this.hintText, this.validator, this.keyboardType, this.onSaved,  this.obscureText = false});
+      {super.key, this.suffixIcon,this.prefixIcon, this.hintText, this.validator, this.keyboardType, this.onSaved,  this.obscureText = false, this.noBorder= false});
   final Widget? suffixIcon,prefixIcon;
   final String? hintText;
   final TextInputType? keyboardType;
   final bool obscureText;
+  final bool noBorder;
 
   final void Function(String?)? onSaved;
 
@@ -23,16 +24,18 @@ class CustomTextFormField extends StatelessWidget {
         onSaved: onSaved,
         validator: validator,
         keyboardType: keyboardType,
+        style: Styles.regular16,
+        textAlign: TextAlign.start,
         decoration: InputDecoration(
           prefixIcon: prefixIcon,
           suffixIcon: suffixIcon,
           hintText: hintText,
-          hintStyle: Styles.regular13.copyWith(color: AppColor.lightGrayColor),
-          fillColor: AppColor.whiteColor,
+          hintStyle: Styles.regular16.copyWith(color: AppColor.lightGrayColor),
+          fillColor:noBorder?AppColor.backgroundColor: AppColor.whiteColor,
           filled: true,
-          border: buildOutlineInputBorder(),
-          enabledBorder: buildOutlineInputBorder(),
-          focusedBorder: buildOutlineInputBorder(),
+          border: noBorder? buildOutlineInputBorderCustom(): buildOutlineInputBorder(),
+          enabledBorder:noBorder? buildOutlineInputBorderCustom(): buildOutlineInputBorder(),
+          focusedBorder:noBorder? buildOutlineInputBorderCustom(): buildOutlineInputBorder(),
         ),
       ),
     );
@@ -47,4 +50,14 @@ class CustomTextFormField extends StatelessWidget {
       ),
     );
   }
+}
+
+OutlineInputBorder buildOutlineInputBorderCustom() {
+  return OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12),
+      borderSide: BorderSide(
+        color: AppColor.backgroundColor,
+        width: 1,
+      )
+  );
 }

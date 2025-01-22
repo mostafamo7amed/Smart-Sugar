@@ -28,9 +28,9 @@ class SmartSugar extends StatelessWidget {
     return GetMaterialApp(
       title: 'Smart Sugar',
       theme: ThemeData(
+        unselectedWidgetColor: AppColor.lightGrayColor,
         scaffoldBackgroundColor: AppColor.backgroundColor,
-        colorScheme: ColorScheme.fromSeed(seedColor:AppColor.blueColor),
-        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor:AppColor.lightGrayColor),
       ),
       debugShowCheckedModeBanner: false,
       onGenerateRoute: onGenerateRoute,
