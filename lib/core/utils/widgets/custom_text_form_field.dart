@@ -5,8 +5,8 @@ import '../app_manager/app_styles.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField(
-      {super.key, this.suffixIcon, this.hintText, this.validator, this.keyboardType, this.onSaved,  this.obscureText = false});
-  final Widget? suffixIcon;
+      {super.key, this.suffixIcon,this.prefixIcon, this.hintText, this.validator, this.keyboardType, this.onSaved,  this.obscureText = false});
+  final Widget? suffixIcon,prefixIcon;
   final String? hintText;
   final TextInputType? keyboardType;
   final bool obscureText;
@@ -24,10 +24,11 @@ class CustomTextFormField extends StatelessWidget {
         validator: validator,
         keyboardType: keyboardType,
         decoration: InputDecoration(
+          prefixIcon: prefixIcon,
           suffixIcon: suffixIcon,
           hintText: hintText,
-          hintStyle: Styles.bold13.copyWith(color: AppColor.lightGrayColor),
-          fillColor: AppColor.fillColor,
+          hintStyle: Styles.regular13.copyWith(color: AppColor.lightGrayColor),
+          fillColor: AppColor.whiteColor,
           filled: true,
           border: buildOutlineInputBorder(),
           enabledBorder: buildOutlineInputBorder(),
@@ -39,9 +40,9 @@ class CustomTextFormField extends StatelessWidget {
 
   OutlineInputBorder buildOutlineInputBorder() {
     return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(5),
+      borderRadius: BorderRadius.circular(10),
       borderSide: BorderSide(
-        width: 1,
+        width: .5,
         color: AppColor.lightGrayColor,
       ),
     );
