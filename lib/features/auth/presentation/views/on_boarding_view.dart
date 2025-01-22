@@ -4,7 +4,7 @@ import 'package:smart_sugar/features/auth/presentation/views/widgets/on_boarding
 import 'package:smart_sugar/features/auth/presentation/views/widgets/on_boarding_page_one.dart';
 import 'package:smart_sugar/features/auth/presentation/views/widgets/on_boarding_page_three.dart';
 import 'package:smart_sugar/features/auth/presentation/views/widgets/on_boarding_page_two.dart';
-import 'package:smart_sugar/features/home/presentation/view/home_view.dart';
+import 'package:smart_sugar/features/home/presentation/view/user_home_root.dart';
 
 import '../../../../core/utils/app_manager/app_colors.dart';
 import '../../../../core/utils/widgets/custom_button.dart';
@@ -104,7 +104,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                   setState(() {});
                 } else {
                   Navigator.of(context)
-                      .pushReplacementNamed(HomeView.routeName);
+                      .pushReplacementNamed(UserHomeRoot.routeName);
                 }
               },
               text: currentIndex == 3 ? "Let’s go" : "Next",

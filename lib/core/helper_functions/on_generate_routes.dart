@@ -6,6 +6,7 @@ import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/auth/presentation/views/on_boarding_view.dart';
 import '../../features/auth/presentation/views/register_view.dart';
 import '../../features/home/presentation/view/home_view.dart';
+import '../../features/home/presentation/view/user_home_root.dart';
 
 Route<dynamic> onGenerateRoute (RouteSettings settings){
   switch(settings.name){
@@ -21,6 +22,8 @@ Route<dynamic> onGenerateRoute (RouteSettings settings){
       return MaterialPageRoute(builder: (_) => const ForgetPasswordView());
     case  HomeView.routeName:
       return MaterialPageRoute(builder: (_) => const HomeView());
+    case  UserHomeRoot.routeName:
+      return MaterialPageRoute(builder: (_) => const UserHomeRoot());
     default:
       return MaterialPageRoute(builder: (_) => const Scaffold());
   }

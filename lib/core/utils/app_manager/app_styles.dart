@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'app_colors.dart';
+
 abstract class Styles {
   static const TextStyle bold13 = TextStyle(
     fontWeight: FontWeight.bold,
@@ -68,5 +70,13 @@ abstract class Styles {
   static const TextStyle regular11 = TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: 11,
+  );
+
+  static TextStyle tabsSelectedTextStyle = TextStyle(
+      fontSize: 13, fontWeight: FontWeight.normal, color: AppColor.orangeColor
+
+  );
+  static TextStyle tabsUnSelectedTextStyle = TextStyle(
+      fontSize: 13, fontWeight: FontWeight.normal, color: AppColor.lightGrayColor
   );
 }
