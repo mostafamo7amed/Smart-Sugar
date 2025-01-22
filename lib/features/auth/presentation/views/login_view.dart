@@ -7,6 +7,7 @@ import 'package:smart_sugar/core/utils/widgets/custom_text_form_field.dart';
 import 'package:smart_sugar/features/auth/presentation/views/register_view.dart';
 import 'package:smart_sugar/features/auth/presentation/views/widgets/custom_image_button.dart';
 import 'package:smart_sugar/features/auth/presentation/views/widgets/custom_password_field.dart';
+import 'package:smart_sugar/features/home/presentation/view/user_home_root.dart';
 
 import '../../../../core/utils/app_manager/app_assets.dart';
 import '../../../../core/utils/app_manager/app_colors.dart';
@@ -117,7 +118,9 @@ class _LoginViewState extends State<LoginView> {
                   ),
                   CustomButton(
                     text: 'Login',
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, UserHomeRoot.routeName);
+                    },
                   ),
                   const SizedBox(
                     height: 10,
