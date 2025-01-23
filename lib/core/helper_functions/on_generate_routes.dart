@@ -5,6 +5,7 @@ import '../../features/auth/presentation/views/forget_password_view.dart';
 import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/auth/presentation/views/on_boarding_view.dart';
 import '../../features/auth/presentation/views/register_view.dart';
+import '../../features/home/presentation/view/emergency_numbers_view.dart';
 import '../../features/home/presentation/view/home_view.dart';
 import '../../features/home/presentation/view/notification_view.dart';
 import '../../features/home/presentation/view/read_glucose_view.dart';
@@ -30,6 +31,8 @@ Route<dynamic> onGenerateRoute (RouteSettings settings){
       return MaterialPageRoute(builder: (_) => const NotificationView());
     case  ReadGlucoseView.routeName:
       return MaterialPageRoute(builder: (_) => const ReadGlucoseView());
+    case  EmergencyNumbersView.routeName:
+      return MaterialPageRoute(builder: (_) => const EmergencyNumbersView());
     default:
       return MaterialPageRoute(builder: (_) => const Scaffold());
   }

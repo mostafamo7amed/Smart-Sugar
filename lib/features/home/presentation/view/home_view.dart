@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smart_sugar/core/utils/app_manager/app_colors.dart';
 import 'package:smart_sugar/core/utils/app_manager/app_styles.dart';
 import 'package:smart_sugar/core/utils/widgets/custom_button.dart';
+import 'package:smart_sugar/features/home/presentation/view/emergency_numbers_view.dart';
 import 'package:smart_sugar/features/home/presentation/view/read_glucose_view.dart';
 import 'package:smart_sugar/features/home/presentation/view/widgets/glucose_level_widget.dart';
 import 'package:smart_sugar/features/home/presentation/view/widgets/home_app_bar.dart';
@@ -189,7 +190,9 @@ class HomeView extends StatelessWidget {
                     height: 40,
                     width: MediaQuery.of(context).size.width * .5,
                     color: AppColor.primaryColor,
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, EmergencyNumbersView.routeName);
+                    },
                     text: 'Emergency number'),
               ),
             ],
