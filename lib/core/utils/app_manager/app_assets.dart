@@ -26,4 +26,5 @@ class AssetsData {
   static const fatIcon = "$basePath/fat.png";
   static const caloriesIcon = "$basePath/calories.png";
   static const clockIcon = "$basePath/clock.png";
+  static const chatGptIcon = "$basePath/chat_gpt.png";
 }
