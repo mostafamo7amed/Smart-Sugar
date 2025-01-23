@@ -15,5 +15,6 @@ class AssetsData {
   static const profileIcon = "$basePath/profile.svg";
   static const notificationIcon = "$basePath/notification.svg";
   static const appIcon = "$basePath/app_icon.png";
+  static const placeHolder = "$basePath/placeholder.png";
 
 }
