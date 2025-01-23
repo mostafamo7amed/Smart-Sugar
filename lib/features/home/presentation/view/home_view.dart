@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smart_sugar/core/utils/app_manager/app_colors.dart';
 import 'package:smart_sugar/core/utils/app_manager/app_styles.dart';
 import 'package:smart_sugar/core/utils/widgets/custom_button.dart';
+import 'package:smart_sugar/features/home/presentation/view/read_glucose_view.dart';
 import 'package:smart_sugar/features/home/presentation/view/widgets/glucose_level_widget.dart';
 import 'package:smart_sugar/features/home/presentation/view/widgets/home_app_bar.dart';
 import 'package:smart_sugar/features/home/presentation/view/widgets/line_chart_widget.dart';
@@ -119,7 +120,7 @@ class HomeView extends StatelessWidget {
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              crossAxisAlignment: CrossAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               GlucoseLevelWidget(
                                 value: 200,
@@ -136,8 +137,7 @@ class HomeView extends StatelessWidget {
                                 level: 'Low',
                                 color: AppColor.lightGrayColor,
                               )
-          
-                          ],
+                            ],
                           ),
                         ),
                         SizedBox(
@@ -152,10 +152,14 @@ class HomeView extends StatelessWidget {
                           child: Row(
                             children: [
                               Text(
-                                'Pills',style: Styles.regular13,),
+                                'Pills',
+                                style: Styles.regular13,
+                              ),
                               Spacer(),
                               Text(
-                                '3 Taken',style: Styles.regular13,),
+                                '3 Taken',
+                                style: Styles.regular13,
+                              ),
                             ],
                           ),
                         )
@@ -169,11 +173,13 @@ class HomeView extends StatelessWidget {
               ),
               Center(
                 child: CustomButton(
-                  height: 40,
-                  width: MediaQuery.of(context).size.width * .5,
+                    height: 40,
+                    width: MediaQuery.of(context).size.width * .5,
                     color: AppColor.redColor.withValues(alpha: .5),
-                    onPressed: () {}, text: 'Add Read'
-                ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, ReadGlucoseView.routeName);
+                    },
+                    text: 'Add Read'),
               ),
               SizedBox(
                 height: 10,
@@ -183,8 +189,8 @@ class HomeView extends StatelessWidget {
                     height: 40,
                     width: MediaQuery.of(context).size.width * .5,
                     color: AppColor.primaryColor,
-                    onPressed: () {}, text: 'Emergency number'
-                ),
+                    onPressed: () {},
+                    text: 'Emergency number'),
               ),
             ],
           ),
