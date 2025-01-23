@@ -17,6 +17,7 @@ class AllMealsView extends StatelessWidget {
       appBar:
           buildAppBar(context, title: '$mealType Meals', showBackButton: true),
       body: GridView.builder(
+        physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.symmetric(horizontal: 5),
         itemCount: 5,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
