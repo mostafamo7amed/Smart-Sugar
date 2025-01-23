@@ -5,6 +5,10 @@ import '../../features/auth/presentation/views/forget_password_view.dart';
 import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/auth/presentation/views/on_boarding_view.dart';
 import '../../features/auth/presentation/views/register_view.dart';
+import '../../features/centers/domain/entities/sugar_center_entity.dart';
+import '../../features/centers/presentation/views/add_to_list_view.dart';
+import '../../features/centers/presentation/views/choose_district_view.dart';
+import '../../features/centers/presentation/views/sugar_details_view.dart';
 import '../../features/diet/domain/entities/meal_entity.dart';
 import '../../features/diet/presentation/view/all_meals_view.dart';
 import '../../features/diet/presentation/view/meal_details_view.dart';
@@ -48,6 +52,12 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
             mealEntity: settings.arguments as MealEntity,
           ),
       );
+    case SugarDetailsView.routeName:
+      return MaterialPageRoute(builder: (_) =>  SugarDetailsView(sugarCenter: settings.arguments as SugarCenterEntity,));
+    case AddToListView.routeName:
+      return MaterialPageRoute(builder: (_) => const AddToListView());
+    case ChooseDistrictView.routeName:
+      return MaterialPageRoute(builder: (_) => const ChooseDistrictView());
     default:
       return MaterialPageRoute(builder: (_) => const Scaffold());
   }

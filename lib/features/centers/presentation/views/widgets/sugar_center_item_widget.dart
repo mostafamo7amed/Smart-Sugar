@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:smart_sugar/core/utils/extensions.dart';
+import 'package:smart_sugar/features/centers/domain/entities/sugar_center_entity.dart';
 
 import '../../../../../core/utils/app_manager/app_assets.dart';
 import '../../../../../core/utils/app_manager/app_colors.dart';
@@ -11,9 +12,11 @@ import '../../../../../core/utils/widgets/cached_image.dart';
 
 class SugarCenterItemWidget extends StatelessWidget {
   const SugarCenterItemWidget({
-    super.key,
+    super.key, required this.sugarCenter, this.addToList=false,
   });
 
+  final SugarCenterEntity sugarCenter;
+  final bool? addToList;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -33,7 +36,7 @@ class SugarCenterItemWidget extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              cachedImage('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNeJG67ejYXQF6k5Xm9uj3YpwLCd6HVGdBBw&s',AssetsData.placeHolder,
+              cachedImage(sugarCenter.image,AssetsData.placeHolder,
                   fit: BoxFit.fill,
                   width: size.width / 4.5,
                   height: size.width / 4.5)
@@ -47,7 +50,7 @@ class SugarCenterItemWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'It’s time to take glucose measurement',
+                      sugarCenter.name!,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: Styles.regular16
@@ -57,7 +60,7 @@ class SugarCenterItemWidget extends StatelessWidget {
                 ),
               ),
               Visibility(
-                visible: false,
+                visible: addToList!,
                 replacement: Icon(
                   Icons.arrow_forward_ios,
                   color: AppColor.lightGrayColor,
