@@ -22,6 +22,7 @@ AppBar buildAppBar(context,
       ),
     ),
     centerTitle: false,
+    titleSpacing: 0,
     title: Text(
       title,
       textAlign: TextAlign.center,
