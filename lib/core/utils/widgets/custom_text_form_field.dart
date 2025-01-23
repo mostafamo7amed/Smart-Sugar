@@ -5,14 +5,17 @@ import '../app_manager/app_styles.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField(
-      {super.key, this.suffixIcon,this.prefixIcon, this.hintText, this.validator, this.keyboardType, this.onSaved,  this.obscureText = false, this.noBorder= false});
+      {super.key, this.suffixIcon,this.prefixIcon, this.hintText, this.validator, this.keyboardType, this.onSaved,  this.obscureText = false, this.noBorder= false, this.onTap, this.controller});
   final Widget? suffixIcon,prefixIcon;
   final String? hintText;
   final TextInputType? keyboardType;
   final bool obscureText;
   final bool noBorder;
+  final TextEditingController? controller;
+
 
   final void Function(String?)? onSaved;
+  final void Function()? onTap;
 
   final String? Function(String?)? validator;
   @override
@@ -20,6 +23,8 @@ class CustomTextFormField extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: TextFormField(
+        controller: controller,
+        onTap: onTap,
         obscureText: obscureText,
         onSaved: onSaved,
         validator: validator,

@@ -16,5 +16,6 @@ class AssetsData {
   static const notificationIcon = "$basePath/notification.svg";
   static const appIcon = "$basePath/app_icon.png";
   static const placeHolder = "$basePath/placeholder.png";
+  static const readGlucoseImage = "$basePath/read.png";
 
 }
