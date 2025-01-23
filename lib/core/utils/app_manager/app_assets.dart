@@ -17,5 +17,13 @@ class AssetsData {
   static const appIcon = "$basePath/app_icon.png";
   static const placeHolder = "$basePath/placeholder.png";
   static const readGlucoseImage = "$basePath/read.png";
-
+  static const breakfastImage = "$basePath/breakfast.png";
+  static const lunchImage = "$basePath/lunch.png";
+  static const dinnerImage = "$basePath/dinner.png";
+  static const snackImage = "$basePath/snacks.png";
+  static const proteinIcon = "$basePath/protein.png";
+  static const carbsIcon = "$basePath/carbs.png";
+  static const fatIcon = "$basePath/fat.png";
+  static const caloriesIcon = "$basePath/calories.png";
+  static const clockIcon = "$basePath/clock.png";
 }

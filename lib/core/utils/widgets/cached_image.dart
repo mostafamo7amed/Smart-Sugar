@@ -28,7 +28,7 @@ Widget cachedImage(String? url, String placeHolder,{double? height, Color? color
       ),
     );
   } else {
-    return Image.asset(placeHolder, height: height, width: width, fit: BoxFit.cover, alignment: alignment ?? Alignment.center).cornerRadiusWithClipRRect(radius ?? 12);
+    return Image.asset(url!, height: height, width: width, fit: BoxFit.cover, alignment: alignment ?? Alignment.center).cornerRadiusWithClipRRect(radius ?? 12);
   }
 }
 
