@@ -18,7 +18,7 @@ class EmergencyNumbersView extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: ListView.builder(
           physics: const AlwaysScrollableScrollPhysics(),
-          itemBuilder: (context, index) => InkWell(
+          itemBuilder: (context, index) => GestureDetector(
             onTap: () {
               //Navigator.pop(context);
               log('call');

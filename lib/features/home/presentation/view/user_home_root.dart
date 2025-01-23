@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/utils/app_manager/app_assets.dart';
 import '../../../../core/utils/app_manager/app_colors.dart';
 import '../../../../core/utils/app_manager/app_styles.dart';
+import '../../../diet/presentation/view/diet_view.dart';
 import 'home_view.dart';
 
 class UserHomeRoot extends StatefulWidget {
@@ -21,7 +22,7 @@ class _UserHomeRootState extends State<UserHomeRoot> {
     return Scaffold(
       body: [
         const HomeView(),
-        const Scaffold(body: Center(child: Text('Search'))),
+        DietView(),
         const Scaffold(body: Center(child: Text('Search'))),
         const Scaffold(body: Center(child: Text('Search'))),
         const Scaffold(body: Center(child: Text('Search'))),
