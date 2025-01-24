@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:smart_sugar/core/utils/app_manager/app_styles.dart';
 import 'package:smart_sugar/core/utils/extensions.dart';
+import 'package:smart_sugar/core/utils/widgets/custom_dialog.dart';
+import 'package:smart_sugar/features/profile/domain/entity/article_entity.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../core/utils/app_manager/app_assets.dart';
@@ -9,19 +11,15 @@ import '../../../../../core/utils/widgets/cached_image.dart';
 import '../../../../../core/utils/widgets/custom_button.dart';
 
 class ArticleCard extends StatelessWidget {
-  final String title;
-  final String description;
-  final String imageUrl;
-  final String contentUrl;
 
 
   const ArticleCard({
     super.key,
-    required this.title,
-    required this.description,
-    required this.imageUrl,
-    required this.contentUrl,
+    required this.articleEntity, this.isManage=false,
   });
+  final ArticleEntity articleEntity;
+  final bool isManage;
+
 
   @override
   Widget build(BuildContext context) {
@@ -37,14 +35,14 @@ class ArticleCard extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               height: MediaQuery.of(context).size.height * .19,
-              child: cachedImage(imageUrl, AssetsData.placeHolder)
+              child: cachedImage(articleEntity.image, AssetsData.placeHolder)
                   .cornerRadiusWithClipRRect(10),
             ),
             // Article Title
             Padding(
               padding: EdgeInsets.all(10),
               child: Text(
-                title,
+                articleEntity.title,
                 style: Styles.bold19,
               ),
             ),
@@ -52,21 +50,40 @@ class ArticleCard extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 10),
               child: Text(
-                description,
+                articleEntity.description,
                 style:
                     Styles.regular13.copyWith(color: AppColor.lightGrayColor),
               ),
             ),
             Padding(
               padding: EdgeInsets.all(10),
-              child: CustomButton(
-                height: 40,
-                width: MediaQuery.of(context).size.width * .5,
-                color: AppColor.lightGrayColor,
-                onPressed: () {
-                  launchUrl(Uri.parse(contentUrl));
-                },
-                text: 'Read More',
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  CustomButton(
+                    height: 40,
+                    width: isManage?MediaQuery.of(context).size.width * .3:MediaQuery.of(context).size.width * .5,
+                    color: AppColor.lightGrayColor,
+                    onPressed: () {
+                      launchUrl(Uri.parse(articleEntity.contentUrl));
+                    },
+                    text: 'Read More',
+                  ),
+                  if(isManage)
+                  CustomButton(
+                    height: 40,
+                    width: MediaQuery.of(context).size.width * .3,
+                    color: AppColor.redColor,
+                    onPressed: () {
+                      customDialog(
+                        context: context,
+                        message: 'Are you sure you want to delete ${articleEntity.title}?',
+                        onConfirm: () {},
+                      );
+                    },
+                    text: 'Delete',
+                  ),
+                ],
               ),
             ),
           ],

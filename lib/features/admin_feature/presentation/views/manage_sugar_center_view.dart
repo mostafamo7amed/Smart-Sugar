@@ -2,12 +2,12 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:smart_sugar/core/utils/widgets/build_app_bar.dart';
-import 'package:smart_sugar/features/admin_feature/presentation/views/delete_sugar_center_view.dart';
+import 'package:smart_sugar/features/admin_feature/presentation/views/widgets/delete_sugar_center_view.dart';
 
 import '../../../../core/utils/app_manager/app_colors.dart';
 import '../../../centers/domain/entities/sugar_center_entity.dart';
 import '../../../centers/presentation/views/widgets/sugar_center_item_widget.dart';
-import 'add_sugar_center_view.dart';
+import 'widgets/add_sugar_center_view.dart';
 
 class ManageSugarCenterView extends StatelessWidget {
   ManageSugarCenterView({super.key});

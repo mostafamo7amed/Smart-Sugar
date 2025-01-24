@@ -12,6 +12,7 @@ AppBar buildAppBar(context,
     bool isProfile = false
     }) {
   return AppBar(
+    toolbarHeight: 70,
     shadowColor: AppColor.lightGrayColor,
     surfaceTintColor: Colors.transparent,
     backgroundColor: Colors.white,

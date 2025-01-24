@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:smart_sugar/core/utils/extensions.dart';
 import 'package:smart_sugar/core/utils/widgets/custom_dialog.dart';
 
-import '../../../../core/helper_functions/url_launcher.dart';
-import '../../../../core/utils/app_manager/app_assets.dart';
-import '../../../../core/utils/app_manager/app_colors.dart';
-import '../../../../core/utils/app_manager/app_styles.dart';
-import '../../../../core/utils/widgets/build_app_bar.dart';
-import '../../../../core/utils/widgets/cached_image.dart';
-import '../../../../core/utils/widgets/custom_button.dart';
-import '../../../centers/domain/entities/sugar_center_entity.dart';
+import '../../../../../core/helper_functions/url_launcher.dart';
+import '../../../../../core/utils/app_manager/app_assets.dart';
+import '../../../../../core/utils/app_manager/app_colors.dart';
+import '../../../../../core/utils/app_manager/app_styles.dart';
+import '../../../../../core/utils/widgets/build_app_bar.dart';
+import '../../../../../core/utils/widgets/cached_image.dart';
+import '../../../../../core/utils/widgets/custom_button.dart';
+import '../../../../centers/domain/entities/sugar_center_entity.dart';
 
 class DeleteSugarCenterView extends StatelessWidget {
   const DeleteSugarCenterView({super.key, required this.sugarCenter});

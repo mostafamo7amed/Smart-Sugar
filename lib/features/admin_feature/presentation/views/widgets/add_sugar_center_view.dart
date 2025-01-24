@@ -4,8 +4,8 @@ import 'package:smart_sugar/core/utils/widgets/build_app_bar.dart';
 import 'package:smart_sugar/core/utils/widgets/custom_button.dart';
 import 'package:smart_sugar/core/utils/widgets/custom_text_form_field.dart';
 
-import '../../../../core/utils/app_manager/app_colors.dart';
-import '../../../../core/utils/app_manager/app_styles.dart';
+import '../../../../../core/utils/app_manager/app_colors.dart';
+import '../../../../../core/utils/app_manager/app_styles.dart';
 
 class AddSugarCenterView extends StatelessWidget {
   const AddSugarCenterView({super.key});
@@ -78,6 +78,7 @@ class AddSugarCenterView extends StatelessWidget {
               Text('Name',style: Styles.regular13.copyWith(color: AppColor.lightGrayColor),),
               const SizedBox(height: 5,),
               CustomTextFormField(
+                hintText: 'e.g. Sugar Center',
                 keyboardType: TextInputType.text,
                 onSaved: (value) {},
               ),
@@ -85,6 +86,7 @@ class AddSugarCenterView extends StatelessWidget {
               Text('District',style: Styles.regular13.copyWith(color: AppColor.lightGrayColor),),
               const SizedBox(height: 5,),
               CustomTextFormField(
+                hintText: 'e.g. Al-Rawdah District',
                 keyboardType: TextInputType.text,
                 onSaved: (value) {},
               ),
@@ -92,6 +94,7 @@ class AddSugarCenterView extends StatelessWidget {
               Text('Phone',style: Styles.regular13.copyWith(color: AppColor.lightGrayColor),),
               const SizedBox(height: 5,),
               CustomTextFormField(
+                hintText: 'e.g. +966 11 12345678',
                 keyboardType: TextInputType.text,
                 onSaved: (value) {},
               ),
