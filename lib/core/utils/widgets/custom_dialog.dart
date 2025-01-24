@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:smart_sugar/core/utils/app_manager/app_colors.dart';
 
+import '../app_manager/app_assets.dart';
 import '../app_manager/app_styles.dart';
 import 'custom_button_for_dialog.dart';
 
@@ -14,7 +16,7 @@ Future customDialog({
       context: context,
       builder: (context) {
         return Dialog(
-          backgroundColor: AppColor.whiteColor ,
+          backgroundColor: AppColor.whiteColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
@@ -27,15 +29,17 @@ Future customDialog({
                   height: 15,
                 ),
                 Container(
-                  height: 50,
-                  width: 50,
+                  height: 60,
+                  width: 60,
                   decoration: BoxDecoration(
-                      color: AppColor.whiteColor,
-                      shape: BoxShape.circle),
-                  child: Icon(
-                    Icons.delete,
-                    color: AppColor.redColor,
-                    size: 40,
+                      color: AppColor.fillColor, shape: BoxShape.circle),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: SvgPicture.asset(
+                      AssetsData.deleteImage,
+                      colorFilter:
+                          ColorFilter.mode(AppColor.blackColor, BlendMode.srcIn),
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -44,8 +48,7 @@ Future customDialog({
                 Text(
                   message,
                   textAlign: TextAlign.center,
-                  style: Styles.regular16
-                      .copyWith(fontWeight: FontWeight.w600),
+                  style: Styles.regular16.copyWith(fontWeight: FontWeight.w600),
                 ),
                 const SizedBox(
                   height: 15,
@@ -60,24 +63,21 @@ Future customDialog({
                   height: 15,
                 ),
                 Row(
-                  mainAxisAlignment:
-                  MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     CustomTextButtonForDialog(
-                      mainTitle:'Confirm',
+                      mainTitle: 'Confirm',
                       textColor: AppColor.whiteColor,
                       onTaped: onConfirm,
-                      buttonBackgroundColor:
-                      AppColor.redColor,
+                      buttonBackgroundColor: AppColor.redColor,
                     ),
                     CustomTextButtonForDialog(
-                      mainTitle:'Cancel',
+                      mainTitle: 'Cancel',
                       textColor: AppColor.whiteColor,
                       onTaped: () {
                         Navigator.pop(context);
                       },
-                      buttonBackgroundColor:
-                      AppColor.lightGrayColor,
+                      buttonBackgroundColor: AppColor.lightGrayColor,
                     ),
                   ],
                 ),

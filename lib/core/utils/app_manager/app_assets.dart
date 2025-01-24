@@ -28,4 +28,10 @@ class AssetsData {
   static const clockIcon = "$basePath/clock.png";
   static const chatGptIcon = "$basePath/chat_gpt.png";
   static const exitIcon = "$basePath/exit.png";
+  static const logoutImage = "$basePath/logout.svg";
+  static const phoneImage = "$basePath/phone.svg";
+  static const reportImage = "$basePath/report.svg";
+  static const infoImage = "$basePath/info.svg";
+  static const deleteImage = "$basePath/delete.svg";
+  static const articleImage = "$basePath/article.svg";
 }

@@ -62,18 +62,21 @@ class EmergencyNumberItemWidget extends StatelessWidget {
                     if (isManage) {
                       customDialog(
                         context: context,
-                        message: 'Are you sure you want to delete this number ?',
+                        message:
+                            'Are you sure you want to delete this number ?',
                         onConfirm: () {},
                       );
                     }
                   },
-                  child: Icon(
-                    size: 30,
-                    isManage ? Icons.delete : Icons.call,
-                    color: isManage
-                        ? AppColor.redColor.withValues(alpha: 0.7)
-                        : AppColor.lightGrayColor,
-                  )),
+                  child: SvgPicture.asset(
+                      height: 30,
+                      isManage ? AssetsData.deleteImage : AssetsData.phoneImage,
+                      colorFilter: ColorFilter.mode(
+                        isManage
+                            ? AppColor.redColor.withValues(alpha: 0.7)
+                            : AppColor.lightGrayColor,
+                        BlendMode.srcIn,
+                      ))),
               SizedBox(
                 width: 10,
               ),
