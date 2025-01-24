@@ -5,7 +5,7 @@ import 'package:smart_sugar/core/utils/widgets/custom_button.dart';
 import 'package:smart_sugar/features/home/presentation/view/emergency_numbers_view.dart';
 import 'package:smart_sugar/features/home/presentation/view/read_glucose_view.dart';
 import 'package:smart_sugar/features/home/presentation/view/widgets/glucose_level_widget.dart';
-import 'package:smart_sugar/features/home/presentation/view/widgets/home_app_bar.dart';
+import 'package:smart_sugar/core/utils/widgets/home_app_bar.dart';
 import 'package:smart_sugar/features/home/presentation/view/widgets/line_chart_widget.dart';
 import 'package:smart_sugar/features/home/presentation/view/widgets/user_activity_widget.dart';
 
@@ -19,7 +19,7 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       appBar: homeAppBar(context),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0,),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -14,7 +14,7 @@ class NotificationView extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: ListView.builder(
           physics: const BouncingScrollPhysics(),
-          itemBuilder: (context, index) => InkWell(
+          itemBuilder: (context, index) => GestureDetector(
             onTap: () {
               //Navigator.pop(context);
             },

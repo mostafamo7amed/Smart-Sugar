@@ -13,6 +13,8 @@ import 'edit_profile_view.dart';
 class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
 
+  static const routeName = 'profileView';
+
   @override
   State<ProfileView> createState() => _ProfileViewState();
 }
@@ -23,7 +25,7 @@ class _ProfileViewState extends State<ProfileView> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: buildAppBar(context, title: 'Profile', showBackButton: false),
+      appBar: buildAppBar(context, title: 'My Profile', showBackButton: false,showProfile: false),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(

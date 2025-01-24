@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smart_sugar/core/utils/app_manager/app_styles.dart';
 import 'package:smart_sugar/core/utils/widgets/custom_button.dart';
 import 'package:smart_sugar/core/utils/widgets/custom_text_form_field.dart';
+import 'package:smart_sugar/features/admin_feature/presentation/views/admin_home_view.dart';
 import 'package:smart_sugar/features/auth/presentation/views/register_view.dart';
 import 'package:smart_sugar/features/auth/presentation/views/widgets/custom_image_button.dart';
 import 'package:smart_sugar/features/auth/presentation/views/widgets/custom_password_field.dart';
@@ -119,7 +120,8 @@ class _LoginViewState extends State<LoginView> {
                   CustomButton(
                     text: 'Login',
                     onPressed: () {
-                      Navigator.pushNamed(context, UserHomeRoot.routeName);
+                     // Navigator.pushNamed(context, UserHomeRoot.routeName);
+                      Navigator.pushNamed(context, AdminHomeView.routeName);
                     },
                   ),
                   const SizedBox(
