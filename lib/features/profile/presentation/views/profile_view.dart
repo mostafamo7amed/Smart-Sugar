@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smart_sugar/core/utils/app_manager/app_assets.dart';
 import 'package:smart_sugar/core/utils/widgets/build_app_bar.dart';
 import 'package:smart_sugar/features/auth/presentation/views/login_view.dart';
@@ -25,7 +26,8 @@ class _ProfileViewState extends State<ProfileView> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: buildAppBar(context, title: 'My Profile', showBackButton: false,showProfile: false),
+      appBar: buildAppBar(context,
+          title: 'My Profile', showBackButton: false, showProfile: false),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
@@ -38,29 +40,46 @@ class _ProfileViewState extends State<ProfileView> {
                   size: size, name: "John Doe", image: AssetsData.chatGptIcon),
             ),
             CustomProfileField(
+              icon: SvgPicture.asset(
+                AssetsData.reportImage,
+                colorFilter:
+                    ColorFilter.mode(AppColor.blackColor, BlendMode.srcIn),
+              ),
               onTap: () {
                 Navigator.pushNamed(context, GlucoseReportView.routeName);
               },
               title: 'Glucose Report',
-              icon: Icon(
+              arrow: Icon(
+                size: 18,
                 Icons.arrow_forward_ios_outlined,
                 color: AppColor.lightGrayColor,
               ),
             ),
             CustomProfileField(
+              icon: SvgPicture.asset(
+                AssetsData.articleImage,
+                colorFilter:
+                    ColorFilter.mode(AppColor.blackColor, BlendMode.srcIn),
+              ),
               onTap: () {
                 Navigator.pushNamed(context, MedicalArticlesView.routeName);
               },
               title: 'Medical Articles',
-              icon: Icon(
+              arrow: Icon(
+                size: 18,
                 Icons.arrow_forward_ios_outlined,
                 color: AppColor.lightGrayColor,
               ),
             ),
             CustomProfileField(
+              icon: SvgPicture.asset(
+                colorFilter:
+                    ColorFilter.mode(AppColor.blackColor, BlendMode.srcIn),
+                AssetsData.notificationIcon,
+              ),
               onTap: () {},
               title: 'Notifications',
-              icon: SizedBox(
+              arrow: SizedBox(
                 height: 30,
                 child: Switch(
                   activeColor: AppColor.primaryColor,
@@ -74,31 +93,41 @@ class _ProfileViewState extends State<ProfileView> {
               ),
             ),
             CustomProfileField(
+              icon: SvgPicture.asset(
+                AssetsData.infoImage,
+              ),
               onTap: () {},
               title: 'Help & Support',
-              icon: Icon(
+              arrow: Icon(
+                size: 18,
                 Icons.arrow_forward_ios_outlined,
                 color: AppColor.lightGrayColor,
               ),
             ),
             CustomProfileField(
+              icon: SvgPicture.asset(
+                AssetsData.infoImage,
+              ),
               onTap: () {},
               title: 'About Us',
-              icon: Icon(
+              arrow: Icon(
+                size: 18,
                 Icons.arrow_forward_ios_outlined,
                 color: AppColor.lightGrayColor,
               ),
             ),
             CustomProfileField(
+              icon: SvgPicture.asset(
+                AssetsData.logoutImage,
+              ),
               onTap: () {
                 Navigator.pushReplacementNamed(context, LoginView.routeName);
               },
               title: 'Logout',
-              icon: Image.asset(
-                AssetsData.exitIcon,
-                height: 24,
+              arrow: Icon(
+                size: 18,
+                Icons.arrow_forward_ios_outlined,
                 color: AppColor.lightGrayColor,
-                width: 35,
               ),
             ),
           ],

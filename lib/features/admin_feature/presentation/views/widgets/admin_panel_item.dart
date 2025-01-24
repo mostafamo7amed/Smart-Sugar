@@ -22,7 +22,7 @@ class AdminPanelItem extends StatelessWidget {
       child: Card(
         elevation: 2,
         child: Container(
-          padding: EdgeInsets.all(14),
+          padding: EdgeInsets.all(16),
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
@@ -32,7 +32,7 @@ class AdminPanelItem extends StatelessWidget {
             child: Row(
               children: [
                 SvgPicture.asset(icon,
-                    height: 30,
+                    height: 25,
                     colorFilter: ColorFilter.mode(
                         color, BlendMode.srcIn)),
                 SizedBox(
@@ -44,6 +44,7 @@ class AdminPanelItem extends StatelessWidget {
                 ),
                 Spacer(),
                 Icon(
+                  size: 18,
                   Icons.arrow_forward_ios,
                   color: color,
                 ),

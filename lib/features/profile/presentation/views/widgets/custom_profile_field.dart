@@ -7,11 +7,13 @@ class CustomProfileField extends StatelessWidget {
   const CustomProfileField({
     super.key,
     required this.title,
-    required this.icon, this.onTap,
+    required this.icon,
+    this.onTap,
+    required this.arrow,
   });
 
   final String title;
-  final Widget icon;
+  final Widget? icon, arrow;
   final void Function()? onTap;
 
   @override
@@ -21,7 +23,7 @@ class CustomProfileField extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-        margin: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         width: size.width,
         decoration: BoxDecoration(
           color: AppColor.whiteColor,
@@ -30,12 +32,16 @@ class CustomProfileField extends StatelessWidget {
           ),
         ),
         child: Row(children: [
+          icon ?? const SizedBox(),
+          const SizedBox(
+            width: 10,
+          ),
           Text(
             title,
             style: Styles.bold16,
           ),
           const Spacer(),
-          icon,
+          arrow ?? const SizedBox(),
         ]),
       ),
     );

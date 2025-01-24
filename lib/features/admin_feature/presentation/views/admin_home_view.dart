@@ -58,7 +58,7 @@ class AdminHomeView extends StatelessWidget {
                 AdminPanelItem(
                   title: 'Medical Articles',
                   color: AppColor.orangeColor,
-                  icon: AssetsData.dietIcon,
+                  icon: AssetsData.articleImage,
                   onTap: () {
                     Navigator.pushNamed(context, ManageArticlesView.routeName);
                   },
@@ -69,9 +69,20 @@ class AdminHomeView extends StatelessWidget {
                 AdminPanelItem(
                   title: 'Emergency Numbers',
                   color: AppColor.primaryColor,
-                  icon: AssetsData.ageIcon,
+                  icon: AssetsData.phoneImage,
                   onTap: () {
                     Navigator.pushNamed(context, ManageEmergencyNumberView.routeName);
+                  },
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                AdminPanelItem(
+                  title: 'Logout',
+                  color: AppColor.blackColor,
+                  icon: AssetsData.logoutImage,
+                  onTap: () {
+                    Navigator.pop(context);
                   },
                 ),
               ],
