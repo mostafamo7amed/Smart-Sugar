@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:smart_sugar/features/splash/presentation/view/splash_view.dart';
 
+import '../../features/admin_feature/presentation/views/manage_articles_view.dart';
+import '../../features/admin_feature/presentation/views/widgets/add_article_view.dart';
 import '../../features/admin_feature/presentation/views/widgets/add_emergency_number_view.dart';
 import '../../features/admin_feature/presentation/views/widgets/add_sugar_center_view.dart';
 import '../../features/admin_feature/presentation/views/admin_home_view.dart';
@@ -96,6 +98,10 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => ManageEmergencyNumberView());
     case AddEmergencyNumberView.routeName:
       return MaterialPageRoute(builder: (_) => AddEmergencyNumberView());
+    case ManageArticlesView.routeName:
+      return MaterialPageRoute(builder: (_) => ManageArticlesView());
+    case AddArticleView.routeName:
+      return MaterialPageRoute(builder: (_) => AddArticleView());
     default:
       return MaterialPageRoute(builder: (_) => const Scaffold());
   }

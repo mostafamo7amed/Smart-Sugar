@@ -11,7 +11,7 @@ class ManageEmergencyNumberView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    appBar: buildAppBar(context, title: 'Manage Numbers'),
+      appBar: buildAppBar(context, title: 'Manage Numbers', showProfile: false),
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 30.0),
         child: FloatingActionButton(
@@ -22,18 +22,20 @@ class ManageEmergencyNumberView extends StatelessWidget {
             color: AppColor.whiteColor,
           ),
           onPressed: () {
-           Navigator.pushNamed(context, AddEmergencyNumberView.routeName);
+            Navigator.pushNamed(context, AddEmergencyNumberView.routeName);
           },
         ),
       ),
-    body: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-      child: ListView.builder(
-        physics: const BouncingScrollPhysics(),
-        itemBuilder: (context, index) => EmergencyNumberItemWidget(isManage: true,),
-        itemCount: 3,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+        child: ListView.builder(
+          physics: const BouncingScrollPhysics(),
+          itemBuilder: (context, index) => EmergencyNumberItemWidget(
+            isManage: true,
+          ),
+          itemCount: 3,
+        ),
       ),
-    ),
     );
   }
 }

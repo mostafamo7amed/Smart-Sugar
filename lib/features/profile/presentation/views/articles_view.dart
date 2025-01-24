@@ -40,10 +40,7 @@ class MedicalArticlesView extends StatelessWidget {
           itemCount: articles.length,
           itemBuilder: (context, index) {
             return ArticleCard(
-              title: articles[index].title,
-              description: articles[index].description,
-              imageUrl: articles[index].image,
-              contentUrl: articles[index].contentUrl,
+             articleEntity: articles[index],
             );
           },
         ),

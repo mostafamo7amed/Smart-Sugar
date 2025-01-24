@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_sugar/core/utils/widgets/home_app_bar.dart';
+import 'package:smart_sugar/features/admin_feature/presentation/views/manage_articles_view.dart';
 import 'package:smart_sugar/features/admin_feature/presentation/views/manage_sugar_center_view.dart';
 import 'package:smart_sugar/features/admin_feature/presentation/views/widgets/admin_panel_item.dart';
 
@@ -58,7 +59,9 @@ class AdminHomeView extends StatelessWidget {
                   title: 'Medical Articles',
                   color: AppColor.orangeColor,
                   icon: AssetsData.dietIcon,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, ManageArticlesView.routeName);
+                  },
                 ),
                 SizedBox(
                   height: 10,

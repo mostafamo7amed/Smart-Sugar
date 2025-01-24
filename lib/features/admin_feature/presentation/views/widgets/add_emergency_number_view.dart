@@ -25,6 +25,7 @@ class AddEmergencyNumberView extends StatelessWidget {
               Text('Name',style: Styles.regular13.copyWith(color: AppColor.lightGrayColor),),
               const SizedBox(height: 5,),
               CustomTextFormField(
+                hintText: 'e.g. emergency',
                 keyboardType: TextInputType.text,
                 onSaved: (value) {},
               ),
@@ -32,6 +33,7 @@ class AddEmergencyNumberView extends StatelessWidget {
               Text('Phone',style: Styles.regular13.copyWith(color: AppColor.lightGrayColor),),
               const SizedBox(height: 5,),
               CustomTextFormField(
+                hintText: 'e.g. +966 11 12345678',
                 keyboardType: TextInputType.text,
                 onSaved: (value) {},
               ),
