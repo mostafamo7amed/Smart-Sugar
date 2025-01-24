@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:smart_sugar/features/splash/presentation/view/splash_view.dart';
 
+import '../../features/admin_feature/presentation/views/add_sugar_center_view.dart';
+import '../../features/admin_feature/presentation/views/admin_home_view.dart';
+import '../../features/admin_feature/presentation/views/delete_sugar_center_view.dart';
+import '../../features/admin_feature/presentation/views/manage_sugar_center_view.dart';
 import '../../features/auth/presentation/views/forget_password_view.dart';
 import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/auth/presentation/views/on_boarding_view.dart';
@@ -20,6 +24,7 @@ import '../../features/home/presentation/view/user_home_root.dart';
 import '../../features/profile/presentation/views/articles_view.dart';
 import '../../features/profile/presentation/views/edit_profile_view.dart';
 import '../../features/profile/presentation/views/glucose_report_view.dart';
+import '../../features/profile/presentation/views/profile_view.dart';
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -65,8 +70,19 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => MedicalArticlesView());
     case GlucoseReportView.routeName:
       return MaterialPageRoute(builder: (_) => GlucoseReportView());
+    case ProfileView.routeName:
+      return MaterialPageRoute(builder: (_) => ProfileView());
     case EditProfileView.routeName:
       return MaterialPageRoute(builder: (_) => EditProfileView());
+      //Admin routes
+    case AdminHomeView.routeName:
+      return MaterialPageRoute(builder: (_) => const AdminHomeView());
+    case ManageSugarCenterView.routeName:
+      return MaterialPageRoute(builder: (_) => ManageSugarCenterView());
+    case AddSugarCenterView.routeName:
+      return MaterialPageRoute(builder: (_) => AddSugarCenterView());
+    case DeleteSugarCenterView.routeName:
+      return MaterialPageRoute(builder: (_) => DeleteSugarCenterView(sugarCenter: settings.arguments as SugarCenterEntity,));
     default:
       return MaterialPageRoute(builder: (_) => const Scaffold());
   }
