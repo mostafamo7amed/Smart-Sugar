@@ -7,8 +7,12 @@ import '../app_manager/app_styles.dart';
 AppBar buildAppBar(context,
     {required String title,
     bool showBackButton = true,
-    bool showProfile = true}) {
+    bool showProfile = true,
+    bool isProfile = false
+    }) {
   return AppBar(
+    shadowColor: AppColor.lightGrayColor,
+    surfaceTintColor: Colors.transparent,
     backgroundColor: Colors.white,
     leading: Visibility(
       visible: showBackButton,
@@ -45,6 +49,20 @@ AppBar buildAppBar(context,
               colorFilter:
                   ColorFilter.mode(AppColor.lightGrayColor, BlendMode.srcIn),
             ),
+            onPressed: () {},
+          ),
+        ),
+      ),
+      Visibility(
+        visible: isProfile,
+        child: Padding(
+          padding: const EdgeInsets.only(right: 8.0),
+          child: IconButton(
+            style: ButtonStyle(
+              backgroundColor: WidgetStateProperty.all(AppColor.fillColor),
+              shape: WidgetStateProperty.all(const CircleBorder()),
+            ),
+            icon: Icon(Icons.edit_outlined, color: AppColor.lightGrayColor),
             onPressed: () {},
           ),
         ),

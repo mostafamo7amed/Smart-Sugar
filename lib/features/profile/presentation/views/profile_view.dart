@@ -8,6 +8,7 @@ import 'package:smart_sugar/features/profile/presentation/views/widgets/custom_p
 import 'package:smart_sugar/features/profile/presentation/views/widgets/profile_title_widget.dart';
 
 import '../../../../core/utils/app_manager/app_colors.dart';
+import 'edit_profile_view.dart';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
@@ -28,7 +29,9 @@ class _ProfileViewState extends State<ProfileView> {
         child: Column(
           children: [
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, EditProfileView.routeName);
+              },
               child: ProfileTitleWidget(
                   size: size, name: "John Doe", image: AssetsData.chatGptIcon),
             ),

@@ -18,6 +18,7 @@ import '../../features/home/presentation/view/notification_view.dart';
 import '../../features/home/presentation/view/read_glucose_view.dart';
 import '../../features/home/presentation/view/user_home_root.dart';
 import '../../features/profile/presentation/views/articles_view.dart';
+import '../../features/profile/presentation/views/edit_profile_view.dart';
 import '../../features/profile/presentation/views/glucose_report_view.dart';
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) {
@@ -64,6 +65,8 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => MedicalArticlesView());
     case GlucoseReportView.routeName:
       return MaterialPageRoute(builder: (_) => GlucoseReportView());
+    case EditProfileView.routeName:
+      return MaterialPageRoute(builder: (_) => EditProfileView());
     default:
       return MaterialPageRoute(builder: (_) => const Scaffold());
   }
