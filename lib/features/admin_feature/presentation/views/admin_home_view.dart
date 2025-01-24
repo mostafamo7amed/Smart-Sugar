@@ -6,6 +6,7 @@ import 'package:smart_sugar/features/admin_feature/presentation/views/widgets/ad
 import '../../../../core/utils/app_manager/app_assets.dart';
 import '../../../../core/utils/app_manager/app_colors.dart';
 import '../../../../core/utils/app_manager/app_styles.dart';
+import 'manage_emergency_number_view.dart';
 
 class AdminHomeView extends StatelessWidget {
   const AdminHomeView({super.key});
@@ -66,7 +67,9 @@ class AdminHomeView extends StatelessWidget {
                   title: 'Emergency Numbers',
                   color: AppColor.primaryColor,
                   icon: AssetsData.ageIcon,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, ManageEmergencyNumberView.routeName);
+                  },
                 ),
               ],
             ),

@@ -4,8 +4,8 @@ import 'package:smart_sugar/core/utils/widgets/build_app_bar.dart';
 import 'package:smart_sugar/core/utils/widgets/custom_button.dart';
 import 'package:smart_sugar/core/utils/widgets/custom_text_form_field.dart';
 
-import '../../../../core/utils/app_manager/app_colors.dart';
-import '../../../../core/utils/app_manager/app_styles.dart';
+import '../../../../../core/utils/app_manager/app_colors.dart';
+import '../../../../../core/utils/app_manager/app_styles.dart';
 
 class AddSugarCenterView extends StatelessWidget {
   const AddSugarCenterView({super.key});
