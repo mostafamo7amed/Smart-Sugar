@@ -81,6 +81,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
             ),
             Expanded(
               child: PageView(
+                physics: NeverScrollableScrollPhysics(),
                 onPageChanged: (value) {
                   currentIndex == value;
                   setState(() {});
@@ -103,8 +104,8 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                   pageController.jumpToPage(++currentIndex);
                   setState(() {});
                 } else {
-                  Navigator.of(context)
-                      .pushReplacementNamed(UserHomeRoot.routeName);
+                 /* Navigator.of(context)
+                      .pushReplacementNamed(UserHomeRoot.routeName);*/
                 }
               },
               text: currentIndex == 3 ? "Let’s go" : "Next",
