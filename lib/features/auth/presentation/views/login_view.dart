@@ -120,8 +120,8 @@ class _LoginViewState extends State<LoginView> {
                   CustomButton(
                     text: 'Login',
                     onPressed: () {
-                     //Navigator.pushNamed(context, UserHomeRoot.routeName);
-                      Navigator.pushNamed(context, AdminHomeView.routeName);
+                      //Navigator.pushNamed(context, UserHomeRoot.routeName);
+                      //Navigator.pushNamed(context, AdminHomeView.routeName);
                     },
                   ),
                   const SizedBox(
