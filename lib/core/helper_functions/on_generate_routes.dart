@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_sugar/features/admin_feature/presentation/views/refresh_api_view.dart';
 import 'package:smart_sugar/features/splash/presentation/view/splash_view.dart';
 
 import '../../features/admin_feature/presentation/views/manage_articles_view.dart';
@@ -102,6 +103,8 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => ManageArticlesView());
     case AddArticleView.routeName:
       return MaterialPageRoute(builder: (_) => AddArticleView());
+    case RefreshApiView.routeName:
+      return MaterialPageRoute(builder: (_) => const RefreshApiView());
     default:
       return MaterialPageRoute(builder: (_) => const Scaffold());
   }

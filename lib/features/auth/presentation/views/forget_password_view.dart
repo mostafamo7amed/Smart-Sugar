@@ -16,7 +16,7 @@ class ForgetPasswordView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<ForgetPasswordView> {
-  String? email, password;
+  String? email;
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
