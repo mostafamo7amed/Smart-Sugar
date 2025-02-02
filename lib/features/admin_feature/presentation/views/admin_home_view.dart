@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:smart_sugar/core/utils/widgets/home_app_bar.dart';
 import 'package:smart_sugar/features/admin_feature/presentation/views/manage_articles_view.dart';
 import 'package:smart_sugar/features/admin_feature/presentation/views/manage_sugar_center_view.dart';
+import 'package:smart_sugar/features/admin_feature/presentation/views/refresh_api_view.dart';
 import 'package:smart_sugar/features/admin_feature/presentation/views/widgets/admin_panel_item.dart';
+import 'package:smart_sugar/features/auth/presentation/views/login_view.dart';
 
 import '../../../../core/utils/app_manager/app_assets.dart';
 import '../../../../core/utils/app_manager/app_colors.dart';
@@ -78,11 +80,22 @@ class AdminHomeView extends StatelessWidget {
                   height: 10,
                 ),
                 AdminPanelItem(
+                  title: 'Refresh Api',
+                  color: AppColor.pinkColor,
+                  icon: AssetsData.infoImage,
+                  onTap: () {
+                    Navigator.pushNamed(context, RefreshApiView.routeName);
+                  },
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                AdminPanelItem(
                   title: 'Logout',
-                  color: AppColor.blackColor,
+                  color: AppColor.redColor,
                   icon: AssetsData.logoutImage,
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.pushReplacementNamed(context, LoginView.routeName);
                   },
                 ),
               ],
