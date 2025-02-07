@@ -1,0 +1,142 @@
+{
+  "type_1_diabetes": {
+    "important_tips": {
+      "1": "Adhere to taking insulin in the correct doses and at the appropriate times.",
+      "2": "Regularly monitor blood sugar levels, especially before and after meals and exercise.",
+      "3": "Eat balanced meals containing complex carbohydrates, proteins, and healthy fats.",
+      "4": "Avoid simple sugars that cause a rapid spike in blood sugar.",
+      "5": "Drink plenty of water to stay hydrated and prevent high blood sugar.",
+      "6": "Exercise moderately while monitoring blood sugar levels before and after workouts.",
+      "7": "Carry a carbohydrate-rich snack during physical activities to prevent low blood sugar.",
+      "8": "Consult a doctor regularly to adjust insulin doses and diet."
+    },
+    "meal_plan": [
+      {
+        "day": "Saturday",
+        "breakfast": "Oatmeal with low-fat milk and nuts",
+        "lunch": "Grilled chicken with brown rice & salad",
+        "dinner": "Vegetable omelet with whole wheat toast",
+        "snacks": "Greek yogurt with nuts"
+      },
+      {
+        "day": "Sunday",
+        "breakfast": "Boiled eggs + whole wheat bread + cucumber",
+        "lunch": "Grilled fish with quinoa & roasted vegetables",
+        "dinner": "Lentil soup + salad",
+        "snacks": "Apple + handful of almonds"
+      },
+      {
+        "day": "Monday",
+        "breakfast": "Avocado toast with cottage cheese",
+        "lunch": "Grilled chicken + roasted potatoes",
+        "dinner": "Tuna salad + toast",
+        "snacks": "Yogurt with fresh fruits"
+      },
+      {
+        "day": "Tuesday",
+        "breakfast": "Banana oat pancakes",
+        "lunch": "Grilled meat with brown rice",
+        "dinner": "Vegetable soup with chicken breast",
+        "snacks": "Handful of unsalted nuts"
+      },
+      {
+        "day": "Wednesday",
+        "breakfast": "Fava beans with olive oil + whole wheat bread",
+        "lunch": "Boiled chicken with whole wheat pasta",
+        "dinner": "Cottage cheese + cucumber",
+        "snacks": "Handful of walnuts + dark chocolate"
+      },
+      {
+        "day": "Thursday",
+        "breakfast": "Scrambled eggs + whole wheat bread",
+        "lunch": "Grilled fish with roasted potatoes",
+        "dinner": "Labneh + olive oil + cucumber",
+        "snacks": "Yogurt with chia seeds"
+      },
+      {
+        "day": "Friday",
+        "breakfast": "Healthy oat-banana pancakes",
+        "lunch": "Grilled chicken with tabbouleh salad",
+        "dinner": "Lentil soup",
+        "snacks": "Handful of almonds + dates"
+      }
+    ],
+    "suitable_exercises": {
+      "1": "Walking or light jogging (30-45 minutes daily).",
+      "2": "Resistance training (light weightlifting) to improve insulin sensitivity.",
+      "3": "Yoga to reduce stress and regulate blood sugar.",
+      "4": "Swimming and cycling as low-impact exercises on the joints."
+    },
+    "note": "Always check blood sugar before and after workouts and carry a carbohydrate-rich snack to prevent sudden hypoglycemia."
+  },
+  "type_2_diabetes": {
+    "important_tips": {
+      "1": "Reduce consumption of simple carbohydrates such as white sugar and baked goods.",
+      "2": "Eat fiber-rich foods like vegetables, legumes, and oats to improve blood sugar control.",
+      "3": "Exercise regularly to improve insulin sensitivity.",
+      "4": "Lose excess weight if present, as it helps improve the body's insulin response.",
+      "5": "Reduce processed foods, soft drinks, and sweetened juices.",
+      "6": "Choose healthy fat sources like olive oil, nuts, and avocado.",
+      "7": "Divide meals into small portions throughout the day to prevent blood sugar spikes.",
+      "8": "Drink plenty of water to stay hydrated and reduce hunger."
+    },
+    "meal_plan": [
+      {
+        "day": "Saturday",
+        "breakfast": "Boiled eggs + whole wheat bread",
+        "lunch": "Grilled chicken + quinoa + vegetables",
+        "dinner": "Lentil soup + salad",
+        "snacks": "Handful of nuts"
+      },
+      {
+        "day": "Sunday",
+        "breakfast": "Oatmeal with low-fat milk + nuts",
+        "lunch": "Grilled fish with roasted potatoes",
+        "dinner": "Labneh + olive oil + cucumber",
+        "snacks": "Greek yogurt"
+      },
+      {
+        "day": "Monday",
+        "breakfast": "Fava beans with olive oil + whole wheat bread",
+        "lunch": "Grilled meat + brown rice + salad",
+        "dinner": "Tuna with mustard + vegetables",
+        "snacks": "Handful of walnuts"
+      },
+      {
+        "day": "Tuesday",
+        "breakfast": "Vegetable omelet + toast",
+        "lunch": "Grilled chicken with zucchini & roasted eggplant",
+        "dinner": "Lentil soup",
+        "snacks": "Apple with almond butter"
+      },
+      {
+        "day": "Wednesday",
+        "breakfast": "Greek yogurt with nuts",
+        "lunch": "Grilled chicken with brown rice",
+        "dinner": "Cottage cheese + cucumber",
+        "snacks": "Handful of unsalted nuts"
+      },
+      {
+        "day": "Thursday",
+        "breakfast": "Avocado toast with cottage cheese",
+        "lunch": "Grilled fish with roasted potatoes",
+        "dinner": "Vegetable soup with chicken breast",
+        "snacks": "Handful of almonds"
+      },
+      {
+        "day": "Friday",
+        "breakfast": "Healthy oat-banana pancakes",
+        "lunch": "Grilled chicken with tabbouleh salad",
+        "dinner": "Yogurt with chia seeds",
+        "snacks": "Handful of nuts and dates"
+      }
+    ],
+    "suitable_exercises": {
+      "1": "Brisk walking (45-60 minutes daily).",
+      "2": "Strength training (weightlifting) to increase muscle mass and burn calories.",
+      "3": "HIIT (High-Intensity Interval Training) to burn fat and improve fitness.",
+      "4": "Stretching and yoga to reduce stress and improve circulation."
+    },
+    "note": "Exercise helps reduce insulin resistance and improves the body's response to insulin, so it must be done regularly."
+  }
+}

@@ -3,8 +3,9 @@ import 'package:smart_sugar/core/utils/app_manager/app_colors.dart';
 import 'package:smart_sugar/core/utils/app_manager/app_styles.dart';
 
 class OnBoardingPageTwo extends StatefulWidget {
-  const OnBoardingPageTwo({super.key});
+  const OnBoardingPageTwo({super.key, required this.onDiabetesTypeChanged});
 
+  final ValueChanged<String> onDiabetesTypeChanged;
   @override
   State<OnBoardingPageTwo> createState() => _OnBoardingPageTwoState();
 }
@@ -35,6 +36,7 @@ class _OnBoardingPageTwoState extends State<OnBoardingPageTwo> {
           GestureDetector(
             onTap: () {
               groupValue = 1;
+              widget.onDiabetesTypeChanged('Type 1');
               setState(() {});
             },
             child: Container(
@@ -77,6 +79,7 @@ class _OnBoardingPageTwoState extends State<OnBoardingPageTwo> {
           GestureDetector(
             onTap: () {
               groupValue = 2;
+              widget.onDiabetesTypeChanged('Type 2');
               setState(() {});
             },
             child: Container(
@@ -119,6 +122,7 @@ class _OnBoardingPageTwoState extends State<OnBoardingPageTwo> {
           GestureDetector(
             onTap: () {
               groupValue = 3;
+              widget.onDiabetesTypeChanged('Gestational Diabetes');
               setState(() {});
             },
             child: Container(

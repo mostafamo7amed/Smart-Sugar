@@ -5,7 +5,7 @@ import '../app_manager/app_styles.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField(
-      {super.key, this.suffixIcon,this.prefixIcon, this.hintText, this.validator, this.keyboardType, this.onSaved,  this.obscureText = false, this.noBorder= false, this.onTap, this.controller, this.maxLines=1});
+      {super.key, this.suffixIcon,this.prefixIcon, this.hintText, this.validator, this.keyboardType, this.onSaved,  this.obscureText = false, this.noBorder= false, this.onTap, this.controller, this.maxLines=1, this.onChanged});
   final Widget? suffixIcon,prefixIcon;
   final String? hintText;
   final TextInputType? keyboardType;
@@ -17,6 +17,7 @@ class CustomTextFormField extends StatelessWidget {
 
   final void Function(String?)? onSaved;
   final void Function()? onTap;
+  final void Function(String)? onChanged;
 
   final String? Function(String?)? validator;
   @override
@@ -26,6 +27,7 @@ class CustomTextFormField extends StatelessWidget {
       child: TextFormField(
         controller: controller,
         onTap: onTap,
+        onChanged: onChanged,
         obscureText: obscureText,
         onSaved: onSaved,
         validator: validator,
@@ -40,6 +42,7 @@ class CustomTextFormField extends StatelessWidget {
           hintStyle: Styles.regular13.copyWith(color: AppColor.lightGrayColor),
           fillColor:noBorder?AppColor.backgroundColor: AppColor.whiteColor,
           filled: true,
+          errorBorder: noBorder? buildOutlineInputBorderCustom(): buildOutlineErrorBorder() ,
           border: noBorder? buildOutlineInputBorderCustom(): buildOutlineInputBorder(),
           enabledBorder:noBorder? buildOutlineInputBorderCustom(): buildOutlineInputBorder(),
           focusedBorder:noBorder? buildOutlineInputBorderCustom(): buildOutlineInputBorder(),
@@ -57,6 +60,17 @@ class CustomTextFormField extends StatelessWidget {
       ),
     );
   }
+
+  OutlineInputBorder buildOutlineErrorBorder() {
+    return OutlineInputBorder(
+      borderRadius: BorderRadius.circular(10),
+      borderSide: BorderSide(
+        width: .5,
+        color: AppColor.redColor,
+      ),
+    );
+  }
+
 }
 
 OutlineInputBorder buildOutlineInputBorderCustom() {

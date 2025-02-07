@@ -120,7 +120,16 @@ class _LoginViewState extends State<LoginView> {
                   CustomButton(
                     text: 'Login',
                     onPressed: () {
-                      Navigator.pushNamed(context, UserHomeRoot.routeName);
+                      if (formKey.currentState!.validate()) {
+                        formKey.currentState!.save();
+                        if(email == 'admin'){
+                          Navigator.pushNamed(context, AdminHomeView.routeName);
+                        }else if(email == 'user') {
+                          Navigator.pushNamed(context, UserHomeRoot.routeName);
+                        }
+                      }
+
+
                       //Navigator.pushNamed(context, AdminHomeView.routeName);
                     },
                   ),

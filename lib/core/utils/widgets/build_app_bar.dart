@@ -52,7 +52,7 @@ AppBar buildAppBar(context,
                   ColorFilter.mode(AppColor.lightGrayColor, BlendMode.srcIn),
             ),
             onPressed: () {
-              Navigator.pushNamed(context, ProfileView.routeName);
+              //Navigator.pushNamed(context, ProfileView.routeName);
             },
           ),
         ),
