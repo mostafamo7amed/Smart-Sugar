@@ -6,7 +6,10 @@ import 'package:smart_sugar/features/auth/presentation/views/widgets/custom_divi
 import '../../../../../core/utils/widgets/custom_text_form_field.dart';
 
 class OnBoardingPageThree extends StatefulWidget {
-  const OnBoardingPageThree({super.key});
+  const OnBoardingPageThree({super.key, required this.onTherapy1Changed, required this.onInsulinChanged, required this.onTherapy2Changed});
+  final ValueChanged<String> onTherapy1Changed;
+  final ValueChanged<String> onTherapy2Changed;
+  final ValueChanged<String> onInsulinChanged;
 
   @override
   State<OnBoardingPageThree> createState() => _OnBoardingPageTwoState();
@@ -40,6 +43,11 @@ class _OnBoardingPageTwoState extends State<OnBoardingPageThree> {
             GestureDetector(
               onTap: () {
                 check1 = !check1;
+                if(check1){
+                  widget.onTherapy1Changed('Insulin Therapy');
+                }else{
+                  widget.onTherapy1Changed('');
+                }
                 setState(() {});
               },
               child: Container(
@@ -63,8 +71,13 @@ class _OnBoardingPageTwoState extends State<OnBoardingPageThree> {
                           }),
                           activeColor: AppColor.primaryColor,
                           onChanged: (value) {
+                            check1 = value!;
+                            if(check1){
+                              widget.onTherapy1Changed('Insulin Therapy');
+                            }else{
+                              widget.onTherapy1Changed('');
+                            }
                             setState(() {
-                              check1 = value!;
                             });
                           },
                           value: check1,
@@ -98,7 +111,10 @@ class _OnBoardingPageTwoState extends State<OnBoardingPageThree> {
                               child: CustomTextFormField(
                                 noBorder: true,
                                 hintText: 'value',
-                                onSaved: (value) {},
+                                onChanged: (value) {
+                                  widget.onInsulinChanged(value);
+                                  setState(() {});
+                                },
                                 suffixIcon: FittedBox(
                                   fit: BoxFit.scaleDown,
                                   child: Text(
@@ -126,6 +142,11 @@ class _OnBoardingPageTwoState extends State<OnBoardingPageThree> {
             GestureDetector(
               onTap: () {
                 check2 = !check2;
+                if(check2){
+                  widget.onTherapy2Changed('Pills');
+                }else{
+                  widget.onTherapy2Changed('');
+                }
                 setState(() {});
               },
               child: Container(
@@ -148,9 +169,13 @@ class _OnBoardingPageTwoState extends State<OnBoardingPageThree> {
                       activeColor: AppColor.primaryColor,
                       value: check2,
                       onChanged: (value) {
-                        setState(() {
-                          check2 = value!;
-                        });
+                        check2 = value!;
+                        if(check2){
+                          widget.onTherapy2Changed('Pills');
+                        }else{
+                          widget.onTherapy2Changed('');
+                        }
+                        setState(() {});
                       },
                       side: BorderSide(
                         color: AppColor.lightGrayColor,

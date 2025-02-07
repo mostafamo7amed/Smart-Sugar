@@ -39,7 +39,7 @@ class MealComponent extends StatelessWidget {
                   bottomRight: Radius.circular(16),
                 ),
                 color: Colors.white70.withValues(alpha: 0.8)),
-            child: Text(model.title.validate(),
+            child: Text(model.mealType.validate(),
                 style: Styles.regular16
                     .copyWith(color: AppColor.blackColor),
                 textAlign: TextAlign.start,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_sugar/features/admin_feature/presentation/views/refresh_api_view.dart';
+import 'package:smart_sugar/features/diet/domain/entities/diabetes_data.dart';
+import 'package:smart_sugar/features/diet/presentation/view/diet_view.dart';
 import 'package:smart_sugar/features/splash/presentation/view/splash_view.dart';
 
 import '../../features/admin_feature/presentation/views/manage_articles_view.dart';
@@ -19,7 +21,6 @@ import '../../features/centers/presentation/views/add_to_list_view.dart';
 import '../../features/centers/presentation/views/choose_district_view.dart';
 import '../../features/centers/presentation/views/sugar_details_view.dart';
 import '../../features/diet/domain/entities/meal_entity.dart';
-import '../../features/diet/presentation/view/all_meals_view.dart';
 import '../../features/diet/presentation/view/meal_details_view.dart';
 import '../../features/home/presentation/view/emergency_numbers_view.dart';
 import '../../features/home/presentation/view/home_view.dart';
@@ -53,12 +54,8 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => const ReadGlucoseView());
     case EmergencyNumbersView.routeName:
       return MaterialPageRoute(builder: (_) => const EmergencyNumbersView());
-    case AllMealsView.routeName:
-      return MaterialPageRoute(
-        builder: (_) => AllMealsView(
-          mealType: settings.arguments.toString(),
-        ),
-      );
+    case DietView.routeName:
+      return MaterialPageRoute(builder: (_) => DietView(mealPlans: settings.arguments as MealPlan,));
     case MealDetailsView.routeName:
       return MaterialPageRoute(
         builder: (_) => MealDetailsView(

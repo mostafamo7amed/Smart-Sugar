@@ -49,6 +49,9 @@ dependencies:
   cached_network_image: ^3.4.1
   url_launcher: ^6.3.1
   dotted_border: ^2.1.0
+  firebase_core: ^3.11.0
+  firebase_auth: ^5.4.2
+  cloud_firestore: ^5.6.3
 
 dev_dependencies:
   flutter_test:
@@ -75,6 +78,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
    - assets/images/
+   - assets/json/diabetes_data.json
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

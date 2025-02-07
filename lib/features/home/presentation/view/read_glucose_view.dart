@@ -5,12 +5,14 @@ import 'package:smart_sugar/core/utils/widgets/build_app_bar.dart';
 import 'package:smart_sugar/core/utils/widgets/cached_image.dart';
 import 'package:smart_sugar/core/utils/widgets/custom_button.dart';
 import 'package:smart_sugar/core/utils/widgets/custom_text_form_field.dart';
+import 'package:smart_sugar/features/home/presentation/view/widgets/measurement_time_widget.dart';
 
 import '../../../../core/helper_functions/pike_date.dart';
 import '../../../../core/helper_functions/pike_time.dart';
 import '../../../../core/utils/app_manager/app_assets.dart';
 import '../../../../core/utils/app_manager/app_colors.dart';
 import '../../../../core/utils/app_manager/app_styles.dart';
+import '../../../../core/utils/widgets/custom_dialog_sugar_measurement.dart';
 
 class ReadGlucoseView extends StatefulWidget {
   const ReadGlucoseView({super.key});
@@ -62,37 +64,9 @@ class _ReadGlucoseViewState extends State<ReadGlucoseView> {
                   SizedBox(
                     height: 10,
                   ),
-                  CustomTextFormField(
-                    controller: TextEditingController(text: dateText),
-                    hintText: 'Date',
-                    keyboardType: TextInputType.datetime,
-                    onTap: () async {
-                      FocusScope.of(context).requestFocus(FocusNode());
-                      DateTime? date = await pickDate(context);
-                      if (date != null) {
-                        dateText = DateFormat('yyyy/MM/dd').format(date);
-                        setState(() {});
-                      }
-                    },
-                    onSaved: (value) {
-                      dateText = value;
-                    },
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  CustomTextFormField(
-                    controller: TextEditingController(text: timeText),
-                    hintText: 'Time',
-                    keyboardType: TextInputType.datetime,
-                    onTap: () async {
-                      FocusScope.of(context).requestFocus(FocusNode());
-                      DateTime? formattedPickedTime = await pickTime(context);
-                      if (formattedPickedTime != null) {
-                        timeText =
-                            DateFormat('hh:mm a').format(formattedPickedTime);
-                        setState(() {});
-                      }
+                  MeasurementTimeWidget(
+                    onChanged: (value) {
+
                     },
                   ),
                   SizedBox(
@@ -102,7 +76,20 @@ class _ReadGlucoseViewState extends State<ReadGlucoseView> {
                     width: MediaQuery.of(context).size.width * .5,
                     height: 40,
                     color: AppColor.redColor.withValues(alpha: .5),
-                    onPressed: () {},
+                    onPressed: () {
+                      customDialogSugarMeasurement(
+                        context: context,
+                       icon: Icon(
+                         size: 40,
+                         Icons.check,
+                         color: AppColor.primaryColor,),
+                       message: 'The sugar level is normal ✅',
+                        color: AppColor.primaryColor,
+                        onConfirm: () {
+                          Navigator.pop(context);
+                        },
+                      );
+                    },
                     text: 'Add Read',
                   ),
                 ],

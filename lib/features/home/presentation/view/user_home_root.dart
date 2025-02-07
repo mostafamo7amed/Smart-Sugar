@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smart_sugar/features/centers/presentation/views/sugar_centers_view.dart';
 import 'package:smart_sugar/features/chat/presentation/views/ai_chat_view.dart';
+import 'package:smart_sugar/features/diet/presentation/view/training_view.dart';
 import 'package:smart_sugar/features/profile/presentation/views/profile_view.dart';
 
 import '../../../../core/utils/app_manager/app_assets.dart';
@@ -25,10 +26,20 @@ class _UserHomeRootState extends State<UserHomeRoot> {
     return Scaffold(
       body: [
         HomeView(),
-        DietView(),
+        TrainingView(),
         AiChatView(),
-        SugarCentersView(),
-        ProfileView(),
+        Scaffold(
+          body: Center(
+            child: Text('Sugar Centers'.toString()),
+          ),
+        ),
+       Scaffold(
+         body: Center(
+           child: Text('Profile'.toString()),
+         ),
+       )
+       // SugarCentersView(),
+      //  ProfileView(),
       ][mCurrentIndex],
       bottomNavigationBar: Container(
         height: 60,

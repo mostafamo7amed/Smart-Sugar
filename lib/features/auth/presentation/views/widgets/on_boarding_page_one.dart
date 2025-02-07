@@ -8,91 +8,121 @@ import 'package:smart_sugar/features/auth/presentation/views/widgets/custom_gend
 
 import 'custom_divider.dart';
 
-class OnBoardingPageOne extends StatelessWidget {
-  const OnBoardingPageOne({super.key});
+class OnBoardingPageOne extends StatefulWidget {
+  const OnBoardingPageOne({super.key, required this.onGenderChanged, required this.onAgeChanged, required this.onWeightChanged, this.formKey});
 
+  final ValueChanged <String> onGenderChanged;
+  final ValueChanged <String> onAgeChanged;
+  final ValueChanged <String> onWeightChanged;
+  final GlobalKey<FormState>? formKey;
+
+  @override
+  State<OnBoardingPageOne> createState() => _OnBoardingPageOneState();
+}
+
+class _OnBoardingPageOneState extends State<OnBoardingPageOne> {
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
       child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Till us about yourself',
-              style: Styles.bold23,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Text(
-              'Your individual parameters are important for Dia in-depth personalization.',
-              style: Styles.regular16.copyWith(color: AppColor.lightGrayColor),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            CustomGenderWidget(
-              onChanged: (value) {},
-            ),
-            CustomDivider(),
-            CustomTextFormField(
-              noBorder: true,
-              prefixIcon: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: SizedBox(
-                  width: 30,
-                  height: 30,
-                  child: SvgPicture.asset(
-                    AssetsData.weightIcon,
-                    fit: BoxFit.scaleDown,
+        child: Form(
+          key: widget.formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Till us about yourself',
+                style: Styles.bold23,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                'Your individual parameters are important for Dia in-depth personalization.',
+                style: Styles.regular16.copyWith(color: AppColor.lightGrayColor),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              CustomGenderWidget(
+                onChanged: (value) {
+                  widget.onGenderChanged(value);
+                  setState(() {});
+                },
+              ),
+              CustomDivider(),
+              CustomTextFormField(
+                noBorder: true,
+                prefixIcon: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: SizedBox(
+                    width: 30,
+                    height: 30,
+                    child: SvgPicture.asset(
+                      AssetsData.weightIcon,
+                      fit: BoxFit.scaleDown,
+                    ),
                   ),
                 ),
-              ),
-              hintText: 'Your Weight',
-              suffixIcon: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: Text(
-                    'KG',
-                    style: Styles.bold19.copyWith(
-                        color: AppColor.lightGrayColor,
-                        fontWeight: FontWeight.normal),
-                  )),
-              keyboardType: TextInputType.number,
-              onSaved: (value) {
-        
-              },
-            ),
-            CustomDivider(),
-            CustomTextFormField(
-              noBorder: true,
-              prefixIcon: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: SizedBox(
-                  height: 30,
-                  width: 30,
-                  child: SvgPicture.asset(
-                    AssetsData.ageIcon,
+                hintText: 'Your Weight',
+                suffixIcon: FittedBox(
                     fit: BoxFit.scaleDown,
+                    child: Text(
+                      'KG',
+                      style: Styles.bold19.copyWith(
+                          color: AppColor.lightGrayColor,
+                          fontWeight: FontWeight.normal),
+                    )),
+                keyboardType: TextInputType.number,
+                onSaved: (value) {
+                  widget.onWeightChanged(value!);
+                  setState(() {});
+                },
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please enter your weight';
+                  }
+                  return null;
+                },
+              ),
+              CustomDivider(),
+              CustomTextFormField(
+                noBorder: true,
+                prefixIcon: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: SizedBox(
+                    height: 30,
+                    width: 30,
+                    child: SvgPicture.asset(
+                      AssetsData.ageIcon,
+                      fit: BoxFit.scaleDown,
+                    ),
                   ),
                 ),
+                hintText: 'Your Age',
+                suffixIcon: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Icon(
+                      Icons.keyboard_arrow_down_outlined,
+                      color: AppColor.lightGrayColor,
+                      size: 30,
+                    )),
+                keyboardType: TextInputType.number,
+                onSaved: (value) {
+                  widget.onAgeChanged(value!);
+                  setState(() {});
+                },
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please enter your age';
+                  }
+                  return null;
+                },
               ),
-              hintText: 'Your Age',
-              suffixIcon: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: Icon(
-                    Icons.keyboard_arrow_down_outlined,
-                    color: AppColor.lightGrayColor,
-                    size: 30,
-                  )),
-              keyboardType: TextInputType.number,
-              onSaved: (value) {
-        
-              },
-            ),
-            CustomDivider(),
-          ],
+              CustomDivider(),
+            ],
+          ),
         ),
       ),
     );
