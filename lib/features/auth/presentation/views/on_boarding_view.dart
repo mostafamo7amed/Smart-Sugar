@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:linear_progress_bar/linear_progress_bar.dart';
 import 'package:smart_sugar/core/helper_functions/get_snack_bar.dart';
+import 'package:smart_sugar/core/utils/widgets/custom_progress_hud.dart';
 import 'package:smart_sugar/features/auth/presentation/manager/register_cubit/register_cubit.dart';
 import 'package:smart_sugar/features/auth/presentation/views/widgets/on_boarding_page_four.dart';
 import 'package:smart_sugar/features/auth/presentation/views/widgets/on_boarding_page_one.dart';
@@ -29,6 +30,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
       insulinValue, glucoseLowValue, glucoseHighValue;
   final formKey1 = GlobalKey<FormState>();
   final formKey2 = GlobalKey<FormState>();
+  final formKey3 = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -57,161 +59,171 @@ class _OnBoardingViewState extends State<OnBoardingView> {
         }
       },
       builder: (context, state) {
-        return Scaffold(
-          body: SafeArea(
-            child: Column(
-              children: [
-                Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
-                  child: Row(
-                    children: [
-                      Visibility(
-                        visible: currentIndex != 0,
-                        child: GestureDetector(
-                          onTap: () {
-                            pageController.jumpToPage(--currentIndex);
-                            setState(() {});
-                          },
-                          child: Icon(
-                            Icons.arrow_back_ios_new,
-                            color: AppColor.lightGrayColor,
+        return CustomProgressHud(
+          isLoading: state is RegisterCreateUserLoading ? true : false,
+          child: Scaffold(
+            body: SafeArea(
+              child: Column(
+                children: [
+                  Padding(
+                    padding:
+                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
+                    child: Row(
+                      children: [
+                        Visibility(
+                          visible: currentIndex != 0,
+                          child: GestureDetector(
+                            onTap: () {
+                              pageController.jumpToPage(--currentIndex);
+                              setState(() {});
+                            },
+                            child: Icon(
+                              Icons.arrow_back_ios_new,
+                              color: AppColor.lightGrayColor,
+                            ),
                           ),
                         ),
-                      ),
-                      if (currentIndex != 0)
-                        SizedBox(
-                          width: 10,
+                        if (currentIndex != 0)
+                          SizedBox(
+                            width: 10,
+                          ),
+                        Expanded(
+                          child: LinearProgressBar(
+                            maxSteps: 4,
+                            progressType: LinearProgressBar
+                                .progressTypeLinear,
+                            // Use Linear progress
+                            currentStep: currentIndex + 1,
+                            progressColor: AppColor.orangeColor,
+                            backgroundColor: AppColor.lightGrayColor,
+                            minHeight: 8,
+                            borderRadius: BorderRadius.circular(10), //  NEW
+                          ),
                         ),
-                      Expanded(
-                        child: LinearProgressBar(
-                          maxSteps: 4,
-                          progressType: LinearProgressBar
-                              .progressTypeLinear,
-                          // Use Linear progress
-                          currentStep: currentIndex + 1,
-                          progressColor: AppColor.orangeColor,
-                          backgroundColor: AppColor.lightGrayColor,
-                          minHeight: 8,
-                          borderRadius: BorderRadius.circular(10), //  NEW
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: PageView(
-                    physics: NeverScrollableScrollPhysics(),
-                    onPageChanged: (value) {
-                      currentIndex == value;
-                      setState(() {});
+                  Expanded(
+                    child: PageView(
+                      physics: NeverScrollableScrollPhysics(),
+                      onPageChanged: (value) {
+                        currentIndex == value;
+                        setState(() {});
+                      },
+                      controller: pageController,
+                      children: [
+                        OnBoardingPageOne(
+                          formKey: formKey1,
+                          onAgeChanged: (value) {
+                            age = value;
+                            setState(() {});
+                          },
+                          onGenderChanged: (value) {
+                            gender = value;
+                            setState(() {});
+                          },
+                          onWeightChanged: (value) {
+                            wight = value;
+                            setState(() {});
+                          },
+                        ),
+                        OnBoardingPageTwo(
+                          onDiabetesTypeChanged: (value) {
+                            diabetesType = value;
+                            setState(() {});
+                          },
+                        ),
+                        OnBoardingPageThree(
+                          formKey: formKey3,
+                          onInsulinChanged: (value) {
+                            insulinValue = value;
+                            setState(() {});
+                          },
+                          onTherapy2Changed: (value) {
+                            therapy2Type = value;
+                            setState(() {});
+                          },
+                          onTherapy1Changed: (value) {
+                            therapy1Type = value;
+                            setState(() {});
+                          },
+                        ),
+                        OnBoardingPageFour(
+                          formKey: formKey2,
+                          onGlucoseHighValueChanged: (value) {
+                            glucoseHighValue = value;
+                            setState(() {});
+                          },
+                          onGlucoseLowValueChanged: (value) {
+                            glucoseLowValue = value;
+                            setState(() {});
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  CustomButton(
+                    onPressed: () {
+                      if (currentIndex < 3) {
+                        if (currentIndex == 0) {
+                          if (formKey1.currentState!.validate()) {
+                            formKey1.currentState!.save();
+                            log(age! + gender! + wight!);
+                            pageController.jumpToPage(++currentIndex);
+                            setState(() {});
+                          }
+                        } else if (currentIndex == 1) {
+                          if (diabetesType != null) {
+                            log(diabetesType!);
+                            pageController.jumpToPage(++currentIndex);
+                            setState(() {});
+                          } else {
+                            getSnackBar('Please select diabetes type');
+                          }
+                        } else if (currentIndex == 2) {
+                          if (therapy1Type != null) {
+                            if (formKey3.currentState!.validate()) {
+                              formKey3.currentState!.save();
+                              pageController.jumpToPage(++currentIndex);
+                              setState(() {});
+                            }
+                            log(therapy1Type ?? '');
+                            log(insulinValue ?? '');
+                          }else if( therapy2Type != null){
+                            pageController.jumpToPage(++currentIndex);
+                            setState(() {});
+                            log(therapy2Type ?? '');
+                          } else {
+                            getSnackBar('Please select therapy type');
+                          }
+                        }
+                      } else {
+                        if (formKey2.currentState!.validate()) {
+                          formKey2.currentState!.save();
+                          log(glucoseHighValue! + glucoseLowValue!);
+                          context.read<RegisterCubit>().createUser(
+                            age: age!,
+                            gender: gender!,
+                            wight: wight!,
+                            diabetesType: diabetesType!,
+                            therapyType: '${therapy1Type??''} ${therapy2Type??''}',
+                            insulinValue: insulinValue??'',
+                            glucoseLowValue: glucoseLowValue!,
+                            glucoseHighValue: glucoseHighValue!,
+                          );
+                        }
+                      }
                     },
-                    controller: pageController,
-                    children: [
-                      OnBoardingPageOne(
-                        formKey: formKey1,
-                        onAgeChanged: (value) {
-                          age = value;
-                          setState(() {});
-                        },
-                        onGenderChanged: (value) {
-                          gender = value;
-                          setState(() {});
-                        },
-                        onWeightChanged: (value) {
-                          wight = value;
-                          setState(() {});
-                        },
-                      ),
-                      OnBoardingPageTwo(
-                        onDiabetesTypeChanged: (value) {
-                          diabetesType = value;
-                          setState(() {});
-                        },
-                      ),
-                      OnBoardingPageThree(
-                        onInsulinChanged: (value) {
-                          insulinValue = value;
-                          setState(() {});
-                        },
-                        onTherapy2Changed: (value) {
-                          therapy2Type = value;
-                          setState(() {});
-                        },
-                        onTherapy1Changed: (value) {
-                          therapy1Type = value;
-                          setState(() {});
-                        },
-                      ),
-                      OnBoardingPageFour(
-                        formKey: formKey2,
-                        onGlucoseHighValueChanged: (value) {
-                          glucoseHighValue = value;
-                          setState(() {});
-                        },
-                        onGlucoseLowValueChanged: (value) {
-                          glucoseLowValue = value;
-                          setState(() {});
-                        },
-                      ),
-                    ],
+                    text: currentIndex == 3 ? "Let’s go" : "Next",
                   ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                CustomButton(
-                  onPressed: () {
-                    if (currentIndex < 3) {
-                      if (currentIndex == 0) {
-                        if (formKey1.currentState!.validate()) {
-                          formKey1.currentState!.save();
-                          log(age! + gender! + wight!);
-                          pageController.jumpToPage(++currentIndex);
-                          setState(() {});
-                        }
-                      } else if (currentIndex == 1) {
-                        if (diabetesType != null) {
-                          log(diabetesType!);
-                          pageController.jumpToPage(++currentIndex);
-                          setState(() {});
-                        } else {
-                          getSnackBar('Please select diabetes type');
-                        }
-                      } else if (currentIndex == 2) {
-                        if (therapy1Type != null || therapy2Type != null) {
-                          log(therapy1Type ?? '');
-                          log(therapy2Type ?? '');
-                          log(insulinValue ?? '');
-                          pageController.jumpToPage(++currentIndex);
-                          setState(() {});
-                        } else {
-                          getSnackBar('Please select therapy type');
-                        }
-                      }
-                    } else {
-                      if (formKey2.currentState!.validate()) {
-                        formKey2.currentState!.save();
-                       /* log(glucoseHighValue! + glucoseLowValue!);
-                        context.read<RegisterCubit>().createUser(
-                          age: age!,
-                          gender: gender!,
-                          wight: wight!,
-                          diabetesType: diabetesType!,
-                          therapyType: '${therapy1Type??''} ${therapy2Type??''}',
-                          insulinValue: insulinValue??'',
-                          glucoseLowValue: glucoseLowValue!,
-                          glucoseHighValue: glucoseHighValue!,
-                        );*/
-                      }
-                    }
-                  },
-                  text: currentIndex == 3 ? "Let’s go" : "Next",
-                ),
-                SizedBox(
-                  height: 20,
-                )
-              ],
+                  SizedBox(
+                    height: 20,
+                  )
+                ],
+              ),
             ),
           ),
         );

@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:smart_sugar/features/centers/presentation/views/sugar_centers_view.dart';
 import 'package:smart_sugar/features/chat/presentation/views/ai_chat_view.dart';
 import 'package:smart_sugar/features/diet/presentation/view/training_view.dart';
-import 'package:smart_sugar/features/profile/presentation/views/profile_view.dart';
 
 import '../../../../core/utils/app_manager/app_assets.dart';
 import '../../../../core/utils/app_manager/app_colors.dart';
 import '../../../../core/utils/app_manager/app_styles.dart';
-import '../../../diet/presentation/view/diet_view.dart';
 import 'home_view.dart';
 
 class UserHomeRoot extends StatefulWidget {

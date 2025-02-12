@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:flutter/services.dart';
 import 'package:smart_sugar/features/diet/domain/entities/diabetes_data.dart';
 
