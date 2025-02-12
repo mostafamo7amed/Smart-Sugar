@@ -41,7 +41,7 @@ class LineChartWidget extends StatelessWidget {
       ),
         series: <CartesianSeries>[
           LineSeries<ChartData, DateTime>(
-            dataSource: chartData,
+            dataSource: chartData.sublist(chartData.length - 4, chartData.length),
             xValueMapper: (ChartData data, _) => data.time,
             yValueMapper: (ChartData data, _) => data.value,
             width: 1.5,

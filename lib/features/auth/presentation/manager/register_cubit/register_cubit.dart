@@ -3,7 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_sugar/core/helper_functions/get_snack_bar.dart';
+import 'package:smart_sugar/core/services/app_references.dart';
 import 'package:smart_sugar/features/auth/domain/entity/user_entity.dart';
+
+import '../../../../../constants.dart';
 part 'register_state.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {
@@ -23,7 +26,7 @@ class RegisterCubit extends Cubit<RegisterState> {
         email: email,
         password: password,
       );
-      credential.user!.updateDisplayName(name);
+      AppReference.sharedPreferences.setString(userNameKey, name);
       user = credential.user!;
       emit(RegisterSuccess(user));
     } on FirebaseAuthException catch (e) {
@@ -58,9 +61,10 @@ class RegisterCubit extends Cubit<RegisterState> {
     required String glucoseHighValue,
   }) async {
     emit(RegisterCreateUserLoading());
+    String userName = AppReference.sharedPreferences.getString(userNameKey)!;
     UserEntity userEntity = UserEntity(
       uid: user.uid,
-      name: user.displayName,
+      name: userName,
       gender: gender,
       email: user.email,
       weight: wight,
@@ -74,7 +78,7 @@ class RegisterCubit extends Cubit<RegisterState> {
       fcmToken: '',
     );
     await FirebaseFirestore.instance
-        .collection('users')
+        .collection(usersCollection)
         .doc(user.uid)
         .set(userEntity.toMap())
         .then((value) => emit(RegisterCreateUserSuccess()))
