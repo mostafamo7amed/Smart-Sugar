@@ -153,7 +153,7 @@ class _LoginViewState extends State<RegisterView> {
                         CustomButton(
                           text: 'Register',
                           onPressed: () {
-                            if (formKey.currentState!.validate()) {
+                            /*if (formKey.currentState!.validate()) {
                               formKey.currentState!.save();
                               autoValidateMode = AutovalidateMode.disabled;
                               if (password == confirmPassword) {
@@ -168,7 +168,7 @@ class _LoginViewState extends State<RegisterView> {
                               }
                             } else {
                               autoValidateMode = AutovalidateMode.always;
-                            }
+                            }*/
                             Navigator.pushNamed(
                                 context, OnBoardingView.routeName);
                           },

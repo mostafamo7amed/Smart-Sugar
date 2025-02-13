@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../features/profile/domain/entity/medication_reminder.dart';
+
 extension WidgetExtension on Widget? {
   /// return padding symmetric
   Padding paddingSymmetric({double vertical = 0.0, double horizontal = 0.0}) {
@@ -126,4 +128,24 @@ extension ContextExtensions on BuildContext {
 
   /// returns brightness
   Brightness platformBrightness() => MediaQuery.of(this).platformBrightness;
+}
+
+extension MedicationReminderExtension on MedicationReminder {
+  MedicationReminder copyWith({
+    String? id,
+    String? name,
+    String? dosage,
+    TimeOfDay? time,
+    List<String>? days,
+    bool? isActive,
+  }) {
+    return MedicationReminder(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      dosage: dosage ?? this.dosage,
+      time: time ?? this.time,
+      days: days ?? this.days,
+      isActive: isActive ?? this.isActive,
+    );
+  }
 }

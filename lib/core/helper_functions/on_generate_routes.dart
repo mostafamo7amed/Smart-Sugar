@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:smart_sugar/features/admin_feature/presentation/views/refresh_api_view.dart';
 import 'package:smart_sugar/features/diet/domain/entities/diabetes_data.dart';
 import 'package:smart_sugar/features/diet/presentation/view/diet_view.dart';
+import 'package:smart_sugar/features/profile/presentation/views/about_us_view.dart';
+import 'package:smart_sugar/features/profile/presentation/views/add_reminder_view.dart';
+import 'package:smart_sugar/features/profile/presentation/views/medication_reminder_view.dart';
 import 'package:smart_sugar/features/splash/presentation/view/splash_view.dart';
 
 import '../../features/admin_feature/presentation/views/manage_articles_view.dart';
@@ -79,6 +82,12 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => ProfileView());
     case EditProfileView.routeName:
       return MaterialPageRoute(builder: (_) => EditProfileView());
+    case MedicationReminderView.routeName:
+      return MaterialPageRoute(builder: (_) => MedicationReminderView());
+    case AddReminderView.routeName:
+      return MaterialPageRoute(builder: (_) => AddReminderView());
+    case AboutUsView.routeName:
+      return MaterialPageRoute(builder: (_) => const AboutUsView());
     //Admin routes
     case AdminHomeView.routeName:
       return MaterialPageRoute(builder: (_) => const AdminHomeView());

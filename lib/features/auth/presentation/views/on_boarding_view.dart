@@ -26,8 +26,15 @@ class OnBoardingView extends StatefulWidget {
 class _OnBoardingViewState extends State<OnBoardingView> {
   late PageController pageController;
   int currentIndex = 0;
-  String? gender, age, wight, diabetesType, therapy1Type, therapy2Type,
-      insulinValue, glucoseLowValue, glucoseHighValue;
+  String? gender,
+      age,
+      wight,
+      diabetesType,
+      therapy1Type,
+      therapy2Type,
+      insulinValue,
+      glucoseLowValue,
+      glucoseHighValue;
   final formKey1 = GlobalKey<FormState>();
   final formKey2 = GlobalKey<FormState>();
   final formKey3 = GlobalKey<FormState>();
@@ -53,8 +60,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
     return BlocConsumer<RegisterCubit, RegisterState>(
       listener: (context, state) {
         if (state is RegisterCreateUserSuccess) {
-          Navigator.of(context)
-              .pushReplacementNamed(UserHomeRoot.routeName);
+          Navigator.of(context).pushReplacementNamed(UserHomeRoot.routeName);
           getSnackBar('Account created successfully');
         }
       },
@@ -66,8 +72,8 @@ class _OnBoardingViewState extends State<OnBoardingView> {
               child: Column(
                 children: [
                   Padding(
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20.0, vertical: 20),
                     child: Row(
                       children: [
                         Visibility(
@@ -90,8 +96,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                         Expanded(
                           child: LinearProgressBar(
                             maxSteps: 4,
-                            progressType: LinearProgressBar
-                                .progressTypeLinear,
+                            progressType: LinearProgressBar.progressTypeLinear,
                             // Use Linear progress
                             currentStep: currentIndex + 1,
                             progressColor: AppColor.orangeColor,
@@ -192,7 +197,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                             }
                             log(therapy1Type ?? '');
                             log(insulinValue ?? '');
-                          }else if( therapy2Type != null){
+                          } else if (therapy2Type != null) {
                             pageController.jumpToPage(++currentIndex);
                             setState(() {});
                             log(therapy2Type ?? '');
@@ -204,7 +209,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                         if (formKey2.currentState!.validate()) {
                           formKey2.currentState!.save();
                           log(glucoseHighValue! + glucoseLowValue!);
-                          context.read<RegisterCubit>().createUser(
+                          /*context.read<RegisterCubit>().createUser(
                             age: age!,
                             gender: gender!,
                             wight: wight!,
@@ -213,7 +218,9 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                             insulinValue: insulinValue??'',
                             glucoseLowValue: glucoseLowValue!,
                             glucoseHighValue: glucoseHighValue!,
-                          );
+                          );*/
+                          Navigator.of(context)
+                              .pushReplacementNamed(UserHomeRoot.routeName);
                         }
                       }
                     },
