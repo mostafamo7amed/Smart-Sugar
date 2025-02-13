@@ -8,7 +8,8 @@ AppBar buildAppBar(context,
     {required String title,
     bool showBackButton = true,
     bool showProfile = true,
-    bool isProfile = false
+    bool isProfile = false,
+      void Function()? onProfileEdit
     }) {
   return AppBar(
     toolbarHeight: 70,
@@ -66,7 +67,7 @@ AppBar buildAppBar(context,
               shape: WidgetStateProperty.all(const CircleBorder()),
             ),
             icon: Icon(Icons.edit_outlined, color: AppColor.lightGrayColor),
-            onPressed: () {},
+            onPressed: onProfileEdit,
           ),
         ),
       ),

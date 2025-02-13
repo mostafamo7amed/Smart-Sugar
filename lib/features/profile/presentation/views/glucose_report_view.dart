@@ -9,15 +9,24 @@ class GlucoseReportView extends StatelessWidget {
   static const routeName = 'glucose-report';
 
   final List<GlucoseMeasurement> measurements = [
-    GlucoseMeasurement(value: 95, dateTime: DateTime(2023, 10, 1)),
-    GlucoseMeasurement(value: 100, dateTime: DateTime(2023, 10, 5)),
-    GlucoseMeasurement(value: 110, dateTime: DateTime(2023, 10, 10)),
-    GlucoseMeasurement(value: 105, dateTime: DateTime(2023, 10, 15)),
-    GlucoseMeasurement(value: 98, dateTime: DateTime(2023, 10, 20)),
-    GlucoseMeasurement(value: 120, dateTime: DateTime(2023, 10, 25)),
-    GlucoseMeasurement(value: 115, dateTime: DateTime(2023, 10, 30)),
-    GlucoseMeasurement(value: 115, dateTime: DateTime(2023, 10, 30)),
-    GlucoseMeasurement(value: 115, dateTime: DateTime(2023, 10, 30)),
+    GlucoseMeasurement(
+        value: 95, dateTime: DateTime(2023, 10, 1), result: 'Low'),
+    GlucoseMeasurement(
+        value: 100, dateTime: DateTime(2023, 10, 5), result: 'Normal'),
+    GlucoseMeasurement(
+        value: 110, dateTime: DateTime(2023, 10, 10), result: 'Normal'),
+    GlucoseMeasurement(
+        value: 105, dateTime: DateTime(2023, 10, 15), result: 'Normal'),
+    GlucoseMeasurement(
+        value: 98, dateTime: DateTime(2023, 10, 20), result: 'Normal'),
+    GlucoseMeasurement(
+        value: 120, dateTime: DateTime(2023, 10, 25), result: 'High'),
+    GlucoseMeasurement(
+        value: 115, dateTime: DateTime(2023, 10, 30), result: 'Normal'),
+    GlucoseMeasurement(
+        value: 115, dateTime: DateTime(2023, 10, 30), result: 'Normal'),
+    GlucoseMeasurement(
+        value: 115, dateTime: DateTime(2023, 10, 30), result: 'Normal'),
   ];
 
   // Calculate average, highest, and lowest glucose values
@@ -90,10 +99,22 @@ class GlucoseReportView extends StatelessWidget {
                       '${measurement.dateTime.day}/${measurement.dateTime.month}/${measurement.dateTime.year}',
                     ),
                     trailing: isHighest
-                        ? Icon(Icons.arrow_upward, color: AppColor.redColor)
+                        ? Text(
+                            measurement.result,
+                            style: Styles.bold16
+                                .copyWith(color: AppColor.redColor),
+                          )
                         : isLowest
-                            ? Icon(Icons.arrow_downward, color: AppColor.blueColor)
-                            : null,
+                            ? Text(
+                                measurement.result,
+                                style: Styles.bold16
+                                    .copyWith(color: AppColor.blueColor),
+                              )
+                            : Text(
+                                measurement.result,
+                                style: Styles.bold16
+                                    .copyWith(color: AppColor.primaryColor),
+                              ),
                   ),
                 );
               },
@@ -124,6 +145,8 @@ class GlucoseReportView extends StatelessWidget {
 class GlucoseMeasurement {
   final int value;
   final DateTime dateTime;
+  final String result;
 
-  GlucoseMeasurement({required this.value, required this.dateTime});
+  GlucoseMeasurement(
+      {required this.value, required this.dateTime, required this.result});
 }

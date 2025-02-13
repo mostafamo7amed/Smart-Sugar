@@ -1,4 +1,3 @@
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:smart_sugar/core/utils/extensions.dart';
@@ -20,31 +19,30 @@ class EditProfileView extends StatefulWidget {
 }
 
 class _EditProfileViewState extends State<EditProfileView> {
-  TextEditingController fullNameController = TextEditingController();
+  TextEditingController fullNameController = TextEditingController(text: 'Buruq Nasser ');
 
-  TextEditingController emailController = TextEditingController();
+  TextEditingController emailController = TextEditingController(text: 'username@example.com');
 
-  TextEditingController mobileNumberController = TextEditingController();
+  TextEditingController ageController = TextEditingController(text: '20');
 
-  TextEditingController ageController = TextEditingController();
+  TextEditingController weightController = TextEditingController(text: '60');
 
-  TextEditingController weightController = TextEditingController();
-
-  TextEditingController heightController = TextEditingController();
-
-  List<String> gender = ['Male', 'Female'];
-
-  String? selectedGender;
-
+  TextEditingController heightController = TextEditingController(text: '170');
+  TextEditingController genderController = TextEditingController(text: 'Female');
   final formKey = GlobalKey<FormState>();
-  int groupValue = -1;
-
+  bool isEdit = false;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: buildAppBar(context,
-          title: 'Edit Profile', isProfile: true, showProfile: false),
+          title: 'Edit Profile', isProfile: true, showProfile: false,
+        onProfileEdit: () {
+          isEdit = !isEdit;
+          setState(() {
+          });
+        },
+      ),
       body: SingleChildScrollView(
         child: Stack(
           children: [
@@ -74,6 +72,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                         height: 10,
                       ),
                       CustomEditItem(
+                        isEnabled: isEdit,
                         controller: fullNameController,
                         validation: (v) {
                           if (fullNameController.text.isEmpty) {
@@ -94,6 +93,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                         height: 10,
                       ),
                       CustomEditItem(
+                        isEnabled: false,
                         controller: emailController,
                         validation: (v) {
                           if (emailController.text.isEmpty) {
@@ -113,6 +113,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                         height: 10,
                       ),
                       CustomEditItem(
+                        isEnabled: isEdit,
                         controller: ageController,
                         validation: (v) {
                           if (ageController.text.isEmpty) {
@@ -137,89 +138,31 @@ class _EditProfileViewState extends State<EditProfileView> {
                       const SizedBox(
                         height: 10,
                       ),
-                      Text(
-                        'Gender',
-                        style: Styles.regular13
-                            .copyWith(color: AppColor.lightGrayColor),
-                      ),
-                      const SizedBox(
-                        height: 7,
-                      ),
-                      DropdownButtonFormField2<String>(
-                        value: selectedGender,
-                        isExpanded: true,
-                        decoration: InputDecoration(
-                          prefixIcon: SvgPicture.asset(
-                            AssetsData.personIcon,
-                            fit: BoxFit.scaleDown,
-                            colorFilter: ColorFilter.mode(
-                                AppColor.pinkColor, BlendMode.srcIn),
-                          ),
-                          fillColor: AppColor.fillColor,
-                          hintStyle: Styles.regular16
-                              .copyWith(color: AppColor.lightGrayColor),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                const BorderSide(color: Colors.blueGrey),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: AppColor.lightGrayColor, width: .5),
-                              borderRadius: BorderRadius.circular(10)),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: AppColor.lightGrayColor, width: .5),
-                            borderRadius: BorderRadius.circular(10),
+
+                      CustomEditItem(
+                        isEnabled: false,
+                        controller: genderController,
+                        title: 'Gender',
+                        prefixWidget: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: SizedBox(
+                            width: 30,
+                            height: 30,
+                            child: SvgPicture.asset(
+                              AssetsData.personIcon,
+                              fit: BoxFit.scaleDown,
+                              colorFilter: ColorFilter.mode(
+                                  AppColor.pinkColor, BlendMode.srcIn),
+                            ),
                           ),
                         ),
-                        items: gender
-                            .map((item) => DropdownMenuItem<String>(
-                                  value: item,
-                                  child: Text(
-                                    item,
-                                    style: Styles.regular16
-                                        .copyWith(color: AppColor.blackColor),
-                                  ),
-                                ))
-                            .toList(),
-                        validator: (value) {
-                          if (value == null) {
-                            return 'please select your gender';
-                          }
-                          return null;
-                        },
-                        onMenuStateChange: (value) {
-                          // cubit.changeGenderMenu();
-                        },
-                        onChanged: (value) {
-                          setState(() {
-                            selectedGender = value.toString();
-                          });
-                        },
-                        onSaved: (value) {
-                          selectedGender = value.toString();
-                        },
-                        iconStyleData: IconStyleData(
-                          icon: Icon(
-                            Icons.keyboard_arrow_down_outlined,
-                            color: AppColor.lightGrayColor,
-                          ),
-                          iconSize: 30,
-                        ),
-                        dropdownStyleData: DropdownStyleData(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        menuItemStyleData: const MenuItemStyleData(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
-                        ),
+                        textInputType: TextInputType.text,
                       ),
                       const SizedBox(
                         height: 10,
                       ),
                       CustomEditItem(
+                        isEnabled: isEdit,
                         controller: weightController,
                         validation: (v) {
                           if (weightController.text.isEmpty) {
@@ -315,9 +258,12 @@ class _EditProfileViewState extends State<EditProfileView> {
                       const SizedBox(
                         height: 20,
                       ),
-                      CustomButton(
-                        onPressed: () {},
-                        text: 'Save Changes',
+                      Visibility(
+                        visible: isEdit,
+                        child: CustomButton(
+                          onPressed: () {},
+                          text: 'Save Changes',
+                        ),
                       )
                     ],
                   ),
@@ -328,12 +274,43 @@ class _EditProfileViewState extends State<EditProfileView> {
               width: size.width,
               top: size.height * .03,
               child: Center(
-                child: CircleAvatar(
-                  backgroundColor: AppColor.fillColor,
-                  radius: 50,
-                  child: cachedImage(
-                          AssetsData.chatGptIcon, AssetsData.placeHolder)
-                      .cornerRadiusWithClipRRect(50),
+                child: Stack(
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: AppColor.fillColor,
+                      radius: 50,
+                     /* child: cachedImage(
+                              AssetsData.profileIcon, AssetsData.placeHolder)
+                          .cornerRadiusWithClipRRect(50),*/
+                      child: SvgPicture.asset(
+                        AssetsData.profileIcon,
+                        fit: BoxFit.scaleDown,
+                        colorFilter: ColorFilter.mode(
+                            AppColor.pinkColor, BlendMode.srcIn),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: Visibility(
+                        visible: isEdit,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: AppColor.pinkColor,
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: Icon(
+                              size: 20,
+                              Icons.camera_alt_outlined,
+                              color: AppColor.whiteColor,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),

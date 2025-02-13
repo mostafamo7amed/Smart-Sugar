@@ -6,6 +6,8 @@ import 'package:smart_sugar/features/diet/presentation/view/training_view.dart';
 import '../../../../core/utils/app_manager/app_assets.dart';
 import '../../../../core/utils/app_manager/app_colors.dart';
 import '../../../../core/utils/app_manager/app_styles.dart';
+import '../../../centers/presentation/views/sugar_centers_view.dart';
+import '../../../profile/presentation/views/profile_view.dart';
 import 'home_view.dart';
 
 class UserHomeRoot extends StatefulWidget {
@@ -25,18 +27,8 @@ class _UserHomeRootState extends State<UserHomeRoot> {
         HomeView(),
         TrainingView(),
         AiChatView(),
-        Scaffold(
-          body: Center(
-            child: Text('Sugar Centers'.toString()),
-          ),
-        ),
-       Scaffold(
-         body: Center(
-           child: Text('Profile'.toString()),
-         ),
-       )
-       // SugarCentersView(),
-      //  ProfileView(),
+        SugarCentersView(),
+        ProfileView(),
       ][mCurrentIndex],
       bottomNavigationBar: Container(
         height: 60,
@@ -94,8 +86,8 @@ class _UserHomeRootState extends State<UserHomeRoot> {
               BottomNavigationBarItem(
                   icon: SvgPicture.asset(
                     AssetsData.chatIcon,
-                    colorFilter:
-                    ColorFilter.mode(AppColor.lightGrayColor, BlendMode.srcIn),
+                    colorFilter: ColorFilter.mode(
+                        AppColor.lightGrayColor, BlendMode.srcIn),
                   ),
                   activeIcon: SvgPicture.asset(
                     AssetsData.chatIcon,

@@ -5,10 +5,12 @@ import 'package:smart_sugar/core/utils/widgets/build_app_bar.dart';
 import 'package:smart_sugar/features/auth/presentation/views/login_view.dart';
 import 'package:smart_sugar/features/profile/presentation/views/articles_view.dart';
 import 'package:smart_sugar/features/profile/presentation/views/glucose_report_view.dart';
+import 'package:smart_sugar/features/profile/presentation/views/medication_reminder_view.dart';
 import 'package:smart_sugar/features/profile/presentation/views/widgets/custom_profile_field.dart';
 import 'package:smart_sugar/features/profile/presentation/views/widgets/profile_title_widget.dart';
 
 import '../../../../core/utils/app_manager/app_colors.dart';
+import 'about_us_view.dart';
 import 'edit_profile_view.dart';
 
 class ProfileView extends StatefulWidget {
@@ -37,7 +39,7 @@ class _ProfileViewState extends State<ProfileView> {
                 Navigator.pushNamed(context, EditProfileView.routeName);
               },
               child: ProfileTitleWidget(
-                  size: size, name: "John Doe", image: AssetsData.chatGptIcon),
+                  size: size, name: "John Doe", image: AssetsData.profileIcon),
             ),
             CustomProfileField(
               icon: SvgPicture.asset(
@@ -94,10 +96,14 @@ class _ProfileViewState extends State<ProfileView> {
             ),
             CustomProfileField(
               icon: SvgPicture.asset(
-                AssetsData.infoImage,
+                AssetsData.notificationIcon,
+                colorFilter:
+                ColorFilter.mode(AppColor.blackColor, BlendMode.srcIn),
               ),
-              onTap: () {},
-              title: 'Help & Support',
+              onTap: () {
+                Navigator.pushNamed(context, MedicationReminderView.routeName);
+              },
+              title: 'Medication Reminders',
               arrow: Icon(
                 size: 18,
                 Icons.arrow_forward_ios_outlined,
@@ -108,7 +114,9 @@ class _ProfileViewState extends State<ProfileView> {
               icon: SvgPicture.asset(
                 AssetsData.infoImage,
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, AboutUsView.routeName);
+              },
               title: 'About Us',
               arrow: Icon(
                 size: 18,

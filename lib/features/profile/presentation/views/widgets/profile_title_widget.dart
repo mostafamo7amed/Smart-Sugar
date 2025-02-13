@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smart_sugar/core/utils/extensions.dart';
 
 import '../../../../../core/utils/app_manager/app_assets.dart';
@@ -35,9 +36,10 @@ class ProfileTitleWidget extends StatelessWidget {
               CircleAvatar(
                 backgroundColor: AppColor.fillColor,
                 radius: 38,
-                child: cachedImage(
+               /* child: cachedImage(
                     image,
-                    AssetsData.placeHolder).cornerRadiusWithClipRRect(38),
+                    AssetsData.placeHolder).cornerRadiusWithClipRRect(38),*/
+                child: SvgPicture.asset(image).cornerRadiusWithClipRRect(38),
               ),
               const SizedBox(
                 width: 15,
