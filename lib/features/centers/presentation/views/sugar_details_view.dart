@@ -3,6 +3,7 @@ import 'package:smart_sugar/core/utils/extensions.dart';
 import 'package:smart_sugar/core/utils/widgets/cached_image.dart';
 import 'package:smart_sugar/core/utils/widgets/custom_button.dart';
 import 'package:smart_sugar/features/centers/domain/entities/sugar_center_entity.dart';
+import 'package:smart_sugar/features/centers/presentation/views/view_center_location_view.dart';
 import '../../../../core/helper_functions/url_launcher.dart';
 import '../../../../core/utils/app_manager/app_assets.dart';
 import '../../../../core/utils/app_manager/app_colors.dart';
@@ -49,7 +50,7 @@ class SugarDetailsView extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: Text(
-                    sugarCenter.name??'',
+                    sugarCenter.name ?? '',
                     style: Styles.bold19,
                     textAlign: TextAlign.center,
                     maxLines: 3,
@@ -65,7 +66,7 @@ class SugarDetailsView extends StatelessWidget {
                     border: Border.all(color: AppColor.lightGrayColor),
                   ),
                   child: Text(
-                    sugarCenter.phoneNumber??'',
+                    sugarCenter.phoneNumber ?? '',
                     style: Styles.semiBold16,
                     textAlign: TextAlign.center,
                     maxLines: 2,
@@ -73,14 +74,45 @@ class SugarDetailsView extends StatelessWidget {
                   ),
                 ),
                 6.height,
-                CustomButton(
-                  height: 40,
-                  width: MediaQuery.of(context).size.width * .5,
-                  text: 'Call',
-                  onPressed: () async {
-                    if (sugarCenter.phoneNumber==null) return;
-                    launchPhoneDialer(sugarCenter.phoneNumber??'',context);
-                  },
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: CustomButton(
+                          height: 40,
+                          width: MediaQuery.of(context).size.width,
+                          text: 'Call',
+                          onPressed: () async {
+                            if (sugarCenter.phoneNumber == null) return;
+                            launchPhoneDialer(
+                                sugarCenter.phoneNumber ?? '', context);
+                          },
+                        ),
+                      ),
+                      Expanded(
+                        child: CustomButton(
+                          height: 40,
+                          width: MediaQuery.of(context).size.width,
+                          text: 'Location',
+                          color: AppColor.blueColor,
+                          onPressed: () {
+                            Navigator.pushNamed(
+                                context, ViewCenterLocationView.routeName);
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: CustomButton(
+                    height: 40,
+                    color: AppColor.lightGrayColor,
+                    onPressed: () {},
+                    text: 'Add to My List',
+                  ),
                 ),
                 20.height,
               ],

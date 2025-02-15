@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smart_sugar/core/utils/app_manager/app_assets.dart';
 import 'package:smart_sugar/core/utils/widgets/build_app_bar.dart';
 import 'package:smart_sugar/features/auth/presentation/views/login_view.dart';
-import 'package:smart_sugar/features/profile/presentation/views/articles_view.dart';
 import 'package:smart_sugar/features/profile/presentation/views/glucose_report_view.dart';
 import 'package:smart_sugar/features/profile/presentation/views/medication_reminder_view.dart';
 import 'package:smart_sugar/features/profile/presentation/views/widgets/custom_profile_field.dart';
@@ -59,14 +58,14 @@ class _ProfileViewState extends State<ProfileView> {
             ),
             CustomProfileField(
               icon: SvgPicture.asset(
-                AssetsData.articleImage,
+                AssetsData.notificationIcon,
                 colorFilter:
-                    ColorFilter.mode(AppColor.blackColor, BlendMode.srcIn),
+                ColorFilter.mode(AppColor.blackColor, BlendMode.srcIn),
               ),
               onTap: () {
-                Navigator.pushNamed(context, MedicalArticlesView.routeName);
+                Navigator.pushNamed(context, MedicationReminderView.routeName);
               },
-              title: 'Medical Articles',
+              title: 'Medication Reminders',
               arrow: Icon(
                 size: 18,
                 Icons.arrow_forward_ios_outlined,
@@ -92,22 +91,6 @@ class _ProfileViewState extends State<ProfileView> {
                     });
                   },
                 ),
-              ),
-            ),
-            CustomProfileField(
-              icon: SvgPicture.asset(
-                AssetsData.notificationIcon,
-                colorFilter:
-                ColorFilter.mode(AppColor.blackColor, BlendMode.srcIn),
-              ),
-              onTap: () {
-                Navigator.pushNamed(context, MedicationReminderView.routeName);
-              },
-              title: 'Medication Reminders',
-              arrow: Icon(
-                size: 18,
-                Icons.arrow_forward_ios_outlined,
-                color: AppColor.lightGrayColor,
               ),
             ),
             CustomProfileField(

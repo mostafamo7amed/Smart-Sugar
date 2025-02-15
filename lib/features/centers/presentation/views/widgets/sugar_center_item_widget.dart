@@ -1,6 +1,4 @@
 
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:smart_sugar/core/utils/extensions.dart';
 import 'package:smart_sugar/features/centers/domain/entities/sugar_center_entity.dart';
@@ -12,11 +10,10 @@ import '../../../../../core/utils/widgets/cached_image.dart';
 
 class SugarCenterItemWidget extends StatelessWidget {
   const SugarCenterItemWidget({
-    super.key, required this.sugarCenter, this.addToList=false,
+    super.key, required this.sugarCenter,
   });
 
   final SugarCenterEntity sugarCenter;
-  final bool? addToList;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -59,28 +56,14 @@ class SugarCenterItemWidget extends StatelessWidget {
                   ],
                 ),
               ),
-              Visibility(
-                visible: addToList!,
-                replacement: Icon(
-                  Icons.arrow_forward_ios,
-                  color: AppColor.lightGrayColor,
-                  size: 20,
-                ),
-                child: GestureDetector(
-                  onTap: () {
-                    //add to my list
-                    log('add to my list');
-                  },
-                  child: CircleAvatar(
-                    radius: 20,
-                    backgroundColor: AppColor.fillColor,
-                    child: Icon(
-                      Icons.add,
-                      color: AppColor.lightGrayColor,
-                    ),
-                  ),
-                ),
+              SizedBox(
+                width: 2,),
+              const Icon(
+                Icons.arrow_forward_ios,
+                size: 18,
               ),
+              SizedBox(
+                width: 2,),
             ],
           ),
         ),

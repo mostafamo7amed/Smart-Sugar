@@ -8,11 +8,9 @@ import 'package:smart_sugar/core/utils/widgets/custom_button.dart';
 import 'package:smart_sugar/core/utils/widgets/custom_progress_hud.dart';
 import 'package:smart_sugar/core/utils/widgets/custom_text_form_field.dart';
 import 'package:smart_sugar/features/auth/presentation/views/on_boarding_view.dart';
-import 'package:smart_sugar/features/auth/presentation/views/widgets/custom_image_button.dart';
 import 'package:smart_sugar/features/auth/presentation/views/widgets/custom_password_field.dart';
 
 import '../../../../constants.dart';
-import '../../../../core/helper_functions/get_snack_bar.dart';
 import '../../../../core/utils/app_manager/app_assets.dart';
 import '../../../../core/utils/app_manager/app_colors.dart';
 import '../manager/register_cubit/register_cubit.dart';
@@ -197,7 +195,7 @@ class _LoginViewState extends State<RegisterView> {
                         const SizedBox(
                           height: 10,
                         ),
-                        Center(
+                       /* Center(
                           child: Text(
                             'Or',
                             style: Styles.semiBold13
@@ -225,7 +223,7 @@ class _LoginViewState extends State<RegisterView> {
                               height: 30,
                             ),
                           ],
-                        )
+                        )*/
                       ],
                     ),
                   ),

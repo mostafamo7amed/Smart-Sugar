@@ -4,29 +4,22 @@ import 'package:smart_sugar/features/admin_feature/presentation/views/widgets/ad
 import '../../../../core/utils/app_manager/app_colors.dart';
 import '../../../../core/utils/widgets/build_app_bar.dart';
 import '../../../profile/domain/entity/article_entity.dart';
-import '../../../profile/presentation/views/widgets/article_card.dart';
+import '../../../home/presentation/view/widgets/article_card.dart';
 
 class ManageArticlesView extends StatelessWidget {
   ManageArticlesView({super.key});
   static const routeName = 'ManageArticlesView';
   final List<ArticleEntity> articles = [
     ArticleEntity(
-        contentUrl:
-        'https://www.heartfoundation.org.au/healthy-living/keeping-your-heart-healthy',
+        date:'14 May 2023',
         title: 'Understanding Heart Health',
         description:
         'Learn about the importance of heart health and how to maintain it.',
         image:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFHOF1zISh_KPeE10EG7FE6k_L4bnSQX-IxQ&s'),
     ArticleEntity(
-        contentUrl: 'https://www.cdc.gov/nutrition/php/resources/healthy-eating-benefits-for-adults.html',
+      date: '5 May 2023',
         title: 'The Benefits of a Balanced Diet',
-        description:
-        'Learn about the importance of heart health and how to maintain it.',
-        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFHOF1zISh_KPeE10EG7FE6k_L4bnSQX-IxQ&s'),
-    ArticleEntity(
-        contentUrl: 'https://www.mayoclinichealthsystem.org/hometown-health/speaking-of-health/5-tips-to-manage-stress',
-        title: 'Managing Stress Effectively',
         description:
         'Learn about the importance of heart health and how to maintain it.',
         image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFHOF1zISh_KPeE10EG7FE6k_L4bnSQX-IxQ&s'),

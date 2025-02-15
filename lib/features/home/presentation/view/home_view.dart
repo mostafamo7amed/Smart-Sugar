@@ -2,24 +2,52 @@ import 'package:flutter/material.dart';
 import 'package:smart_sugar/core/utils/app_manager/app_colors.dart';
 import 'package:smart_sugar/core/utils/app_manager/app_styles.dart';
 import 'package:smart_sugar/core/utils/widgets/custom_button.dart';
-import 'package:smart_sugar/features/home/presentation/view/emergency_numbers_view.dart';
 import 'package:smart_sugar/features/home/presentation/view/read_glucose_view.dart';
+import 'package:smart_sugar/features/home/presentation/view/widgets/articles_horizontal_list.dart';
+import 'package:smart_sugar/features/home/presentation/view/widgets/custom_section_field.dart';
 import 'package:smart_sugar/features/home/presentation/view/widgets/glucose_level_widget.dart';
 import 'package:smart_sugar/core/utils/widgets/home_app_bar.dart';
 import 'package:smart_sugar/features/home/presentation/view/widgets/line_chart_widget.dart';
 import 'package:smart_sugar/features/home/presentation/view/widgets/user_activity_widget.dart';
+import '../../../profile/domain/entity/article_entity.dart';
+import 'articles_view.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+  HomeView({super.key});
 
   static const String routeName = "home";
 
+  final List<ArticleEntity> articles = [
+    ArticleEntity(
+        date: '13-06-2023',
+        title: 'Understanding Heart Health',
+        description:
+            'Learn about the importance of heart health and how to maintain it.',
+        image:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFHOF1zISh_KPeE10EG7FE6k_L4bnSQX-IxQ&s'),
+    ArticleEntity(
+        date: '14-06-2023',
+        title: 'The Benefits of a Balanced Diet',
+        description:
+            'Learn about the importance of heart health and how to maintain it.',
+        image:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFHOF1zISh_KPeE10EG7FE6k_L4bnSQX-IxQ&s'),
+    ArticleEntity(
+        date: '15-06-2023',
+        title: 'Managing Stress Effectively',
+        description:
+            'Learn about the importance of heart health and how to maintain it.',
+        image:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFHOF1zISh_KPeE10EG7FE6k_L4bnSQX-IxQ&s'),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: homeAppBar(context),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0,),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 20.0,
+        ),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -185,15 +213,23 @@ class HomeView extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              Center(
-                child: CustomButton(
-                    height: 40,
-                    width: MediaQuery.of(context).size.width * .5,
-                    color: AppColor.primaryColor,
-                    onPressed: () {
-                      Navigator.pushNamed(context, EmergencyNumbersView.routeName);
-                    },
-                    text: 'Emergency number'),
+             Divider(color: AppColor.lightGrayColor, thickness: .5,),
+              SizedBox(
+                height: 10,
+              ),
+              CustomSectionField(
+                  title: 'Medical Articles',
+                  onTap: () {
+                    Navigator.pushNamed(context, MedicalArticlesView.routeName);
+                  }),
+              SizedBox(
+                height: 10,
+              ),
+              ArticlesHorizontalList(
+                articles: articles,
+              ),
+              SizedBox(
+                height: 10,
               ),
             ],
           ),

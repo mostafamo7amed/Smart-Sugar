@@ -10,7 +10,6 @@ import 'package:smart_sugar/core/utils/widgets/custom_progress_hud.dart';
 import 'package:smart_sugar/core/utils/widgets/custom_text_form_field.dart';
 import 'package:smart_sugar/features/auth/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:smart_sugar/features/auth/presentation/views/register_view.dart';
-import 'package:smart_sugar/features/auth/presentation/views/widgets/custom_image_button.dart';
 import 'package:smart_sugar/features/auth/presentation/views/widgets/custom_password_field.dart';
 import 'package:smart_sugar/features/home/presentation/view/user_home_root.dart';
 
@@ -138,15 +137,18 @@ class _LoginViewState extends State<LoginView> {
                             text: 'Login',
                             onPressed: () {
 
-                             /* if (formKey.currentState!.validate()) {
+                              if (formKey.currentState!.validate()) {
                                 formKey.currentState!.save();
-                                context
+                               /* context
                                     .read<LoginCubit>()
-                                    .login(email!, password!);
-                              }*/
+                                    .login(email!, password!);*/
+                                if(email == 'admin' && password == 'admin'){
+                                  Navigator.pushNamed(context, AdminHomeView.routeName);
+                                }else if(email == 'user' && password == 'user'){
+                                  Navigator.pushNamed(context, UserHomeRoot.routeName);
+                                }
+                              }
 
-
-                              Navigator.pushNamed(context, UserHomeRoot.routeName);
                             },
                           ),
                           const SizedBox(
@@ -174,7 +176,7 @@ class _LoginViewState extends State<LoginView> {
                           const SizedBox(
                             height: 10,
                           ),
-                          Center(
+                         /* Center(
                             child: Text(
                               'Or',
                               style: Styles.semiBold13
@@ -202,7 +204,7 @@ class _LoginViewState extends State<LoginView> {
                                 height: 30,
                               ),
                             ],
-                          )
+                          )*/
                         ],
                       ),
                     ),

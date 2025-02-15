@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:smart_sugar/features/admin_feature/presentation/views/choose_center_location_view.dart';
 import 'package:smart_sugar/features/admin_feature/presentation/views/refresh_api_view.dart';
+import 'package:smart_sugar/features/centers/presentation/views/my_list_sugar_centers_view.dart';
+import 'package:smart_sugar/features/centers/presentation/views/view_center_location_view.dart';
 import 'package:smart_sugar/features/diet/domain/entities/diabetes_data.dart';
 import 'package:smart_sugar/features/diet/presentation/view/diet_view.dart';
 import 'package:smart_sugar/features/profile/presentation/views/about_us_view.dart';
@@ -20,17 +23,17 @@ import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/auth/presentation/views/on_boarding_view.dart';
 import '../../features/auth/presentation/views/register_view.dart';
 import '../../features/centers/domain/entities/sugar_center_entity.dart';
-import '../../features/centers/presentation/views/add_to_list_view.dart';
-import '../../features/centers/presentation/views/choose_district_view.dart';
 import '../../features/centers/presentation/views/sugar_details_view.dart';
 import '../../features/diet/domain/entities/meal_entity.dart';
 import '../../features/diet/presentation/view/meal_details_view.dart';
-import '../../features/home/presentation/view/emergency_numbers_view.dart';
+import '../../features/home/presentation/view/article_details_view.dart';
+import '../../features/centers/presentation/views/emergency_numbers_view.dart';
 import '../../features/home/presentation/view/home_view.dart';
 import '../../features/home/presentation/view/notification_view.dart';
 import '../../features/home/presentation/view/read_glucose_view.dart';
 import '../../features/home/presentation/view/user_home_root.dart';
-import '../../features/profile/presentation/views/articles_view.dart';
+import '../../features/profile/domain/entity/article_entity.dart';
+import '../../features/home/presentation/view/articles_view.dart';
 import '../../features/profile/presentation/views/edit_profile_view.dart';
 import '../../features/profile/presentation/views/glucose_report_view.dart';
 import '../../features/profile/presentation/views/profile_view.dart';
@@ -48,7 +51,7 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     case ForgetPasswordView.routeName:
       return MaterialPageRoute(builder: (_) => const ForgetPasswordView());
     case HomeView.routeName:
-      return MaterialPageRoute(builder: (_) => const HomeView());
+      return MaterialPageRoute(builder: (_) => HomeView());
     case UserHomeRoot.routeName:
       return MaterialPageRoute(builder: (_) => const UserHomeRoot());
     case NotificationView.routeName:
@@ -70,12 +73,14 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
           builder: (_) => SugarDetailsView(
                 sugarCenter: settings.arguments as SugarCenterEntity,
               ));
-    case AddToListView.routeName:
-      return MaterialPageRoute(builder: (_) => const AddToListView());
-    case ChooseDistrictView.routeName:
-      return MaterialPageRoute(builder: (_) => const ChooseDistrictView());
     case MedicalArticlesView.routeName:
       return MaterialPageRoute(builder: (_) => MedicalArticlesView());
+    case ArticlesDetailsView.routeName:
+      return MaterialPageRoute(
+        builder: (_) => ArticlesDetailsView(
+          articleEntity: settings.arguments as ArticleEntity,
+        ),
+      );
     case GlucoseReportView.routeName:
       return MaterialPageRoute(builder: (_) => GlucoseReportView());
     case ProfileView.routeName:
@@ -88,6 +93,10 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => AddReminderView());
     case AboutUsView.routeName:
       return MaterialPageRoute(builder: (_) => const AboutUsView());
+    case ViewCenterLocationView.routeName:
+      return MaterialPageRoute(builder: (_) => const ViewCenterLocationView());
+    case MyListSugarCentersView.routeName:
+      return MaterialPageRoute(builder: (_) => const MyListSugarCentersView());
     //Admin routes
     case AdminHomeView.routeName:
       return MaterialPageRoute(builder: (_) => const AdminHomeView());
@@ -111,6 +120,8 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => AddArticleView());
     case RefreshApiView.routeName:
       return MaterialPageRoute(builder: (_) => const RefreshApiView());
+    case ChooseCenterLocationView.routeName:
+      return MaterialPageRoute(builder: (_) => const ChooseCenterLocationView());
     default:
       return MaterialPageRoute(builder: (_) => const Scaffold());
   }
