@@ -2,7 +2,7 @@ class ArticleEntity {
   final String title;
   final String description;
   final String image;
-  final String contentUrl;
+  final String date;
 
-  ArticleEntity( {required this.contentUrl,required this.title, required this.description, required this.image});
+  ArticleEntity( {required this.date,required this.title, required this.description, required this.image});
 }

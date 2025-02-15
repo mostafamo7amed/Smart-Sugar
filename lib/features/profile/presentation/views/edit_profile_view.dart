@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:smart_sugar/core/utils/extensions.dart';
 import 'package:smart_sugar/core/utils/widgets/build_app_bar.dart';
 import 'package:smart_sugar/features/profile/presentation/views/widgets/custom_edit_item.dart';
 
 import '../../../../core/utils/app_manager/app_assets.dart';
 import '../../../../core/utils/app_manager/app_colors.dart';
 import '../../../../core/utils/app_manager/app_styles.dart';
-import '../../../../core/utils/widgets/cached_image.dart';
 import '../../../../core/utils/widgets/custom_button.dart';
 
 class EditProfileView extends StatefulWidget {

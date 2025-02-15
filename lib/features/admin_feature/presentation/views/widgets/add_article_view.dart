@@ -83,19 +83,6 @@ class AddArticleView extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              Text(
-                'Content',
-                style:
-                    Styles.regular13.copyWith(color: AppColor.lightGrayColor),
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              CustomTextFormField(
-                hintText: 'e.g. https://www.smartSugar.com',
-                keyboardType: TextInputType.text,
-                onSaved: (value) {},
-              ),
               SizedBox(
                 height: 20,
               ),

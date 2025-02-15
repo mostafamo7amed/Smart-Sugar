@@ -3,12 +3,12 @@ import 'package:smart_sugar/core/utils/app_manager/app_styles.dart';
 import 'package:smart_sugar/core/utils/extensions.dart';
 import 'package:smart_sugar/core/utils/widgets/custom_dialog.dart';
 import 'package:smart_sugar/features/profile/domain/entity/article_entity.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../core/utils/app_manager/app_assets.dart';
 import '../../../../../core/utils/app_manager/app_colors.dart';
 import '../../../../../core/utils/widgets/cached_image.dart';
 import '../../../../../core/utils/widgets/custom_button.dart';
+import '../article_details_view.dart';
 
 class ArticleCard extends StatelessWidget {
 
@@ -60,12 +60,13 @@ class ArticleCard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
+                  if(!isManage)
                   CustomButton(
                     height: 40,
                     width: isManage?MediaQuery.of(context).size.width * .3:MediaQuery.of(context).size.width * .5,
                     color: AppColor.lightGrayColor,
                     onPressed: () {
-                      launchUrl(Uri.parse(articleEntity.contentUrl));
+                      Navigator.pushNamed(context, ArticlesDetailsView.routeName,arguments: articleEntity);
                     },
                     text: 'Read More',
                   ),

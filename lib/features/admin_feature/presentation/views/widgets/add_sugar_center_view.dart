@@ -1,16 +1,28 @@
+import 'dart:developer';
+
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:smart_sugar/core/utils/widgets/build_app_bar.dart';
 import 'package:smart_sugar/core/utils/widgets/custom_button.dart';
 import 'package:smart_sugar/core/utils/widgets/custom_text_form_field.dart';
+import 'package:smart_sugar/features/admin_feature/presentation/views/choose_center_location_view.dart';
 
 import '../../../../../core/utils/app_manager/app_colors.dart';
 import '../../../../../core/utils/app_manager/app_styles.dart';
 
-class AddSugarCenterView extends StatelessWidget {
+class AddSugarCenterView extends StatefulWidget {
   const AddSugarCenterView({super.key});
   static const routeName = 'addSugarCenterView';
 
+  @override
+  State<AddSugarCenterView> createState() => _AddSugarCenterViewState();
+}
+
+
+class _AddSugarCenterViewState extends State<AddSugarCenterView> {
+
+  LatLng ? location;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,14 +95,6 @@ class AddSugarCenterView extends StatelessWidget {
                 onSaved: (value) {},
               ),
               const SizedBox(height: 10,),
-              Text('District',style: Styles.regular13.copyWith(color: AppColor.lightGrayColor),),
-              const SizedBox(height: 5,),
-              CustomTextFormField(
-                hintText: 'e.g. Al-Rawdah District',
-                keyboardType: TextInputType.text,
-                onSaved: (value) {},
-              ),
-              const SizedBox(height: 10,),
               Text('Phone',style: Styles.regular13.copyWith(color: AppColor.lightGrayColor),),
               const SizedBox(height: 5,),
               CustomTextFormField(
@@ -98,14 +102,35 @@ class AddSugarCenterView extends StatelessWidget {
                 keyboardType: TextInputType.text,
                 onSaved: (value) {},
               ),
+              const SizedBox(height: 10,),
+              Text('Choose Location',style: Styles.regular13.copyWith(color: AppColor.lightGrayColor),),
+              const SizedBox(height: 5,),
+              CustomTextFormField(
+                hintText: 'e.g. 123, Street, City',
+                readOnly: true,
+                controller: TextEditingController(text: location == null ? '' : '${location!.latitude}, ${location!.longitude}'),
+                keyboardType: TextInputType.text,
+                onTap: () async {
+                  final result = await Navigator.pushNamed(context, ChooseCenterLocationView.routeName);
+                 log(result.toString());
+
+                  if (result != null) {
+                     setState(() {
+                      location = result as LatLng;
+                      log(location.toString());
+                     });
+                  }
+                },
+                onSaved: (value) {},
+              ),
               SizedBox(height: 20,),
               CustomButton(
                 text: 'Add',
                 onPressed: () {
-          
+
               },)
-          
-          
+
+
             ],
           ),
         ),
