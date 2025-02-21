@@ -13,7 +13,8 @@ import 'about_us_view.dart';
 import 'edit_profile_view.dart';
 
 class ProfileView extends StatefulWidget {
-  const ProfileView({super.key});
+  const ProfileView({super.key, this.showBackButton = false});
+  final bool? showBackButton;
 
   static const routeName = 'profileView';
 
@@ -28,7 +29,9 @@ class _ProfileViewState extends State<ProfileView> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: buildAppBar(context,
-          title: 'My Profile', showBackButton: false, showProfile: false),
+          title: 'My Profile',
+          showBackButton: widget.showBackButton??false,
+          showProfile: false),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
@@ -60,7 +63,7 @@ class _ProfileViewState extends State<ProfileView> {
               icon: SvgPicture.asset(
                 AssetsData.notificationIcon,
                 colorFilter:
-                ColorFilter.mode(AppColor.blackColor, BlendMode.srcIn),
+                    ColorFilter.mode(AppColor.blackColor, BlendMode.srcIn),
               ),
               onTap: () {
                 Navigator.pushNamed(context, MedicationReminderView.routeName);
@@ -112,7 +115,10 @@ class _ProfileViewState extends State<ProfileView> {
                 AssetsData.logoutImage,
               ),
               onTap: () {
-                Navigator.pushReplacementNamed(context, LoginView.routeName);
+                Navigator.pushReplacementNamed(
+                  context,
+                  LoginView.routeName,
+                );
               },
               title: 'Logout',
               arrow: Icon(

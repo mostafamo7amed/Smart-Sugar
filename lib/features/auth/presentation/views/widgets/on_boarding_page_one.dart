@@ -92,6 +92,41 @@ class _OnBoardingPageOneState extends State<OnBoardingPageOne> {
                 prefixIcon: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: SizedBox(
+                    width: 30,
+                    height: 30,
+                    child: SvgPicture.asset(
+                      AssetsData.weightIcon,
+                      fit: BoxFit.scaleDown,
+                    ),
+                  ),
+                ),
+                hintText: 'Your Height',
+                suffixIcon: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      'CM',
+                      style: Styles.bold19.copyWith(
+                          color: AppColor.lightGrayColor,
+                          fontWeight: FontWeight.normal),
+                    )),
+                keyboardType: TextInputType.number,
+                onSaved: (value) {
+                  widget.onWeightChanged(value!);
+                  setState(() {});
+                },
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please enter your Height';
+                  }
+                  return null;
+                },
+              ),
+              CustomDivider(),
+              CustomTextFormField(
+                noBorder: true,
+                prefixIcon: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: SizedBox(
                     height: 30,
                     width: 30,
                     child: SvgPicture.asset(
@@ -100,7 +135,7 @@ class _OnBoardingPageOneState extends State<OnBoardingPageOne> {
                     ),
                   ),
                 ),
-                hintText: 'Your Age',
+                hintText: 'Your Date of Birth',
                 suffixIcon: FittedBox(
                     fit: BoxFit.scaleDown,
                     child: Icon(
@@ -115,7 +150,7 @@ class _OnBoardingPageOneState extends State<OnBoardingPageOne> {
                 },
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Please enter your age';
+                    return 'Please enter your date of birth';
                   }
                   return null;
                 },

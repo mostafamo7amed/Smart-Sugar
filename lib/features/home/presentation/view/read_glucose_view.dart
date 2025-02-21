@@ -67,6 +67,14 @@ class _ReadGlucoseViewState extends State<ReadGlucoseView> {
                     },
                   ),
                   SizedBox(
+                    height: 10,
+                  ),
+                  CustomTextFormField(
+                    hintText: 'Date',
+                    keyboardType: TextInputType.number,
+                    onSaved: (value) {},
+                  ),
+                  SizedBox(
                     height: 20,
                   ),
                   CustomButton(

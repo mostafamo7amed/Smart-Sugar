@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../../features/profile/presentation/views/profile_view.dart';
 import '../app_manager/app_assets.dart';
 import '../app_manager/app_colors.dart';
 import '../app_manager/app_styles.dart';
@@ -52,7 +53,7 @@ AppBar buildAppBar(context,
                   ColorFilter.mode(AppColor.lightGrayColor, BlendMode.srcIn),
             ),
             onPressed: () {
-              //Navigator.pushNamed(context, ProfileView.routeName);
+              Navigator.pushNamed(context, ProfileView.routeName,arguments: true);
             },
           ),
         ),
