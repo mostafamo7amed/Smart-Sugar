@@ -84,7 +84,7 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     case GlucoseReportView.routeName:
       return MaterialPageRoute(builder: (_) => GlucoseReportView());
     case ProfileView.routeName:
-      return MaterialPageRoute(builder: (_) => ProfileView());
+      return MaterialPageRoute(builder: (_) => ProfileView( showBackButton: settings.arguments as bool,));
     case EditProfileView.routeName:
       return MaterialPageRoute(builder: (_) => EditProfileView());
     case MedicationReminderView.routeName:

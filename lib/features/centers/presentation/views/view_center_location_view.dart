@@ -67,7 +67,6 @@ class _ViewCenterLocationViewState extends State<ViewCenterLocationView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(context, title: 'Center Location', showProfile: false),
-
       body:currentPosition!=null? GoogleMap(
         zoomControlsEnabled: false,
         markers: {
