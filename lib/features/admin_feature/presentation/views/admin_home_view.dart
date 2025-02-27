@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_sugar/core/services/app_references.dart';
 import 'package:smart_sugar/core/utils/widgets/home_app_bar.dart';
 import 'package:smart_sugar/features/admin_feature/presentation/views/manage_articles_view.dart';
 import 'package:smart_sugar/features/admin_feature/presentation/views/manage_sugar_center_view.dart';
 import 'package:smart_sugar/features/admin_feature/presentation/views/refresh_api_view.dart';
 import 'package:smart_sugar/features/admin_feature/presentation/views/widgets/admin_panel_item.dart';
+import 'package:smart_sugar/features/auth/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:smart_sugar/features/auth/presentation/views/login_view.dart';
 
+import '../../../../constants.dart';
 import '../../../../core/utils/app_manager/app_assets.dart';
 import '../../../../core/utils/app_manager/app_colors.dart';
 import '../../../../core/utils/app_manager/app_styles.dart';
+import '../../../../core/utils/widgets/custom_dialog.dart';
 import 'manage_emergency_number_view.dart';
 
 class AdminHomeView extends StatelessWidget {
@@ -17,6 +22,13 @@ class AdminHomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return BlocConsumer<LoginCubit, LoginState>(
+  listener: (context, state) {
+    if (state is LoginLogoutState) {
+      Navigator.pushNamedAndRemoveUntil(context, LoginView.routeName, (route) => false);
+    }
+  },
+  builder: (context, state) {
     return Scaffold(
       appBar: homeAppBar(context, showNotification: false),
       body: Padding(
@@ -95,7 +107,16 @@ class AdminHomeView extends StatelessWidget {
                   color: AppColor.redColor,
                   icon: AssetsData.logoutImage,
                   onTap: () {
-                    Navigator.pushReplacementNamed(context, LoginView.routeName);
+                    customDialog(
+                      context: context,
+                      message: 'Are you sure you want logout?',
+                      onConfirm: () {
+                        AppReference.removeData(key: userIdKey);
+                        AppReference.removeData(key: authKey);
+                        LoginCubit.get(context).logout();
+                        Navigator.pop(context);
+                      },
+                    );
                   },
                 ),
               ],
@@ -105,5 +126,7 @@ class AdminHomeView extends StatelessWidget {
         ),
       ),
     );
+  },
+);
   }
 }

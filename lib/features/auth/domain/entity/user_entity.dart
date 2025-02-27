@@ -4,8 +4,9 @@ class UserEntity {
   final String? gender;
   final String? email;
   final String? weight;
+  final String? height;
   final String? image;
-  final String? age;
+  final String? dateOfBirth;
   final String? diabetesType;
   final String? therapyType;
   final String? insulinValue;
@@ -19,8 +20,9 @@ class UserEntity {
     this.gender,
     this.email,
     this.weight,
+    this.height,
     this.image,
-    this.age,
+    this.dateOfBirth,
     this.diabetesType,
     this.therapyType,
     this.insulinValue,
@@ -36,7 +38,8 @@ class UserEntity {
         'email': email,
         'weight': weight,
         'image': image,
-        'age': age,
+        'dateOfBirth': dateOfBirth,
+        'height': height,
         'diabetesType': diabetesType,
         'therapyType': therapyType,
         'insulinValue': insulinValue,
@@ -51,8 +54,9 @@ class UserEntity {
         gender: map['gender'],
         email: map['email'],
         weight: map['weight'],
+        height: map['height'],
         image: map['image'],
-        age: map['age'],
+        dateOfBirth: map['dateOfBirth'],
         diabetesType: map['diabetesType'],
         therapyType: map['therapyType'],
         insulinValue: map['insulinValue'],

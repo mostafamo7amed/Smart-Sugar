@@ -34,187 +34,185 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => LoginCubit(),
-      child: BlocConsumer<LoginCubit, LoginState>(
-        listener: (context, state) {
-          if (state is LoginSuccess) {
-            AppReference.setData(key: authKey, data: true);
-            context.read<LoginCubit>().findUser(state.user.uid, context);
-          }
-        },
-        builder: (context, state) {
-          return CustomProgressHud(
-            isLoading: state is LoginLoading ? true : false,
-            child: Scaffold(
-              body: SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: SingleChildScrollView(
-                    child: Form(
-                      key: formKey,
-                      autovalidateMode: autoValidateMode,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * .08,
+    return BlocConsumer<LoginCubit, LoginState>(
+      listener: (context, state) {
+        if (state is LoginSuccess) {
+          AppReference.setData(key: authKey, data: true);
+          AppReference.setData(key: userIdKey, data: state.user.uid);
+          context.read<LoginCubit>().findUser(state.user.uid, context);
+        }
+      },
+      builder: (context, state) {
+        return CustomProgressHud(
+          isLoading: state is LoginLoading ? true : false,
+          child: Scaffold(
+            body: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: SingleChildScrollView(
+                  child: Form(
+                    key: formKey,
+                    autovalidateMode: autoValidateMode,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * .08,
+                        ),
+                        Center(
+                          child: SizedBox(
+                            width: 200,
+                            height: 200,
+                            child: Image.asset(AssetsData.appLogo),
                           ),
-                          Center(
-                            child: SizedBox(
-                              width: 200,
-                              height: 200,
-                              child: Image.asset(AssetsData.appLogo),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Text(
-                            'Login',
-                            style: Styles.bold19,
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          CustomTextFormField(
-                              hintText: 'Email',
-                              keyboardType: TextInputType.emailAddress,
-                              prefixIcon: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: SvgPicture.asset(
-                                  AssetsData.personIcon,
-                                  colorFilter: ColorFilter.mode(
-                                      AppColor.pinkColor, BlendMode.srcIn),
-                                  width: 20,
-                                  fit: BoxFit.scaleDown,
-                                ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          'Login',
+                          style: Styles.bold19,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustomTextFormField(
+                            hintText: 'Email',
+                            keyboardType: TextInputType.emailAddress,
+                            prefixIcon: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: SvgPicture.asset(
+                                AssetsData.personIcon,
+                                colorFilter: ColorFilter.mode(
+                                    AppColor.pinkColor, BlendMode.srcIn),
+                                width: 20,
+                                fit: BoxFit.scaleDown,
                               ),
-                              onSaved: (value) {
-                                email = value;
-                              },
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Please enter your email';
-                                }
-                                return null;
-                              }),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          CustomPasswordFormField(
+                            ),
+                            onSaved: (value) {
+                              email = value;
+                            },
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return 'Please enter password';
+                                return 'Please enter your email';
                               }
                               return null;
+                            }),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustomPasswordFormField(
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter password';
+                            }
+                            return null;
+                          },
+                          onSaved: (value) {
+                            password = value;
+                          },
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, ForgetPasswordView.routeName);
                             },
-                            onSaved: (value) {
-                              password = value;
-                            },
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.pushNamed(
-                                    context, ForgetPasswordView.routeName);
-                              },
-                              child: Text(
-                                'Forgot Password?',
-                                style: Styles.regular13
-                                    .copyWith(color: AppColor.lightGrayColor),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          CustomButton(
-                            text: 'Login',
-                            onPressed: () {
-
-                              if (formKey.currentState!.validate()) {
-                                formKey.currentState!.save();
-                               /* context
-                                    .read<LoginCubit>()
-                                    .login(email!, password!);*/
-                                if(email == 'admin' && password == 'admin'){
-                                  Navigator.pushNamed(context, AdminHomeView.routeName);
-                                }else if(email == 'user' && password == 'user'){
-                                  Navigator.pushNamed(context, UserHomeRoot.routeName);
-                                }
-                              }
-
-                            },
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Text.rich(
-                            TextSpan(
-                              text: 'Don\'t have an account? ',
+                            child: Text(
+                              'Forgot Password?',
                               style: Styles.regular13
                                   .copyWith(color: AppColor.lightGrayColor),
-                              children: [
-                                TextSpan(
-                                  recognizer: TapGestureRecognizer()
-                                    ..onTap = () {
-                                      Navigator.pushNamed(
-                                          context, RegisterView.routeName);
-                                    },
-                                  text: 'Register',
-                                  style: Styles.regular13
-                                      .copyWith(color: AppColor.primaryColor),
-                                ),
-                              ],
                             ),
                           ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                         /* Center(
-                            child: Text(
-                              'Or',
-                              style: Styles.semiBold13
-                                  .copyWith(color: AppColor.lightGrayColor),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        CustomButton(
+                          text: 'Login',
+                          onPressed: () {
+
+                            if (formKey.currentState!.validate()) {
+                              formKey.currentState!.save();
+                              context
+                                  .read<LoginCubit>()
+                                  .login(email!, password!);
+                              if(email == 'admin' && password == 'admin'){
+                                Navigator.pushNamed(context, AdminHomeView.routeName);
+                              }else if(email == 'user' && password == 'user'){
+                                Navigator.pushNamed(context, UserHomeRoot.routeName);
+                              }
+                            }
+
+                          },
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Text.rich(
+                          TextSpan(
+                            text: 'Don\'t have an account? ',
+                            style: Styles.regular13
+                                .copyWith(color: AppColor.lightGrayColor),
                             children: [
-                              CustomImageButton(
-                                onTap: () {},
-                                imagePath: AssetsData.googleIcon,
-                              ),
-                              const SizedBox(
-                                width: 24,
-                              ),
-                              CustomImageButton(
-                                onTap: () {},
-                                imagePath: AssetsData.iPhoneIcon,
-                              ),
-                              const SizedBox(
-                                height: 30,
+                              TextSpan(
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    Navigator.pushReplacementNamed(
+                                        context, RegisterView.routeName);
+                                  },
+                                text: 'Register',
+                                style: Styles.regular13
+                                    .copyWith(color: AppColor.primaryColor),
                               ),
                             ],
-                          )*/
-                        ],
-                      ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                       /* Center(
+                          child: Text(
+                            'Or',
+                            style: Styles.semiBold13
+                                .copyWith(color: AppColor.lightGrayColor),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CustomImageButton(
+                              onTap: () {},
+                              imagePath: AssetsData.googleIcon,
+                            ),
+                            const SizedBox(
+                              width: 24,
+                            ),
+                            CustomImageButton(
+                              onTap: () {},
+                              imagePath: AssetsData.iPhoneIcon,
+                            ),
+                            const SizedBox(
+                              height: 30,
+                            ),
+                          ],
+                        )*/
+                      ],
                     ),
                   ),
                 ),
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

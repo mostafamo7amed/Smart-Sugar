@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:smart_sugar/features/home/presentation/view/user_home_root.dart';
-
 import '../../../../constants.dart';
 import '../../../../core/services/app_references.dart';
 import '../../../../core/utils/app_manager/app_assets.dart';
+import '../../../auth/presentation/manager/login_cubit/login_cubit.dart';
 import '../../../auth/presentation/views/login_view.dart';
 
 class SplashView extends StatefulWidget {
@@ -41,8 +40,8 @@ class _SplashViewState extends State<SplashView> {
     Future.delayed(const Duration(seconds: 3), () {
       if (!mounted) return;
       if (isAuthorized) {
-        Navigator.pushReplacementNamed(context, UserHomeRoot.routeName);
-      } else {
+        LoginCubit.get(context)
+            .findUser(AppReference.getData(key: userIdKey), context);      } else {
         Navigator.pushReplacementNamed(context, LoginView.routeName);
       }
     });

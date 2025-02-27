@@ -11,9 +11,11 @@ import 'package:smart_sugar/features/auth/presentation/views/on_boarding_view.da
 import 'package:smart_sugar/features/auth/presentation/views/widgets/custom_password_field.dart';
 
 import '../../../../constants.dart';
+import '../../../../core/helper_functions/get_snack_bar.dart';
 import '../../../../core/utils/app_manager/app_assets.dart';
 import '../../../../core/utils/app_manager/app_colors.dart';
 import '../manager/register_cubit/register_cubit.dart';
+import 'login_view.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
@@ -34,6 +36,7 @@ class _LoginViewState extends State<RegisterView> {
       listener: (context, state) {
         if (state is RegisterSuccess) {
           AppReference.sharedPreferences.setBool(authKey, true);
+          AppReference.sharedPreferences.setString(userIdKey, state.user.uid);
           Navigator.pushReplacementNamed(context, OnBoardingView.routeName);
         }
       },
@@ -151,7 +154,7 @@ class _LoginViewState extends State<RegisterView> {
                         CustomButton(
                           text: 'Register',
                           onPressed: () {
-                            /*if (formKey.currentState!.validate()) {
+                            if (formKey.currentState!.validate()) {
                               formKey.currentState!.save();
                               autoValidateMode = AutovalidateMode.disabled;
                               if (password == confirmPassword) {
@@ -166,9 +169,7 @@ class _LoginViewState extends State<RegisterView> {
                               }
                             } else {
                               autoValidateMode = AutovalidateMode.always;
-                            }*/
-                            Navigator.pushNamed(
-                                context, OnBoardingView.routeName);
+                            }
                           },
                         ),
                         const SizedBox(
@@ -183,7 +184,10 @@ class _LoginViewState extends State<RegisterView> {
                               TextSpan(
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
-                                    Navigator.pop(context);
+                                    Navigator.pushReplacementNamed(
+                                      context,
+                                      LoginView.routeName,
+                                    );
                                   },
                                 text: 'Login',
                                 style: Styles.regular13
