@@ -16,3 +16,11 @@ final class LoginError extends LoginState {}
 
 final class LoginFindAdminState extends LoginState {}
 final class LoginFindUserState extends LoginState {}
+
+final class LoginLogoutState extends LoginState {}
+
+final class LoginResetPasswordLoading extends LoginState {}
+
+final class LoginResetPasswordSuccess extends LoginState {}
+
+final class LoginResetPasswordError extends LoginState {}

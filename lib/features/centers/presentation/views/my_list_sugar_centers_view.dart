@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:smart_sugar/core/utils/extensions.dart';
 import 'package:smart_sugar/features/centers/presentation/views/sugar_details_view.dart';
 import 'package:smart_sugar/features/centers/presentation/views/widgets/sugar_center_item_widget.dart';
-
-import '../../../../core/utils/app_manager/app_styles.dart';
 import '../../../../core/utils/widgets/build_app_bar.dart';
-import '../../../auth/presentation/views/widgets/custom_divider.dart';
 import '../../domain/entities/sugar_center_entity.dart';
 
 class MyListSugarCentersView extends StatelessWidget {

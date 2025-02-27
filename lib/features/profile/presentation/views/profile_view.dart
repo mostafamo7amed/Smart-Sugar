@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:smart_sugar/core/services/app_references.dart';
 import 'package:smart_sugar/core/utils/app_manager/app_assets.dart';
 import 'package:smart_sugar/core/utils/widgets/build_app_bar.dart';
+import 'package:smart_sugar/features/auth/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:smart_sugar/features/auth/presentation/views/login_view.dart';
 import 'package:smart_sugar/features/profile/presentation/views/glucose_report_view.dart';
 import 'package:smart_sugar/features/profile/presentation/views/medication_reminder_view.dart';
 import 'package:smart_sugar/features/profile/presentation/views/widgets/custom_profile_field.dart';
 import 'package:smart_sugar/features/profile/presentation/views/widgets/profile_title_widget.dart';
 
+import '../../../../constants.dart';
 import '../../../../core/utils/app_manager/app_colors.dart';
+import '../../../../core/utils/widgets/custom_dialog.dart';
 import 'about_us_view.dart';
 import 'edit_profile_view.dart';
 
@@ -32,7 +37,15 @@ class _ProfileViewState extends State<ProfileView> {
           title: 'My Profile',
           showBackButton: widget.showBackButton??false,
           showProfile: false),
-      body: SingleChildScrollView(
+      body: BlocConsumer<LoginCubit, LoginState>(
+  listener: (context, state) {
+    if (state is LoginLogoutState) {
+      Navigator.pushNamedAndRemoveUntil(
+          context, LoginView.routeName, (route) => false);
+    }
+  },
+  builder: (context, state) {
+    return SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
@@ -115,10 +128,17 @@ class _ProfileViewState extends State<ProfileView> {
                 AssetsData.logoutImage,
               ),
               onTap: () {
-                Navigator.pushReplacementNamed(
-                  context,
-                  LoginView.routeName,
+                customDialog(
+                  context: context,
+                  message: 'Are you sure you want logout?',
+                  onConfirm: () {
+                    AppReference.removeData(key: userIdKey);
+                    AppReference.removeData(key: authKey);
+                    LoginCubit.get(context).logout();
+                    Navigator.pop(context);
+                  },
                 );
+                
               },
               title: 'Logout',
               arrow: Icon(
@@ -129,7 +149,9 @@ class _ProfileViewState extends State<ProfileView> {
             ),
           ],
         ),
-      ),
+      );
+  },
+),
     );
   }
 }

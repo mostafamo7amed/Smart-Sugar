@@ -52,8 +52,9 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   void createUser({
     required String gender,
-    required String age,
+    required String dateOfBirth,
     required String wight,
+    required String height,
     required String diabetesType,
     required String therapyType,
     required String insulinValue,
@@ -69,7 +70,8 @@ class RegisterCubit extends Cubit<RegisterState> {
       email: user.email,
       weight: wight,
       image: '',
-      age: age,
+      dateOfBirth: dateOfBirth,
+      height: height,
       diabetesType: diabetesType,
       therapyType: therapyType,
       insulinValue: insulinValue,

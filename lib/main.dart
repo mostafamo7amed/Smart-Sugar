@@ -10,6 +10,7 @@ import 'core/helper_functions/on_generate_routes.dart';
 import 'core/services/app_references.dart';
 import 'core/services/custom_bloc_observer.dart';
 import 'core/services/git_it_services.dart';
+import 'features/auth/presentation/manager/login_cubit/login_cubit.dart';
 import 'features/auth/presentation/manager/register_cubit/register_cubit.dart';
 import 'firebase_options.dart';
 
@@ -33,6 +34,7 @@ class SmartSugar extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => RegisterCubit()),
+        BlocProvider(create: (context) => LoginCubit()),
       ],
       child: GetMaterialApp(
         title: 'Smart Sugar',

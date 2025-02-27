@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
+import 'package:smart_sugar/core/helper_functions/pike_date.dart';
 import 'package:smart_sugar/core/utils/app_manager/app_assets.dart';
 import 'package:smart_sugar/core/utils/app_manager/app_colors.dart';
 import 'package:smart_sugar/core/utils/app_manager/app_styles.dart';
@@ -9,11 +11,12 @@ import 'package:smart_sugar/features/auth/presentation/views/widgets/custom_gend
 import 'custom_divider.dart';
 
 class OnBoardingPageOne extends StatefulWidget {
-  const OnBoardingPageOne({super.key, required this.onGenderChanged, required this.onAgeChanged, required this.onWeightChanged, this.formKey});
+  const OnBoardingPageOne({super.key, required this.onGenderChanged, required this.onAgeChanged, required this.onWeightChanged, this.formKey, required this.onHeightChanged});
 
   final ValueChanged <String> onGenderChanged;
   final ValueChanged <String> onAgeChanged;
   final ValueChanged <String> onWeightChanged;
+  final ValueChanged <String> onHeightChanged;
   final GlobalKey<FormState>? formKey;
 
   @override
@@ -21,6 +24,7 @@ class OnBoardingPageOne extends StatefulWidget {
 }
 
 class _OnBoardingPageOneState extends State<OnBoardingPageOne> {
+  String birthDate = '';
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -111,7 +115,7 @@ class _OnBoardingPageOneState extends State<OnBoardingPageOne> {
                     )),
                 keyboardType: TextInputType.number,
                 onSaved: (value) {
-                  widget.onWeightChanged(value!);
+                  widget.onHeightChanged(value!);
                   setState(() {});
                 },
                 validator: (value) {
@@ -123,6 +127,7 @@ class _OnBoardingPageOneState extends State<OnBoardingPageOne> {
               ),
               CustomDivider(),
               CustomTextFormField(
+                readOnly: true,
                 noBorder: true,
                 prefixIcon: Padding(
                   padding: const EdgeInsets.all(10.0),
@@ -147,6 +152,15 @@ class _OnBoardingPageOneState extends State<OnBoardingPageOne> {
                 onSaved: (value) {
                   widget.onAgeChanged(value!);
                   setState(() {});
+                },
+                controller: TextEditingController(text: birthDate),
+                onTap: () async {
+                  DateTime? date = await pickDate(context);
+                  if (date != null) {
+                    widget.onAgeChanged(DateFormat('yyyy-MM-dd').format(date));
+                    birthDate = DateFormat('yyyy-MM-dd').format(date);
+                    setState(() {});
+                  }
                 },
                 validator: (value) {
                   if (value!.isEmpty) {

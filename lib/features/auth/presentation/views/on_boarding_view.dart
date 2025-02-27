@@ -27,8 +27,9 @@ class _OnBoardingViewState extends State<OnBoardingView> {
   late PageController pageController;
   int currentIndex = 0;
   String? gender,
-      age,
+      dateOfBirth,
       wight,
+      height,
       diabetesType,
       therapy1Type,
       therapy2Type,
@@ -60,8 +61,8 @@ class _OnBoardingViewState extends State<OnBoardingView> {
     return BlocConsumer<RegisterCubit, RegisterState>(
       listener: (context, state) {
         if (state is RegisterCreateUserSuccess) {
-          Navigator.of(context).pushReplacementNamed(UserHomeRoot.routeName);
           getSnackBar('Account created successfully');
+          Navigator.of(context).pushReplacementNamed(UserHomeRoot.routeName);
         }
       },
       builder: (context, state) {
@@ -120,7 +121,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                         OnBoardingPageOne(
                           formKey: formKey1,
                           onAgeChanged: (value) {
-                            age = value;
+                            dateOfBirth = value;
                             setState(() {});
                           },
                           onGenderChanged: (value) {
@@ -129,6 +130,10 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                           },
                           onWeightChanged: (value) {
                             wight = value;
+                            setState(() {});
+                          },
+                          onHeightChanged: (value) {
+                            height = value;
                             setState(() {});
                           },
                         ),
@@ -176,7 +181,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                         if (currentIndex == 0) {
                           if (formKey1.currentState!.validate()) {
                             formKey1.currentState!.save();
-                            log(age! + gender! + wight!);
+                            log(dateOfBirth! + gender! + wight! + height!);
                             pageController.jumpToPage(++currentIndex);
                             setState(() {});
                           }
@@ -209,16 +214,18 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                         if (formKey2.currentState!.validate()) {
                           formKey2.currentState!.save();
                           log(glucoseHighValue! + glucoseLowValue!);
-                          /*context.read<RegisterCubit>().createUser(
-                            age: age!,
-                            gender: gender!,
-                            wight: wight!,
-                            diabetesType: diabetesType!,
-                            therapyType: '${therapy1Type??''} ${therapy2Type??''}',
-                            insulinValue: insulinValue??'',
-                            glucoseLowValue: glucoseLowValue!,
-                            glucoseHighValue: glucoseHighValue!,
-                          );*/
+                          context.read<RegisterCubit>().createUser(
+                                dateOfBirth: dateOfBirth!,
+                                height: height!,
+                                gender: gender!,
+                                wight: wight!,
+                                diabetesType: diabetesType!,
+                                therapyType:
+                                    '${therapy1Type ?? ''} ${therapy2Type ?? ''}',
+                                insulinValue: insulinValue ?? '',
+                                glucoseLowValue: glucoseLowValue!,
+                                glucoseHighValue: glucoseHighValue!,
+                              );
                           Navigator.of(context)
                               .pushReplacementNamed(UserHomeRoot.routeName);
                         }
