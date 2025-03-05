@@ -1,7 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:smart_sugar/core/utils/extensions.dart';
-import 'package:smart_sugar/features/centers/domain/entities/sugar_center_entity.dart';
+import 'package:smart_sugar/features/admin_feature/domain/sugar_center_model.dart';
 
 import '../../../../../core/utils/app_manager/app_assets.dart';
 import '../../../../../core/utils/app_manager/app_colors.dart';
@@ -10,10 +9,11 @@ import '../../../../../core/utils/widgets/cached_image.dart';
 
 class SugarCenterItemWidget extends StatelessWidget {
   const SugarCenterItemWidget({
-    super.key, required this.sugarCenter,
+    super.key,
+    this.sugarCenter,
   });
 
-  final SugarCenterEntity sugarCenter;
+  final SugarCenterModel? sugarCenter;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -22,21 +22,24 @@ class SugarCenterItemWidget extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       color: AppColor.whiteColor,
       child: Container(
-        width:MediaQuery.of(context).size.width,
+        width: MediaQuery.of(context).size.width,
         decoration: const BoxDecoration(
-            borderRadius: BorderRadius.all(
-              Radius.circular(12),
-            ),
+          borderRadius: BorderRadius.all(
+            Radius.circular(12),
+          ),
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              cachedImage(sugarCenter.image,AssetsData.placeHolder,
-                  fit: BoxFit.fill,
-                  width: size.width / 4.5,
-                  height: size.width / 4.5)
+              cachedImage(
+                      sugarCenter?.image ??
+                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNeJG67ejYXQF6k5Xm9uj3YpwLCd6HVGdBBw&s',
+                      AssetsData.placeHolder,
+                      fit: BoxFit.fill,
+                      width: size.width / 4.5,
+                      height: size.width / 4.5)
                   .cornerRadiusWithClipRRect(12),
               const SizedBox(
                 width: 5,
@@ -47,7 +50,7 @@ class SugarCenterItemWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      sugarCenter.name!,
+                      sugarCenter?.name ?? 'International Medical Center (IMC)',
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: Styles.regular16
@@ -57,13 +60,15 @@ class SugarCenterItemWidget extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                width: 2,),
+                width: 2,
+              ),
               const Icon(
                 Icons.arrow_forward_ios,
                 size: 18,
               ),
               SizedBox(
-                width: 2,),
+                width: 2,
+              ),
             ],
           ),
         ),

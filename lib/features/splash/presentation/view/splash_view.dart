@@ -41,7 +41,8 @@ class _SplashViewState extends State<SplashView> {
       if (!mounted) return;
       if (isAuthorized) {
         LoginCubit.get(context)
-            .findUser(AppReference.getData(key: userIdKey), context);      } else {
+            .findUser(AppReference.getData(key: userIdKey), context); } else {
+
         Navigator.pushReplacementNamed(context, LoginView.routeName);
       }
     });

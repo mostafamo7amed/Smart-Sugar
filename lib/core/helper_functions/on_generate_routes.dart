@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_sugar/features/admin_feature/domain/sugar_center_model.dart';
 import 'package:smart_sugar/features/admin_feature/presentation/views/choose_center_location_view.dart';
 import 'package:smart_sugar/features/admin_feature/presentation/views/refresh_api_view.dart';
 import 'package:smart_sugar/features/centers/presentation/views/my_list_sugar_centers_view.dart';
@@ -61,7 +62,10 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     case EmergencyNumbersView.routeName:
       return MaterialPageRoute(builder: (_) => const EmergencyNumbersView());
     case DietView.routeName:
-      return MaterialPageRoute(builder: (_) => DietView(mealPlans: settings.arguments as MealPlan,));
+      return MaterialPageRoute(
+          builder: (_) => DietView(
+                mealPlans: settings.arguments as MealPlan,
+              ));
     case MealDetailsView.routeName:
       return MaterialPageRoute(
         builder: (_) => MealDetailsView(
@@ -84,7 +88,10 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     case GlucoseReportView.routeName:
       return MaterialPageRoute(builder: (_) => GlucoseReportView());
     case ProfileView.routeName:
-      return MaterialPageRoute(builder: (_) => ProfileView( showBackButton: settings.arguments as bool,));
+      return MaterialPageRoute(
+          builder: (_) => ProfileView(
+                showBackButton: settings.arguments as bool,
+              ));
     case EditProfileView.routeName:
       return MaterialPageRoute(builder: (_) => EditProfileView());
     case MedicationReminderView.routeName:
@@ -106,9 +113,9 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => AddSugarCenterView());
     case DeleteSugarCenterView.routeName:
       return MaterialPageRoute(
-          builder: (_) => DeleteSugarCenterView(
-                sugarCenter: settings.arguments as SugarCenterEntity,
-              ),
+        builder: (_) => DeleteSugarCenterView(
+          sugarCenter: settings.arguments as SugarCenterModel,
+        ),
       );
     case ManageEmergencyNumberView.routeName:
       return MaterialPageRoute(builder: (_) => ManageEmergencyNumberView());
@@ -121,7 +128,8 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     case RefreshApiView.routeName:
       return MaterialPageRoute(builder: (_) => const RefreshApiView());
     case ChooseCenterLocationView.routeName:
-      return MaterialPageRoute(builder: (_) => const ChooseCenterLocationView());
+      return MaterialPageRoute(
+          builder: (_) => const ChooseCenterLocationView());
     default:
       return MaterialPageRoute(builder: (_) => const Scaffold());
   }

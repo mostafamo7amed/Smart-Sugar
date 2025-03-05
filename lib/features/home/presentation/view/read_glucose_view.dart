@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:smart_sugar/core/utils/extensions.dart';
 import 'package:smart_sugar/core/utils/widgets/build_app_bar.dart';
 import 'package:smart_sugar/core/utils/widgets/cached_image.dart';
@@ -6,6 +7,7 @@ import 'package:smart_sugar/core/utils/widgets/custom_button.dart';
 import 'package:smart_sugar/core/utils/widgets/custom_text_form_field.dart';
 import 'package:smart_sugar/features/home/presentation/view/widgets/measurement_time_widget.dart';
 
+import '../../../../core/helper_functions/pike_date.dart';
 import '../../../../core/utils/app_manager/app_assets.dart';
 import '../../../../core/utils/app_manager/app_colors.dart';
 import '../../../../core/utils/app_manager/app_styles.dart';
@@ -20,8 +22,8 @@ class ReadGlucoseView extends StatefulWidget {
 }
 
 class _ReadGlucoseViewState extends State<ReadGlucoseView> {
-  String? dateText;
-  String? timeText;
+  TextEditingController glucoseController = TextEditingController();
+  TextEditingController dateController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,6 +47,7 @@ class _ReadGlucoseViewState extends State<ReadGlucoseView> {
               child: Column(
                 children: [
                   CustomTextFormField(
+                    controller: glucoseController,
                     hintText: 'Glucose',
                     keyboardType: TextInputType.number,
                     onSaved: (value) {},
@@ -62,17 +65,25 @@ class _ReadGlucoseViewState extends State<ReadGlucoseView> {
                     height: 10,
                   ),
                   MeasurementTimeWidget(
-                    onChanged: (value) {
-
-                    },
+                    onChanged: (value) {},
                   ),
                   SizedBox(
                     height: 10,
                   ),
                   CustomTextFormField(
+                    readOnly: true,
+                    controller: dateController,
                     hintText: 'Date',
                     keyboardType: TextInputType.number,
-                    onSaved: (value) {},
+                    onTap: () async {
+                      DateTime? date = await pickDate(context);
+                      if (date != null) {
+                        String formattedDate =
+                            DateFormat('yyyy-MM-dd').format(date);
+                        setState(() {});
+                        dateController.text = formattedDate;
+                      }
+                    },
                   ),
                   SizedBox(
                     height: 20,
@@ -84,11 +95,12 @@ class _ReadGlucoseViewState extends State<ReadGlucoseView> {
                     onPressed: () {
                       customDialogSugarMeasurement(
                         context: context,
-                       icon: Icon(
-                         size: 40,
-                         Icons.check,
-                         color: AppColor.primaryColor,),
-                       message: 'The sugar level is normal ✅',
+                        icon: Icon(
+                          size: 40,
+                          Icons.check,
+                          color: AppColor.primaryColor,
+                        ),
+                        message: 'The sugar level is normal ✅',
                         color: AppColor.primaryColor,
                         onConfirm: () {
                           Navigator.pop(context);

@@ -11,11 +11,9 @@ import 'package:smart_sugar/core/utils/widgets/custom_text_form_field.dart';
 import 'package:smart_sugar/features/auth/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:smart_sugar/features/auth/presentation/views/register_view.dart';
 import 'package:smart_sugar/features/auth/presentation/views/widgets/custom_password_field.dart';
-import 'package:smart_sugar/features/home/presentation/view/user_home_root.dart';
 
 import '../../../../core/utils/app_manager/app_assets.dart';
 import '../../../../core/utils/app_manager/app_colors.dart';
-import '../../../admin_feature/presentation/views/admin_home_view.dart';
 import 'forget_password_view.dart';
 
 class LoginView extends StatefulWidget {
@@ -135,17 +133,11 @@ class _LoginViewState extends State<LoginView> {
                         CustomButton(
                           text: 'Login',
                           onPressed: () {
-
                             if (formKey.currentState!.validate()) {
                               formKey.currentState!.save();
                               context
                                   .read<LoginCubit>()
                                   .login(email!, password!);
-                              if(email == 'admin' && password == 'admin'){
-                                Navigator.pushNamed(context, AdminHomeView.routeName);
-                              }else if(email == 'user' && password == 'user'){
-                                Navigator.pushNamed(context, UserHomeRoot.routeName);
-                              }
                             }
 
                           },

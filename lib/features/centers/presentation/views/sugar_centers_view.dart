@@ -95,7 +95,7 @@ class SugarCentersView extends StatelessWidget {
                   arguments: sugarCenters[index]);
             },
             child: SugarCenterItemWidget(
-              sugarCenter: sugarCenters[index],
+
             ),
           ),
           itemCount: sugarCenters.length,

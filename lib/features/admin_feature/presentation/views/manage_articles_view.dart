@@ -1,60 +1,83 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_sugar/core/utils/widgets/custom_progress_hud.dart';
+import 'package:smart_sugar/features/admin_feature/presentation/manager/admin_cubit.dart';
 import 'package:smart_sugar/features/admin_feature/presentation/views/widgets/add_article_view.dart';
 
+import '../../../../core/helper_functions/get_snack_bar.dart';
 import '../../../../core/utils/app_manager/app_colors.dart';
 import '../../../../core/utils/widgets/build_app_bar.dart';
-import '../../../profile/domain/entity/article_entity.dart';
 import '../../../home/presentation/view/widgets/article_card.dart';
 
-class ManageArticlesView extends StatelessWidget {
-  ManageArticlesView({super.key});
+class ManageArticlesView extends StatefulWidget {
+  const ManageArticlesView({super.key});
+
   static const routeName = 'ManageArticlesView';
-  final List<ArticleEntity> articles = [
-    ArticleEntity(
-        date:'14 May 2023',
-        title: 'Understanding Heart Health',
-        description:
-        'Learn about the importance of heart health and how to maintain it.',
-        image:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFHOF1zISh_KPeE10EG7FE6k_L4bnSQX-IxQ&s'),
-    ArticleEntity(
-      date: '5 May 2023',
-        title: 'The Benefits of a Balanced Diet',
-        description:
-        'Learn about the importance of heart health and how to maintain it.',
-        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFHOF1zISh_KPeE10EG7FE6k_L4bnSQX-IxQ&s'),
-  ];
+
+  @override
+  State<ManageArticlesView> createState() => _ManageArticlesViewState();
+}
+
+class _ManageArticlesViewState extends State<ManageArticlesView> {
+  @override
+  void initState() {
+    AdminCubit.get(context).getAllArticles();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: buildAppBar(context, title: 'Medical Articles',showProfile: false),
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(bottom: 30.0),
-        child: FloatingActionButton(
-          backgroundColor: AppColor.primaryColor,
-          child: Icon(
-            size: 30,
-            Icons.add,
-            color: AppColor.whiteColor,
+    return BlocConsumer<AdminCubit, AdminState>(
+      listener: (context, state) {
+        if (state is DeleteArticleSuccessState) {
+          getSnackBar('Article Deleted Successfully');
+          AdminCubit.get(context).getAllArticles();
+        }
+      },
+      builder: (context, state) {
+        var cubit = AdminCubit.get(context);
+        return CustomProgressHud(
+          isLoading: state is GetArticlesLoadingState ||
+              state is DeleteArticleLoadingState,
+          child: Scaffold(
+            appBar: buildAppBar(context,
+                title: 'Medical Articles', showProfile: false),
+            floatingActionButton: Padding(
+              padding: const EdgeInsets.only(bottom: 30.0),
+              child: FloatingActionButton(
+                backgroundColor: AppColor.primaryColor,
+                child: Icon(
+                  size: 30,
+                  Icons.add,
+                  color: AppColor.whiteColor,
+                ),
+                onPressed: () {
+                  Navigator.pushNamed(context, AddArticleView.routeName);
+                },
+              ),
+            ),
+            body: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: cubit.articleList.isEmpty
+                  ? const Center(child: Text('No Articles'))
+                  : ListView.builder(
+                      itemCount: cubit.articleList.length,
+                      itemBuilder: (context, index) {
+                        return ArticleCard(
+                          onDelete: () {
+                            cubit.deleteArticle(
+                                cubit.articleList[index].id ?? '');
+                            Navigator.pop(context);
+                          },
+                          articleEntity: cubit.articleList[index],
+                          isManage: true,
+                        );
+                      },
+                    ),
+            ),
           ),
-          onPressed: () {
-           Navigator.pushNamed(context, AddArticleView.routeName);
-          },
-        ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
-        child: ListView.builder(
-          itemCount: articles.length,
-          itemBuilder: (context, index) {
-            return ArticleCard(
-              articleEntity: articles[index],
-              isManage: true,
-            );
-          },
-        ),
-      ),
+        );
+      },
     );
   }
 }
