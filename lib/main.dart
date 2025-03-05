@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:smart_sugar/core/services/dependency_injection.dart';
 import 'package:smart_sugar/core/utils/app_manager/app_colors.dart';
+import 'package:smart_sugar/features/admin_feature/presentation/manager/admin_cubit.dart';
 import 'package:smart_sugar/features/splash/presentation/view/splash_view.dart';
 
 import 'core/helper_functions/on_generate_routes.dart';
@@ -35,6 +36,7 @@ class SmartSugar extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => RegisterCubit()),
         BlocProvider(create: (context) => LoginCubit()),
+        BlocProvider(create: (context) => AdminCubit(),)
       ],
       child: GetMaterialApp(
         title: 'Smart Sugar',

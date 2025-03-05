@@ -15,10 +15,11 @@ class ArticleCard extends StatelessWidget {
 
   const ArticleCard({
     super.key,
-    required this.articleEntity, this.isManage=false,
+    required this.articleEntity, this.isManage=false, this.onDelete,
   });
   final ArticleEntity articleEntity;
   final bool isManage;
+  final void Function()? onDelete;
 
 
   @override
@@ -79,7 +80,7 @@ class ArticleCard extends StatelessWidget {
                       customDialog(
                         context: context,
                         message: 'Are you sure you want to delete ${articleEntity.title}?',
-                        onConfirm: () {},
+                        onConfirm: onDelete,
                       );
                     },
                     text: 'Delete',

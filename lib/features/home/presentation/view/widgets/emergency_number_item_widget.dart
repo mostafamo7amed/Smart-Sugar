@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smart_sugar/core/utils/widgets/custom_dialog.dart';
+import 'package:smart_sugar/features/admin_feature/domain/emergency_number_entity.dart';
 
 import '../../../../../core/utils/app_manager/app_assets.dart';
 import '../../../../../core/utils/app_manager/app_colors.dart';
 import '../../../../../core/utils/app_manager/app_styles.dart';
 
 class EmergencyNumberItemWidget extends StatelessWidget {
-  const EmergencyNumberItemWidget({super.key, this.isManage = false});
+  const EmergencyNumberItemWidget(
+      {super.key,
+      this.isManage = false,
+      this.onDelete,
+      this.emergencyNumberEntity});
 
   final bool isManage;
+  final void Function()? onDelete;
+  final EmergencyNumberEntity? emergencyNumberEntity;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -41,7 +48,7 @@ class EmergencyNumberItemWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-                      'Ambulanceman',
+                      emergencyNumberEntity?.name ?? 'Ambulanceman',
                       style: Styles.regular16
                           .copyWith(fontWeight: FontWeight.w600),
                     ),
@@ -49,7 +56,7 @@ class EmergencyNumberItemWidget extends StatelessWidget {
                       height: 5,
                     ),
                     Text(
-                      '+123456789',
+                      emergencyNumberEntity?.number ?? '+123456789',
                       style: Styles.regular16.copyWith(
                           fontWeight: FontWeight.w600,
                           color: AppColor.lightGrayColor),
@@ -64,7 +71,7 @@ class EmergencyNumberItemWidget extends StatelessWidget {
                         context: context,
                         message:
                             'Are you sure you want to delete this number ?',
-                        onConfirm: () {},
+                        onConfirm: onDelete,
                       );
                     }
                   },
