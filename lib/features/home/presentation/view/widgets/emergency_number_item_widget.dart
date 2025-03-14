@@ -48,7 +48,7 @@ class EmergencyNumberItemWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-                      emergencyNumberEntity?.name ?? 'Ambulanceman',
+                      emergencyNumberEntity?.name ?? '',
                       style: Styles.regular16
                           .copyWith(fontWeight: FontWeight.w600),
                     ),
@@ -56,7 +56,7 @@ class EmergencyNumberItemWidget extends StatelessWidget {
                       height: 5,
                     ),
                     Text(
-                      emergencyNumberEntity?.number ?? '+123456789',
+                      emergencyNumberEntity?.number ?? '',
                       style: Styles.regular16.copyWith(
                           fontWeight: FontWeight.w600,
                           color: AppColor.lightGrayColor),

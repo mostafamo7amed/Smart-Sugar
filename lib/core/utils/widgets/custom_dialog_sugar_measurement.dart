@@ -8,6 +8,7 @@ Future customDialogSugarMeasurement({
   icon,
   message,
   color,
+  result,
   onConfirm,
 }) =>
     showDialog(
@@ -38,7 +39,15 @@ Future customDialogSugarMeasurement({
                   ),
                 ),
                 const SizedBox(
-                  height: 15,
+                  height: 10,
+                ),
+                Text(
+                  result??'',
+                  textAlign: TextAlign.center,
+                  style: Styles.regular16.copyWith(fontWeight: FontWeight.w600, color: color),
+                ),
+                const SizedBox(
+                  height: 5,
                 ),
                 Text(
                   message,
@@ -64,8 +73,7 @@ Future customDialogSugarMeasurement({
                       mainTitle: 'OK',
                       textColor: AppColor.whiteColor,
                       onTaped: onConfirm,
-                      buttonBackgroundColor: color,
-                    ),
+                      buttonBackgroundColor: AppColor.primaryColor,),
                   ],
                 ),
                 const SizedBox(

@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'package:smart_sugar/core/helper_functions/get_snack_bar.dart';
 import 'package:smart_sugar/features/admin_feature/domain/emergency_number_entity.dart';
 import 'package:smart_sugar/features/admin_feature/domain/sugar_center_model.dart';
@@ -124,7 +125,7 @@ class AdminCubit extends Cubit<AdminState> {
     if (imageUrl != null) {
       ArticleEntity articleModel = ArticleEntity(
         id: articleId.toString(),
-        date: DateTime.now().toString(),
+        date: DateFormat('yyyy-MM-dd').format(DateTime.now()),
         title: title,
         description: content,
         image: imageUrl,
@@ -225,8 +226,7 @@ class AdminCubit extends Cubit<AdminState> {
     FirebaseFirestore.instance
         .collection(apiCollection)
         .doc('1')
-        .set({'apiLink': link})
-        .then((value) {
+        .set({'apiLink': link}).then((value) {
       emit(RefreshApiLinkSuccessState());
     }).catchError((e) {
       emit(RefreshApiLinkErrorState());

@@ -9,7 +9,7 @@ class CustomEditItem extends StatelessWidget {
     super.key,
     this.validation,
     required this.controller,
-    required this.title, this.suffixIc, required this.textInputType,this.prefixWidget, this.isEnabled
+    required this.title, this.suffixIc, required this.textInputType,this.prefixWidget, this.isEnabled, this.readOnly = false, this.onTap
   });
 
   final TextEditingController controller;
@@ -19,6 +19,8 @@ class CustomEditItem extends StatelessWidget {
   final TextInputType textInputType;
   final String? Function(String?)? validation;
   final bool? isEnabled;
+  final bool readOnly;
+  final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -33,6 +35,8 @@ class CustomEditItem extends StatelessWidget {
           ),
           const SizedBox(height: 7,),
           CustomTextFormField(
+            readOnly: readOnly,
+            onTap: onTap,
             isEnabled: isEnabled,
             controller: controller,
             keyboardType: textInputType,

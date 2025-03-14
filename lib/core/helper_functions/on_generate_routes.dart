@@ -23,7 +23,6 @@ import '../../features/auth/presentation/views/forget_password_view.dart';
 import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/auth/presentation/views/on_boarding_view.dart';
 import '../../features/auth/presentation/views/register_view.dart';
-import '../../features/centers/domain/entities/sugar_center_entity.dart';
 import '../../features/centers/presentation/views/sugar_details_view.dart';
 import '../../features/diet/domain/entities/meal_entity.dart';
 import '../../features/diet/presentation/view/meal_details_view.dart';
@@ -75,7 +74,7 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     case SugarDetailsView.routeName:
       return MaterialPageRoute(
           builder: (_) => SugarDetailsView(
-                sugarCenter: settings.arguments as SugarCenterEntity,
+                sugarCenter: settings.arguments as SugarCenterModel,
               ));
     case MedicalArticlesView.routeName:
       return MaterialPageRoute(builder: (_) => MedicalArticlesView());
@@ -101,7 +100,7 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     case AboutUsView.routeName:
       return MaterialPageRoute(builder: (_) => const AboutUsView());
     case ViewCenterLocationView.routeName:
-      return MaterialPageRoute(builder: (_) => const ViewCenterLocationView());
+      return MaterialPageRoute(builder: (_) => ViewCenterLocationView(sugarCenter: settings.arguments as SugarCenterModel,));
     case MyListSugarCentersView.routeName:
       return MaterialPageRoute(builder: (_) => const MyListSugarCentersView());
     //Admin routes
