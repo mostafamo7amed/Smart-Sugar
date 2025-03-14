@@ -5,7 +5,10 @@ import '../../../../../core/utils/app_manager/app_styles.dart';
 
 class GlucoseLevelWidget extends StatelessWidget {
   const GlucoseLevelWidget({
-    super.key, required this.level, required this.value, required this.color,
+    super.key,
+    required this.level,
+    required this.value,
+    required this.color,
   });
   final String level;
   final double value;
@@ -17,20 +20,30 @@ class GlucoseLevelWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Spacer(),
-        Text('${value.round()} \nmg/dL',
+        Text(
+          '${value.round()} \nmg/dL',
           textAlign: TextAlign.center,
-          style: Styles.regular13.copyWith(color: AppColor.lightGrayColor),),
+          style: Styles.regular13.copyWith(color: AppColor.lightGrayColor),
+        ),
         Container(
           width: 30,
-          height:MediaQuery.of(context).size.width *( .5*value/250),
+          height: level == 'High'
+              ? MediaQuery.of(context).size.height * 0.15
+              : level == "Normal"
+                  ? MediaQuery.of(context).size.height * 0.1
+                  : MediaQuery.of(context).size.height * 0.05,
           decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.circular(6),
           ),
         ),
-        Text(level,style: Styles.regular13.copyWith(color: AppColor.lightGrayColor),),
+        Text(
+          level,
+          style: Styles.regular13.copyWith(color: AppColor.lightGrayColor),
+        ),
         SizedBox(
-          height: 10,),
+          height: 10,
+        ),
       ],
     );
   }

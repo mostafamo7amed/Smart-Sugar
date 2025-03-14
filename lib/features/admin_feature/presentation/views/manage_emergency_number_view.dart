@@ -72,7 +72,7 @@ class _ManageEmergencyNumberViewState extends State<ManageEmergencyNumberView> {
                         },
                         emergencyNumberEntity: cubit.emergencyNumberList[index],
                       ),
-                      itemCount: cubit.emergencyNumberList.length ?? 3,
+                      itemCount: cubit.emergencyNumberList.length,
                     ),
             ),
           ),

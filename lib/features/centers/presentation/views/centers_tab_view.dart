@@ -3,6 +3,7 @@ import 'package:smart_sugar/core/utils/widgets/build_app_bar.dart';
 import 'package:smart_sugar/features/centers/presentation/views/sugar_centers_view.dart';
 import 'package:smart_sugar/features/centers/presentation/views/widgets/custom_tab_item.dart';
 import 'package:smart_sugar/features/centers/presentation/views/emergency_numbers_view.dart';
+import 'package:smart_sugar/features/home/presentation/manager/user_cubit.dart';
 
 import '../../../../core/utils/app_manager/app_colors.dart';
 
@@ -18,6 +19,7 @@ class _CentersTabViewState extends State<CentersTabView> {
   int currentIndex = 0;
   @override
   void initState() {
+    UserCubit.get(context).getAllEmergencyNumber();
     pageController = PageController();
     pageController.addListener(() {
       currentIndex = pageController.page!.round();
@@ -56,6 +58,7 @@ class _CentersTabViewState extends State<CentersTabView> {
                         onTap: () {
                           pageController.jumpToPage(0);
                           currentIndex = 0;
+                          UserCubit.get(context).getAllEmergencyNumber();
                           setState(() {});
                         },
                         title: 'Emergency',
@@ -66,6 +69,7 @@ class _CentersTabViewState extends State<CentersTabView> {
                         onTap: () {
                           pageController.jumpToPage(1);
                           currentIndex = 1;
+                          UserCubit.get(context).getAllSugarCenter();
                           setState(() {});
                         },
                         title: 'Sugar Centers',

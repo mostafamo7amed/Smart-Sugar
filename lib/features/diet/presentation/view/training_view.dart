@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_sugar/core/helper_functions/load_diabetes_data.dart';
 import 'package:smart_sugar/features/diet/domain/entities/diabetes_data.dart';
+import 'package:smart_sugar/features/home/presentation/manager/user_cubit.dart';
 
 import '../../../../core/utils/app_manager/app_colors.dart';
 import '../../../../core/utils/app_manager/app_styles.dart';
@@ -24,26 +26,37 @@ class _TrainingViewState extends State<TrainingView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: buildAppBar(context, title: 'Diet Plan', showBackButton: false),
-      body: FutureBuilder<DiabetesData>(
-        future: diabetesData,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            final data = snapshot.data!;
-            return SingleChildScrollView(
-              child: Column(
-                children: [
-                  _buildTypeSection('Type 1 Diabetes', data.type1),
-                ],
-              ),
-            );
-          } else if (snapshot.hasError) {
-            return Text('Error: ${snapshot.error}');
-          }
-          return CircularProgressIndicator();
-        },
-      ),
+    return BlocConsumer<UserCubit, UserState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        var cubit = UserCubit.get(context);
+        return Scaffold(
+          appBar:
+              buildAppBar(context, title: 'Diet Plan', showBackButton: false),
+          body: FutureBuilder<DiabetesData>(
+            future: diabetesData,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                final data = snapshot.data!;
+                return SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      _buildTypeSection(
+                          '${cubit.userEntity?.diabetesType} Diabetes',
+                          cubit.userEntity?.diabetesType == 'Type 1'
+                              ? data.type1
+                              : data.type2),
+                    ],
+                  ),
+                );
+              } else if (snapshot.hasError) {
+                return Text('Error: ${snapshot.error}');
+              }
+              return CircularProgressIndicator();
+            },
+          ),
+        );
+      },
     );
   }
 }
@@ -134,7 +147,8 @@ Widget _buildTypeSection(String title, DiabetesType type) {
               Row(
                 children: [
                   Text('Meal Plan',
-                      style: Styles.bold19.copyWith(color: AppColor.orangeColor)),
+                      style:
+                          Styles.bold19.copyWith(color: AppColor.orangeColor)),
                   Spacer(),
                   Icon(
                     Icons.arrow_forward_ios,
@@ -152,7 +166,8 @@ Widget _buildTypeSection(String title, DiabetesType type) {
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) => GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, DietView.routeName,arguments: type.mealPlans[index]);
+                      Navigator.pushNamed(context, DietView.routeName,
+                          arguments: type.mealPlans[index]);
                     },
                     child: Container(
                       margin: const EdgeInsets.only(right: 8.0),

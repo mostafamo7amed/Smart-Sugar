@@ -28,7 +28,7 @@ class _RefreshApiViewState extends State<RefreshApiView> {
   @override
   initState() {
     AdminCubit.get(context).getApiLink();
-    linkController.text = AdminCubit.get(context).apiLink!;
+    linkController.text = AdminCubit.get(context).apiLink?? '';
     super.initState();
   }
 

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:smart_sugar/core/utils/extensions.dart';
-import 'package:smart_sugar/features/admin_feature/domain/sugar_center_model.dart';
 
 import '../../../../../core/utils/app_manager/app_assets.dart';
 import '../../../../../core/utils/app_manager/app_colors.dart';
 import '../../../../../core/utils/app_manager/app_styles.dart';
 import '../../../../../core/utils/widgets/cached_image.dart';
+import '../../../../admin_feature/domain/sugar_center_model.dart';
 
 class SugarCenterItemWidget extends StatelessWidget {
   const SugarCenterItemWidget({
@@ -50,7 +50,7 @@ class SugarCenterItemWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      sugarCenter?.name ?? 'International Medical Center (IMC)',
+                      sugarCenter?.name ?? '',
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: Styles.regular16

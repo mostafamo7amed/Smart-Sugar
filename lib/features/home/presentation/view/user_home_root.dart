@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:smart_sugar/constants.dart';
+import 'package:smart_sugar/core/services/app_references.dart';
 import 'package:smart_sugar/features/centers/presentation/views/centers_tab_view.dart';
 import 'package:smart_sugar/features/chat/presentation/views/ai_chat_view.dart';
 import 'package:smart_sugar/features/diet/presentation/view/training_view.dart';
+import 'package:smart_sugar/features/home/presentation/manager/user_cubit.dart';
 
 import '../../../../core/utils/app_manager/app_assets.dart';
 import '../../../../core/utils/app_manager/app_colors.dart';
@@ -20,6 +23,12 @@ class UserHomeRoot extends StatefulWidget {
 class _UserHomeRootState extends State<UserHomeRoot> {
   int mCurrentIndex = 0;
   int mCounter = 0;
+  @override
+  void initState() {
+    UserCubit.get(context).getUser(AppReference.getData(key: userIdKey));
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
