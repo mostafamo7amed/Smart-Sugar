@@ -12,7 +12,7 @@ class UserEntity {
   final String? insulinValue;
   final String? glucoseLowValue;
   final String? glucoseHighValue;
-  final String? fcmToken;
+  final bool? fcmToken;
 
   UserEntity({
     this.uid,

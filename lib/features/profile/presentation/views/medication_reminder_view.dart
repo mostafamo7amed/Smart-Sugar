@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_sugar/core/services/app_references.dart';
 import 'package:smart_sugar/core/utils/extensions.dart';
+import 'package:smart_sugar/features/home/presentation/manager/user_cubit.dart';
 import 'package:smart_sugar/features/profile/presentation/views/add_reminder_view.dart';
 
+import '../../../../constants.dart';
 import '../../../../core/utils/app_manager/app_colors.dart';
 import '../../../../core/utils/app_manager/app_styles.dart';
 import '../../../../core/utils/widgets/build_app_bar.dart';
@@ -9,6 +13,7 @@ import '../../domain/entity/medication_reminder.dart';
 
 class MedicationReminderView extends StatefulWidget {
   const MedicationReminderView({super.key});
+
   static const routeName = 'medicationReminderView';
 
   @override
@@ -16,16 +21,12 @@ class MedicationReminderView extends StatefulWidget {
 }
 
 class MedicationReminderViewState extends State<MedicationReminderView> {
-  final List<MedicationReminder> _reminders = [
-    MedicationReminder(
-      id: '1',
-      name: 'Medication 1',
-      dosage: '2 tablets',
-      time: TimeOfDay(hour: 12, minute: 0),
-      days: ['Mon', 'Wed'],
-      isActive: true,
-    ),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    UserCubit.get(context)
+        .getMedicationReminders(AppReference.getData(key: userIdKey));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,31 +36,41 @@ class MedicationReminderViewState extends State<MedicationReminderView> {
         title: 'Reminders',
         isProfile: false,
       ),
-      body: _buildRemindersList(),
+      body: BlocConsumer<UserCubit, UserState>(
+        listener: (context, state) {
+          if(state is UpdateMedicationStatusSuccessState){
+            UserCubit.get(context)
+                .getMedicationReminders(AppReference.getData(key: userIdKey));
+          }
+        },
+        builder: (context, state) {
+          var cubit = UserCubit.get(context);
+          return cubit.medicationReminders.isEmpty
+              ? const Center(child: Text('No Reminders'))
+              : _buildRemindersList(
+                  cubit: cubit,
+                );
+        },
+      ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColor.primaryColor,
         shape: CircleBorder(),
         child: Icon(Icons.add, color: AppColor.whiteColor),
         onPressed: () async {
-          final result =
-              await Navigator.pushNamed(context, AddReminderView.routeName);
-          if (result != null) {
-            setState(() {
-              _reminders.add(result as MedicationReminder);
-            });
-          }
+          Navigator.pushNamed(context, AddReminderView.routeName);
         },
       ),
     );
   }
 
-  Widget _buildRemindersList() {
+  Widget _buildRemindersList({required UserCubit cubit}) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: ListView.builder(
-        itemCount: _reminders.length,
+        itemCount: cubit.medicationReminders.length,
         itemBuilder: (context, index) {
-          final reminder = _reminders[index];
+          final reminder = cubit.medicationReminders[index];
+          bool switchValue = reminder.isActive;
           return Dismissible(
             key: Key(reminder.id),
             background: Container(
@@ -87,7 +98,9 @@ class MedicationReminderViewState extends State<MedicationReminderView> {
                     ],
                   ),
                 )),
-            onDismissed: (direction) => _removeReminder(reminder.id),
+            onDismissed: (direction) {
+              cubit.removeMedicationReminder(reminder.id);
+            },
             child: Card(
               color: AppColor.whiteColor,
               elevation: 2,
@@ -101,16 +114,21 @@ class MedicationReminderViewState extends State<MedicationReminderView> {
                   children: [
                     Text('Dosage: ${reminder.dosage}',
                         style: Styles.semiBold13),
-                    Text('Time: ${reminder.time.format(context)}',
-                        style: Styles.semiBold13),
+                    Text('Time: ${reminder.time}', style: Styles.semiBold13),
                     Text('Days: ${reminder.days.join(", ")}',
                         style: Styles.semiBold13),
                   ],
                 ),
                 trailing: Switch(
                   activeColor: AppColor.primaryColor,
-                  value: reminder.isActive,
-                  onChanged: (value) => _toggleReminder(reminder.id),
+                  value: switchValue,
+                  onChanged: (value) {
+                    setState(() {
+                      switchValue =  !switchValue;
+                    });
+                    cubit.updateMedicationStatus(
+                        reminder.id, !reminder.isActive);
+                  },
                 ),
               ),
             ),
@@ -118,20 +136,5 @@ class MedicationReminderViewState extends State<MedicationReminderView> {
         },
       ),
     );
-  }
-
-  void _removeReminder(String id) {
-    setState(() {
-      _reminders.removeWhere((reminder) => reminder.id == id);
-    });
-  }
-
-  void _toggleReminder(String id) {
-    setState(() {
-      final index = _reminders.indexWhere((r) => r.id == id);
-      _reminders[index] = _reminders[index].copyWith(
-        isActive: !_reminders[index].isActive,
-      );
-    });
   }
 }

@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-
-import '../../../../../core/helper_functions/current_time.dart';
+import 'package:smart_sugar/features/chat/domain/message_entity.dart';
 import '../../../../../core/utils/app_manager/app_colors.dart';
 import '../../../../../core/utils/app_manager/app_styles.dart';
 
-Widget buildSenderMessage(context) {
-  String senderTime = currentTime();
-
+Widget buildSenderMessage(context, MessageModel message) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2.0),
     child: Row(
@@ -32,14 +29,14 @@ Widget buildSenderMessage(context) {
               Padding(
                 padding: const EdgeInsets.only(bottom: 5.0),
                 child: Text(
-                  'What type of exercises can I do to help lower my blood sugar ?',
-                  style:
-                  Styles.regular16.copyWith(color: AppColor.blackColor),
+                  message.text.toString(),
+                  style: Styles.regular16.copyWith(color: AppColor.blackColor),
                 ),
               ),
               Text(
-                senderTime,
-                style: Styles.regular11.copyWith(color: AppColor.lightGrayColor),
+                message.dateTime.toString(),
+                style:
+                    Styles.regular11.copyWith(color: AppColor.lightGrayColor),
               ),
             ],
           ),

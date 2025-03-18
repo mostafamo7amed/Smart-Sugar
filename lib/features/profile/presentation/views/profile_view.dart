@@ -13,6 +13,7 @@ import 'package:smart_sugar/features/profile/presentation/views/widgets/custom_p
 import 'package:smart_sugar/features/profile/presentation/views/widgets/profile_title_widget.dart';
 
 import '../../../../constants.dart';
+import '../../../../core/helper_functions/request_notification_permission.dart';
 import '../../../../core/utils/app_manager/app_colors.dart';
 import '../../../../core/utils/widgets/custom_dialog.dart';
 import 'about_us_view.dart';
@@ -29,7 +30,7 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
-  bool isSwitched = false;
+  bool? isSwitched;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -47,7 +48,11 @@ class _ProfileViewState extends State<ProfileView> {
         },
         builder: (context, state) {
           return BlocConsumer<UserCubit, UserState>(
-            listener: (context, userState) {},
+            listener: (context, userState) {
+              if(userState is UpdateNotificationStatusSuccessState){
+                UserCubit.get(context).getUser(AppReference.getData(key: userIdKey));
+              }
+            },
             builder: (context, userState) {
               var cubit = UserCubit.get(context);
               return SingleChildScrollView(
@@ -109,11 +114,12 @@ class _ProfileViewState extends State<ProfileView> {
                         height: 30,
                         child: Switch(
                           activeColor: AppColor.primaryColor,
-                          value: isSwitched,
+                          value: cubit.userEntity?.fcmToken ?? false,
                           onChanged: (value) {
-                            setState(() {
-                              isSwitched = value;
-                            });
+                            Future<bool> result =
+                                requestNotificationPermission();
+                            cubit.updateNotificationStatus(
+                                AppReference.getData(key: userIdKey), value);
                           },
                         ),
                       ),

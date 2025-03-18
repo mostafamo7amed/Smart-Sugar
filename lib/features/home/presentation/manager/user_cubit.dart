@@ -1,16 +1,24 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:smart_sugar/constants.dart';
 import 'package:smart_sugar/core/helper_functions/get_random_number.dart';
+import 'package:smart_sugar/core/services/local_notification_services.dart';
 import 'package:smart_sugar/features/admin_feature/domain/emergency_number_entity.dart';
 import 'package:smart_sugar/features/admin_feature/domain/sugar_center_model.dart';
 import 'package:smart_sugar/features/auth/domain/entity/user_entity.dart';
 import 'package:http/http.dart' as http;
+import 'package:smart_sugar/features/chat/domain/message_entity.dart';
+import 'package:smart_sugar/features/home/domain/notification_entity.dart';
+import 'package:smart_sugar/features/profile/domain/entity/medication_reminder.dart';
 
+import '../../../../core/helper_functions/current_time.dart';
+import '../../../../core/helper_functions/get_next_time.dart';
 import '../../../profile/domain/entity/article_entity.dart';
 import '../../domain/sugar_read_entity.dart';
 import '../view/widgets/line_chart_widget.dart';
@@ -164,7 +172,7 @@ class UserCubit extends Cubit<UserState> {
 
     double sumSugar = 0;
     minSugarReadings = readings.first.sugarRead;
-    maxSugarReadings= readings.first.sugarRead;
+    maxSugarReadings = readings.first.sugarRead;
     int inRangeCount = 0;
 
     for (var reading in readings) {
@@ -175,8 +183,8 @@ class UserCubit extends Cubit<UserState> {
       if (sugar >= 70 && sugar <= 140) inRangeCount++;
     }
 
-     averageSugarReadings = sumSugar / readings.length;
-     timeInRange = (inRangeCount / readings.length) * 100;
+    averageSugarReadings = sumSugar / readings.length;
+    timeInRange = (inRangeCount / readings.length) * 100;
 
     emit(AnalyzeSugarReadSuccessState());
   }
@@ -315,7 +323,7 @@ class UserCubit extends Cubit<UserState> {
 
     chartData = List.generate(
       readings.length >= 3 ? 3 : readings.length,
-          (index) {
+      (index) {
         var reading = readings[readings.length - 1 - index];
         return ChartData(
           DateTime.parse(reading.date),
@@ -325,4 +333,210 @@ class UserCubit extends Cubit<UserState> {
     );
     emit(GetChartDataSuccessState());
   }
+
+  String? apiLink;
+  Future<void> getApiLink() async {
+    emit(GetApiLinkLoadingState());
+    FirebaseFirestore.instance
+        .collection(apiCollection)
+        .doc('1')
+        .get()
+        .then((value) {
+      apiLink = value.data()!['apiLink'];
+      emit(GetApiLinkSuccessState());
+    }).catchError((e) {
+      emit(GetApiLinkErrorState());
+    });
+  }
+
+  String aiResponse = '';
+  List<MessageModel> messages = [];
+  chatWithAI(String message) async {
+    emit(ChatWithAILoadingState());
+    String cuTime1 = currentTime();
+    messages.add(MessageModel(
+      text: message,
+      dateTime: cuTime1,
+      isGPT: false,
+    ));
+    var headers = {'Content-Type': 'application/json'};
+    var data = json.encode({"message": message});
+    var dio = Dio();
+    var response = await dio.request(
+      '$apiLink/DiabetesChat',
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+      data: data,
+    );
+    String cuTime2 = currentTime();
+    if (response.statusCode == 200) {
+      aiResponse = json.encode(response.data['response']);
+      String cuTime2 = currentTime();
+      String res2;
+      res2 = aiResponse
+          .replaceAll("\\n", "\n")
+          .replaceAll(RegExp(r'\n\s*\n'), '\n')
+          .replaceAllMapped(RegExp(r'^\s*\*', multiLine: true), (match) => "•")
+          .replaceAll('\n', '\n')
+          .replaceAll(RegExp(r'\s+'), ' ')
+          .replaceAll(RegExp(r'[\\"]'), '')
+          .trim(); //
+      messages.add(MessageModel(
+        text: res2,
+        dateTime: cuTime2,
+        isGPT: true,
+      ));
+      emit(ChatWithAISuccessState());
+    } else {
+      messages.add(MessageModel(
+        text: 'Something went wrong',
+        dateTime: cuTime2,
+        isGPT: true,
+      ));
+      emit(ChatWithAIErrorState());
+    }
+  }
+
+  addMedicationReminder(String title, String time, String diagnose, String uid,
+      List<String> days, DateTime date) async {
+    emit(AddMedicationReminderLoadingState());
+    int reminderId = getRandomNumber();
+    MedicationReminder reminder = MedicationReminder(
+      userId: uid,
+      date: date,
+      id: reminderId.toString(),
+      name: title,
+      dosage: diagnose,
+      time: time,
+      days: days,
+    );
+    var random = Random();
+    for (var day in days) {
+      int id = random.nextInt((pow(2, 31) - 1).toInt());
+      DateTime dateTime = getNextScheduledDateTime(time, day);
+      await addNotification(uid, title, diagnose, dateTime, time, day);
+      await LocalNotificationServices.scheduleNotification(
+          id,
+          title,
+          diagnose,
+          dateTime);
+    }
+    FirebaseFirestore.instance
+        .collection(medicationsCollection)
+        .doc(reminderId.toString())
+        .set(reminder.toJson())
+        .then((value) {
+      emit(AddMedicationReminderSuccessState());
+    }).catchError((e) {
+      emit(AddMedicationReminderErrorState());
+    });
+  }
+
+  updateMedicationStatus(String id, bool status) async {
+    emit(UpdateMedicationStatusLoadingState());
+
+    FirebaseFirestore.instance
+        .collection(medicationsCollection)
+        .doc(id)
+        .update({'isActive': status}).then((value) {
+      emit(UpdateMedicationStatusSuccessState());
+    }).catchError((e) {
+      emit(UpdateMedicationStatusErrorState());
+    });
+  }
+
+  removeMedicationReminder(String id) async {
+    emit(RemoveMedicationReminderLoadingState());
+    FirebaseFirestore.instance
+        .collection(medicationsCollection)
+        .doc(id)
+        .delete()
+        .then((value) {
+      emit(RemoveMedicationReminderSuccessState());
+    }).catchError((e) {
+      emit(RemoveMedicationReminderErrorState());
+    });
+  }
+
+  List<MedicationReminder> medicationReminders = [];
+  getMedicationReminders(String uid) async {
+    emit(GetMedicationRemindersLoadingState());
+    FirebaseFirestore.instance
+        .collection(medicationsCollection)
+        .where('userId', isEqualTo: uid)
+        .get()
+        .then((value) {
+      medicationReminders =
+          value.docs.map((e) => MedicationReminder.fromJson(e.data())).toList();
+      emit(GetMedicationRemindersSuccessState());
+    }).catchError((e) {
+      print(e);
+      emit(GetMedicationRemindersErrorState());
+    });
+  }
+
+  addNotification(String uid, String title, String body, DateTime dateTime,
+      String time, String day) async {
+    emit(AddNotificationLoadingState());
+    int id = getRandomNumber();
+    NotificationEntity notification = NotificationEntity(
+        userId: uid,
+        id: id.toString(),
+        title: title,
+        body: body,
+        date: dateTime,
+        time: time,
+        day: day);
+    FirebaseFirestore.instance
+        .collection(notificationCollection)
+        .doc(id.toString())
+        .set(notification.toJson())
+        .then((value) {
+      emit(AddNotificationSuccessState());
+    }).catchError((e) {
+      emit(AddNotificationErrorState());
+    });
+  }
+
+  List<NotificationEntity> notifications = [];
+  List<NotificationEntity> allNotifications = [];
+  getNotifications(String uid) async {
+    notifications = [];
+    allNotifications = [];
+    emit(GetNotificationsLoadingState());
+    FirebaseFirestore.instance
+        .collection(notificationCollection)
+        .where('userId', isEqualTo: uid)
+        .get()
+        .then((value) {
+      allNotifications = value.docs.map((e) {
+        NotificationEntity notification = NotificationEntity.fromJson(e.data());
+        return notification;
+      }).toList();
+      notifications = removeFutureNotifications(allNotifications);
+      emit(GetNotificationsSuccessState());
+    }).catchError((e) {
+      emit(GetNotificationsErrorState());
+    });
+  }
+
+  updateNotificationStatus(String uid, bool status) async {
+    emit(UpdateNotificationStatusLoadingState());
+    FirebaseFirestore.instance
+        .collection(usersCollection)
+        .doc(uid)
+        .update({'fcmToken': status}).then((value) {
+      emit(UpdateNotificationStatusSuccessState());
+    }).catchError((e) {
+      emit(UpdateNotificationStatusErrorState());
+    });
+  }
+
+  List<NotificationEntity> removeFutureNotifications(List<NotificationEntity> notifications) {
+    DateTime now = DateTime.now();
+    return notifications.where((notification) => notification.date.isBefore(now)).toList();
+  }
+
 }

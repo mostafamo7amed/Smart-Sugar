@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:smart_sugar/core/utils/extensions.dart';
+import 'package:smart_sugar/features/home/domain/notification_entity.dart';
 
 import '../../../../../core/utils/app_manager/app_assets.dart';
 import '../../../../../core/utils/app_manager/app_colors.dart';
@@ -10,8 +10,10 @@ import '../../../../../core/utils/widgets/cached_image.dart';
 class NotificationItemWidget extends StatelessWidget {
   const NotificationItemWidget({
     super.key,
+    required this.notification,
   });
 
+  final NotificationEntity notification;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -20,21 +22,21 @@ class NotificationItemWidget extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       color: AppColor.whiteColor,
       child: Container(
-        width:MediaQuery.of(context).size.width,
+        width: MediaQuery.of(context).size.width,
         decoration: const BoxDecoration(
             borderRadius: BorderRadius.all(
-              Radius.circular(12),
-            )),
+          Radius.circular(12),
+        )),
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              cachedImage('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQI308Gg7fgBFR5VSmruzyBVJCuzfnLedp53A&s',AssetsData.placeHolder,
-                  fit: BoxFit.fill,
-                  width: size.width / 4.3,
-                  height: size.width / 4.3)
-                  .cornerRadiusWithClipRRect(12),
+             Icon(
+                Icons.medical_services_rounded,
+                color: AppColor.primaryColor,
+                size: 40,
+             ),
               const SizedBox(
                 width: 10,
               ),
@@ -43,12 +45,12 @@ class NotificationItemWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'It’s time to take glucose measurement',
+                      notification.title,
                       style: Styles.regular16
                           .copyWith(fontWeight: FontWeight.w600),
                     ),
                     Text(
-                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                      notification.body,
                       style: Styles.regular13
                           .copyWith(color: AppColor.lightGrayColor),
                       maxLines: 1,
@@ -58,21 +60,22 @@ class NotificationItemWidget extends StatelessWidget {
                       children: [
                         const Spacer(),
                         Text(
-                          'Yesterday',
+                          notification.time,
                           style: Styles.regular13
                               .copyWith(color: AppColor.lightGrayColor),
                           textAlign: TextAlign.end,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
-                        Container(
-                          margin: const EdgeInsets.all(8),
-                          height: 7,
-                          width: 7,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: AppColor.blackColor,
-                          ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          notification.day,
+                          style: Styles.regular13
+                              .copyWith(color: AppColor.lightGrayColor),
+                          textAlign: TextAlign.end,
+                          maxLines: 1,
                         )
                       ],
                     ),

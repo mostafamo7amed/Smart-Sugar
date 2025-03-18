@@ -77,7 +77,7 @@ class RegisterCubit extends Cubit<RegisterState> {
       insulinValue: insulinValue,
       glucoseLowValue: glucoseLowValue,
       glucoseHighValue: glucoseHighValue,
-      fcmToken: '',
+      fcmToken: false,
     );
     await FirebaseFirestore.instance
         .collection(usersCollection)

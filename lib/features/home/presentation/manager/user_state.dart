@@ -85,3 +85,57 @@ final class EditUserProfileErrorState extends UserState {}
 final class GetChartDataLoadingState extends UserState {}
 
 final class GetChartDataSuccessState extends UserState {}
+
+final class GetApiLinkLoadingState extends UserState {}
+
+final class GetApiLinkSuccessState extends UserState {}
+
+final class GetApiLinkErrorState extends UserState {}
+
+final class ChatWithAILoadingState extends UserState {}
+
+final class ChatWithAISuccessState extends UserState {}
+
+final class ChatWithAIErrorState extends UserState {}
+
+final class AddMedicationReminderLoadingState extends UserState {}
+
+final class AddMedicationReminderSuccessState extends UserState {}
+
+final class AddMedicationReminderErrorState extends UserState {}
+
+final class GetMedicationRemindersLoadingState extends UserState {}
+
+final class GetMedicationRemindersSuccessState extends UserState {}
+
+final class GetMedicationRemindersErrorState extends UserState {}
+
+final class AddNotificationLoadingState extends UserState {}
+
+final class AddNotificationSuccessState extends UserState {}
+
+final class AddNotificationErrorState extends UserState {}
+
+final class GetNotificationsLoadingState extends UserState {}
+
+final class GetNotificationsSuccessState extends UserState {}
+
+final class GetNotificationsErrorState extends UserState {}
+
+final class UpdateMedicationStatusLoadingState extends UserState {}
+
+final class UpdateMedicationStatusSuccessState extends UserState {}
+
+final class UpdateMedicationStatusErrorState extends UserState {}
+
+final class  RemoveMedicationReminderLoadingState extends UserState {}
+
+final class  RemoveMedicationReminderSuccessState extends UserState {}
+
+final class  RemoveMedicationReminderErrorState extends UserState {}
+
+final class UpdateNotificationStatusLoadingState extends UserState {}
+
+final class UpdateNotificationStatusSuccessState extends UserState {}
+
+final class UpdateNotificationStatusErrorState extends UserState {}
