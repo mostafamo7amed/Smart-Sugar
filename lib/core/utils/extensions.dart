@@ -134,13 +134,17 @@ extension MedicationReminderExtension on MedicationReminder {
     String? id,
     String? name,
     String? dosage,
-    TimeOfDay? time,
+    String? time,
     List<String>? days,
     bool? isActive,
+    String? userId,
+    DateTime? date,
   }) {
     return MedicationReminder(
       id: id ?? this.id,
+      userId: userId ?? this.userId,
       name: name ?? this.name,
+      date: date ?? this.date,
       dosage: dosage ?? this.dosage,
       time: time ?? this.time,
       days: days ?? this.days,

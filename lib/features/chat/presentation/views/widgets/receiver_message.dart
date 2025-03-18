@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:intl/intl.dart';
+import 'package:smart_sugar/features/chat/domain/message_entity.dart';
 
 import '../../../../../core/utils/app_manager/app_assets.dart';
 import '../../../../../core/utils/app_manager/app_colors.dart';
 import '../../../../../core/utils/app_manager/app_styles.dart';
+import '../../../../../core/utils/widgets/animated_decorated_text.dart';
 
-Widget buildReceiverMessage(context) {
-  String formattedTime = DateFormat('kk:mm a').format(DateTime.now());
+Widget buildReceiverMessage(context, MessageModel message) {
+
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
     child: Row(
@@ -42,13 +45,12 @@ Widget buildReceiverMessage(context) {
             children: [
               Padding(
                 padding: const EdgeInsets.only(bottom: 5.0),
-                child: Text(
-                  'Great question! Regular physical activity helps improve blood sugar control. Consider moderate exercises like brisk walking, cycling, or light jogging for about 30 minutes a day, 5 days a week. Resistance exercises, like lifting weights or using resistance bands, are also beneficial. Remember, start gradually if you’re new to exercise and always check with your healthcare provider before beginning a new routine!',
-                  style: Styles.regular16.copyWith(color: AppColor.blackColor),
-                ),
+                child: AnimatedDecoratedText(
+                  message.text.toString(),
+                )
               ),
               Text(
-                formattedTime,
+                message.dateTime.toString(),
                 style: Styles.regular11.copyWith(color: AppColor.grayColor.withValues(alpha: .8)),
               ),
             ],

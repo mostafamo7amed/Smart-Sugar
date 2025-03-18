@@ -11,9 +11,14 @@ const String articleCollection = 'articles';
 const String emergencyCollection = 'emergency numbers';
 const String apiCollection = 'api';
 const String sugarReadCollection = 'reading';
+const String notificationCollection = 'notifications';
+const String medicationsCollection = 'medication reminders';
 
 //apis
 final String cloudinaryImageUrl =
     "https://api.cloudinary.com/v1_1/dj4ayc4sr/image/upload";
 final String uploadPreset = "smart_sugar";
+
+const channelName = 'smart_sugar';
+const channelId = '1';
 
