@@ -472,7 +472,6 @@ class UserCubit extends Cubit<UserState> {
           value.docs.map((e) => MedicationReminder.fromJson(e.data())).toList();
       emit(GetMedicationRemindersSuccessState());
     }).catchError((e) {
-      print(e);
       emit(GetMedicationRemindersErrorState());
     });
   }

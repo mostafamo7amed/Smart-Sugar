@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
-import 'package:smart_sugar/core/helper_functions/get_snack_bar.dart';
 import 'package:timezone/timezone.dart' as tz;
 
 import 'package:timezone/data/latest.dart' as tz;
@@ -14,7 +13,6 @@ class LocalNotificationServices {
       FlutterLocalNotificationsPlugin();
 
   static onNotificationTap(NotificationResponse notificationResponse) {
-    getSnackBar(notificationResponse.input.toString()+' ${notificationResponse.payload}');
 
   }
   static initialize() {

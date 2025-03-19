@@ -5,7 +5,6 @@ Future<bool> requestNotificationPermission() async {
   PermissionStatus status = await Permission.notification.status;
 
   if (status.isGranted) {
-    print("Notification permission already granted.");
     return true;
   }
 
