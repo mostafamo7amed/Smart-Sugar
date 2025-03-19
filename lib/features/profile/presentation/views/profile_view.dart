@@ -116,7 +116,6 @@ class _ProfileViewState extends State<ProfileView> {
                           activeColor: AppColor.primaryColor,
                           value: cubit.userEntity?.fcmToken ?? false,
                           onChanged: (value) {
-                            Future<bool> result =
                                 requestNotificationPermission();
                             cubit.updateNotificationStatus(
                                 AppReference.getData(key: userIdKey), value);

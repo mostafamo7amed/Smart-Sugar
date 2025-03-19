@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:smart_sugar/core/utils/extensions.dart';
 import 'package:smart_sugar/features/home/domain/notification_entity.dart';
 
-import '../../../../../core/utils/app_manager/app_assets.dart';
 import '../../../../../core/utils/app_manager/app_colors.dart';
 import '../../../../../core/utils/app_manager/app_styles.dart';
-import '../../../../../core/utils/widgets/cached_image.dart';
 
 class NotificationItemWidget extends StatelessWidget {
   const NotificationItemWidget({
@@ -16,7 +13,6 @@ class NotificationItemWidget extends StatelessWidget {
   final NotificationEntity notification;
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
     return Card(
       elevation: 2,
       clipBehavior: Clip.hardEdge,

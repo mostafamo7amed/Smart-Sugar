@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
-import 'package:intl/intl.dart';
 import 'package:smart_sugar/features/chat/domain/message_entity.dart';
 
 import '../../../../../core/utils/app_manager/app_assets.dart';

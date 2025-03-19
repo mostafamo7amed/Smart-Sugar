@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_sugar/core/services/app_references.dart';
-import 'package:smart_sugar/core/utils/extensions.dart';
 import 'package:smart_sugar/features/home/presentation/manager/user_cubit.dart';
 import 'package:smart_sugar/features/profile/presentation/views/add_reminder_view.dart';
 
@@ -9,7 +8,6 @@ import '../../../../constants.dart';
 import '../../../../core/utils/app_manager/app_colors.dart';
 import '../../../../core/utils/app_manager/app_styles.dart';
 import '../../../../core/utils/widgets/build_app_bar.dart';
-import '../../domain/entity/medication_reminder.dart';
 
 class MedicationReminderView extends StatefulWidget {
   const MedicationReminderView({super.key});
