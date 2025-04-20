@@ -36,7 +36,7 @@ class MedicationReminderViewState extends State<MedicationReminderView> {
       ),
       body: BlocConsumer<UserCubit, UserState>(
         listener: (context, state) {
-          if(state is UpdateMedicationStatusSuccessState){
+          if(state is UpdateMedicationStatusSuccessState || state is RemoveMedicationReminderSuccessState){
             UserCubit.get(context)
                 .getMedicationReminders(AppReference.getData(key: userIdKey));
           }
@@ -70,7 +70,7 @@ class MedicationReminderViewState extends State<MedicationReminderView> {
           final reminder = cubit.medicationReminders[index];
           bool switchValue = reminder.isActive;
           return Dismissible(
-            key: Key(reminder.id),
+            key: UniqueKey(),
             background: Container(
                 padding: const EdgeInsets.all(10.0),
                 decoration: BoxDecoration(

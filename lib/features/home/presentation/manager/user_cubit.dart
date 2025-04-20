@@ -47,12 +47,7 @@ class UserCubit extends Cubit<UserState> {
     emit(AddGlucoseReadLoadingState());
     int id = getRandomNumber();
     SugarReadEntity sugarReadEntity = SugarReadEntity(
-      id.toString(),
-      uid,
-      glucose,
-      date,
-      measurementTime,
-      result,
+      id.toString(), uid, glucose, date, measurementTime, result,
     );
     FirebaseFirestore.instance
         .collection(sugarReadCollection)
@@ -354,16 +349,11 @@ class UserCubit extends Cubit<UserState> {
   chatWithAI(String message) async {
     emit(ChatWithAILoadingState());
     String cuTime1 = currentTime();
-    messages.add(MessageModel(
-      text: message,
-      dateTime: cuTime1,
-      isGPT: false,
-    ));
+    messages.add(MessageModel(text: message, dateTime: cuTime1, isGPT: false,));
     var headers = {'Content-Type': 'application/json'};
     var data = json.encode({"message": message});
     var dio = Dio();
-    var response = await dio.request(
-      '$apiLink/DiabetesChat',
+    var response = await dio.request('$apiLink/DiabetesChat',
       options: Options(
         method: 'POST',
         headers: headers,
@@ -375,25 +365,11 @@ class UserCubit extends Cubit<UserState> {
       aiResponse = json.encode(response.data['response']);
       String cuTime2 = currentTime();
       String res2;
-      res2 = aiResponse
-          .replaceAll("\\n", "\n")
-          .replaceAll(RegExp(r'\n\s*\n'), '\n')
-          .replaceAllMapped(RegExp(r'^\s*\*', multiLine: true), (match) => "•")
-          .replaceAll('\n', '\n')
-          .replaceAll(RegExp(r'\s+'), ' ')
-          .replaceAll(RegExp(r'[\\"]'), '')
-          .trim(); //
-      messages.add(MessageModel(
-        text: res2,
-        dateTime: cuTime2,
-        isGPT: true,
-      ));
+      res2 = aiResponse.replaceAll("\\n", "\n").replaceAll(RegExp(r'\n\s*\n'), '\n').replaceAllMapped(RegExp(r'^\s*\*', multiLine: true), (match) => "•").replaceAll('\n', '\n').replaceAll(RegExp(r'\s+'), ' ').replaceAll(RegExp(r'[\\"]'), '').trim(); //
+      messages.add(MessageModel(text: res2, dateTime: cuTime2, isGPT: true,));
       emit(ChatWithAISuccessState());
     } else {
-      messages.add(MessageModel(
-        text: 'Something went wrong',
-        dateTime: cuTime2,
-        isGPT: true,
+      messages.add(MessageModel(text: 'Something went wrong', dateTime: cuTime2, isGPT: true,
       ));
       emit(ChatWithAIErrorState());
     }

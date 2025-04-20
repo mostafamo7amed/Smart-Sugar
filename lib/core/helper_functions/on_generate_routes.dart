@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_sugar/features/admin_feature/domain/sugar_center_model.dart';
 import 'package:smart_sugar/features/admin_feature/presentation/views/choose_center_location_view.dart';
-import 'package:smart_sugar/features/admin_feature/presentation/views/refresh_api_view.dart';
 import 'package:smart_sugar/features/centers/presentation/views/my_list_sugar_centers_view.dart';
 import 'package:smart_sugar/features/centers/presentation/views/view_center_location_view.dart';
 import 'package:smart_sugar/features/diet/domain/entities/diabetes_data.dart';
@@ -124,8 +123,6 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => ManageArticlesView());
     case AddArticleView.routeName:
       return MaterialPageRoute(builder: (_) => AddArticleView());
-    case RefreshApiView.routeName:
-      return MaterialPageRoute(builder: (_) => const RefreshApiView());
     case ChooseCenterLocationView.routeName:
       return MaterialPageRoute(
           builder: (_) => const ChooseCenterLocationView());
