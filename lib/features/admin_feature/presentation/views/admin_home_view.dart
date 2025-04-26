@@ -4,7 +4,6 @@ import 'package:smart_sugar/core/services/app_references.dart';
 import 'package:smart_sugar/core/utils/widgets/home_app_bar.dart';
 import 'package:smart_sugar/features/admin_feature/presentation/views/manage_articles_view.dart';
 import 'package:smart_sugar/features/admin_feature/presentation/views/manage_sugar_center_view.dart';
-import 'package:smart_sugar/features/admin_feature/presentation/views/refresh_api_view.dart';
 import 'package:smart_sugar/features/admin_feature/presentation/views/widgets/admin_panel_item.dart';
 import 'package:smart_sugar/features/auth/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:smart_sugar/features/auth/presentation/views/login_view.dart';
@@ -86,17 +85,6 @@ class AdminHomeView extends StatelessWidget {
                   icon: AssetsData.phoneImage,
                   onTap: () {
                     Navigator.pushNamed(context, ManageEmergencyNumberView.routeName);
-                  },
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                AdminPanelItem(
-                  title: 'Refresh Api',
-                  color: AppColor.pinkColor,
-                  icon: AssetsData.infoImage,
-                  onTap: () {
-                    Navigator.pushNamed(context, RefreshApiView.routeName);
                   },
                 ),
                 SizedBox(
