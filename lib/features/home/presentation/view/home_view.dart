@@ -1,11 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_sugar/constants.dart';
 import 'package:smart_sugar/core/services/app_references.dart';
-import 'package:smart_sugar/core/services/local_notification_services.dart';
-import 'package:smart_sugar/core/services/work_manager.dart';
 import 'package:smart_sugar/core/utils/app_manager/app_colors.dart';
 import 'package:smart_sugar/core/utils/app_manager/app_styles.dart';
 import 'package:smart_sugar/core/utils/widgets/custom_button.dart';
@@ -192,17 +188,12 @@ class _HomeViewState extends State<HomeView> {
                                 height: 3,
                               ),
                               GestureDetector(
-                                onTap: () {
-                                  log('tap');
-                                  //LocalNotificationServices.showNotification();
-                                  WorkManagerServices.cancelReminder('1');
-                                  LocalNotificationServices.scheduleNotification(0, 'Diabetes', 'Tap to open', DateTime.now());
-                                },
+                                onTap: () {},
                                 child: Container(
                                   padding: EdgeInsets.all(8),
                                   decoration: BoxDecoration(
-                                    color:
-                                        AppColor.blueColor.withValues(alpha: .15),
+                                    color: AppColor.blueColor
+                                        .withValues(alpha: .15),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                   child: Row(

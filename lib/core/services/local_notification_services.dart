@@ -68,8 +68,10 @@ class LocalNotificationServices {
       body,
       scheduleTime,
       const NotificationDetails(
-        android: AndroidNotificationDetails(channelId, channelName,
-            importance: Importance.high, priority: Priority.high),
+        android: AndroidNotificationDetails(
+            channelId, channelName,
+            importance: Importance.high,
+            priority: Priority.high),
       ),
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,

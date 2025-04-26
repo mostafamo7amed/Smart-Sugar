@@ -59,7 +59,6 @@ dependencies:
   flutter_local_notifications: ^18.0.1
   timezone: ^0.10.0
   flutter_timezone: ^4.1.0
-  workmanager: ^0.5.2
   dio: ^5.8.0+1
   flutter_decorated_text: ^1.0.14
   flutter_html: ^3.0.0

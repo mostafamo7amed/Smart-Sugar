@@ -28,7 +28,6 @@ class _NotificationViewState extends State<NotificationView> {
   Widget build(BuildContext context) {
     return BlocConsumer<UserCubit, UserState>(
       listener: (context, state) {
-        // TODO: implement listener
       },
       builder: (context, state) {
         var cubit = UserCubit.get(context);

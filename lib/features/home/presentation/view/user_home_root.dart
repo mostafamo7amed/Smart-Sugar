@@ -40,7 +40,6 @@ class _UserHomeRootState extends State<UserHomeRoot> {
         ProfileView(),
       ][mCurrentIndex],
       bottomNavigationBar: Container(
-        height: 60,
         margin: EdgeInsets.all(10),
         decoration: BoxDecoration(
             color: AppColor.whiteColor,
